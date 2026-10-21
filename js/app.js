@@ -638,21 +638,30 @@ window.handleRsvpSubmit = function(event) {
     localStorage.setItem('boda_rsvp_list', JSON.stringify(savedList));
   } catch (e) {}
 
-  // 2. Enviar automáticamente al servidor para escribir directamente en confirmados_boda.xlsx
-  fetch('/api/rsvp', {
+  // 2. Enviar directamente a Google Sheets en Google Drive vía Apps Script
+  const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzNxP3pt3umOdLWCtSbLsQihEUfL9CYlcjkp7hC23RvRoD574zHTUBOd9QfomlAthyAZA/exec';
+
+  fetch(GOOGLE_SCRIPT_URL, {
     method: 'POST',
+    mode: 'no-cors',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'text/plain;charset=utf-8'
     },
     body: JSON.stringify(rsvpData)
   })
-  .then(res => res.json())
-  .then(data => {
-    console.log('[EXCEL AUTO-GUARDADO]', data);
+  .then(() => {
+    console.log('[GOOGLE SHEETS] Confirmación enviada exitosamente a Google Drive');
   })
   .catch(err => {
-    console.log('[AVISO] Servidor local no disponible, guardado en almacenamiento local', err);
+    console.warn('[GOOGLE SHEETS ERROR]', err);
   });
+
+  // Fallback si corre en servidor local Python
+  fetch('/api/rsvp', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(rsvpData)
+  }).catch(() => {});
 
   const passNameInput = document.getElementById('passGuestNameInput');
   const passCountEl = document.getElementById('passDisplayCount');
