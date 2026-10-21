@@ -33,6 +33,14 @@
 
   <!-- Preload Imagen de Fondo del Sobre (Local y Google Drive CDN) -->
   <link rel="preload" as="image" href="imag/fondo_sobre.png">
+
+  <!-- Forzar scroll al inicio inmediatamente para evitar restauración de scroll al recargar -->
+  <script>
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+    window.scrollTo(0, 0);
+  </script>
 </head>
 
 <body class="envelope-active">
@@ -129,7 +137,6 @@
   <header class="glass-header">
     <nav class="glass-nav">
       <a href="#inicio" class="nav-brand">
-        <div class="wedding-monogram">G &amp; M</div>
         <span class="nav-brand-text">Gloria &amp; Marco</span>
       </a>
 
@@ -140,6 +147,7 @@
 
       <ul class="nav-links" id="navLinks">
         <li><a href="#inicio" class="nav-link active">Inicio</a></li>
+        <li><a href="#nuestra-historia" class="nav-link">Nuestra Historia</a></li>
         <li><a href="#video-seccion" class="nav-link">Nuestro Video</a></li>
         <li><a href="#cuenta-regresiva" class="nav-link">La Fecha</a></li>
         <li><a href="#itinerario" class="nav-link">Itinerario</a></li>
@@ -204,6 +212,88 @@
           </div>
         </div>
 
+      </div>
+    </section>
+
+    <!-- SECTION: NUESTRA HISTORIA (Collage Polaroid y Cita Emotiva) -->
+    <section id="nuestra-historia" class="wedding-card story-card">
+      <div class="card-header text-center">
+        <div class="wedding-seal-badge">
+          <i class="ri-heart-3-line"></i>
+          <span>Capítulo de Amor</span>
+        </div>
+        <h2 class="card-title story-script-title">Nuestra Historia</h2>
+        <div class="ornament-divider">
+          <span class="line"></span>
+          <span class="diamond">❦</span>
+          <span class="line"></span>
+        </div>
+      </div>
+
+      <!-- Contenedor del Collage Estilo Polaroid con Flores -->
+      <div class="story-collage-container">
+
+        <!-- Adorno floral superior -->
+        <div class="story-floral-top">
+          <span>🌸</span>
+          <i class="ri-heart-fill" style="font-size: 1.2rem; color: var(--gold-primary);"></i>
+          <span>🌸</span>
+        </div>
+
+        <!-- Trío de Polaroids estilo Scrapbook -->
+        <div class="polaroid-cluster">
+          <!-- Polaroid 1 (Izquierda inclinada: history1.jpeg) -->
+          <div class="polaroid-frame polaroid-left" title="Gloria & Marco">
+            <div class="polaroid-photo-box">
+              <img src="https://lh3.googleusercontent.com/d/1o6oqu9lFpTdIo3o7aLR7b605Z7BxgZ_d"
+                alt="Gloria y Marco - El primer latido" class="polaroid-img"
+                onerror="this.onerror=null; this.src='imag/history1.jpeg';">
+            </div>
+            <div class="polaroid-caption">
+              <span>El primer latido</span>
+            </div>
+          </div>
+
+          <!-- Polaroid 2 (Derecha inclinada: history3.jpeg) -->
+          <div class="polaroid-frame polaroid-right" title="Gloria & Marco">
+            <div class="polaroid-photo-box">
+              <img src="https://lh3.googleusercontent.com/d/1pq1i0WhuFtcRfyrxGOqRzG6wUqEJlRDi"
+                alt="Gloria y Marco - Conquistando cimas" class="polaroid-img"
+                onerror="this.onerror=null; this.src='imag/history3.jpeg';">
+            </div>
+            <div class="polaroid-caption">
+              <span>Caminando juntos</span>
+            </div>
+          </div>
+
+          <!-- Polaroid 3 (Centro / Frente: history2.jpeg) -->
+          <div class="polaroid-frame polaroid-center" title="Gloria & Marco">
+            <div class="polaroid-photo-box">
+              <img src="https://lh3.googleusercontent.com/d/1ZH_SSQNMVgDysdsuLtdeAe7WPFvmGDMc"
+                alt="Gloria y Marco - Risas y amor para siempre" class="polaroid-img"
+                onerror="this.onerror=null; this.src='imag/history2.jpeg';">
+            </div>
+            <div class="polaroid-caption">
+              <span>Para toda la vida</span>
+            </div>
+
+            <!-- Detalle floral delicado en la esquina -->
+            <div class="story-floral-accent">
+              <span>🤍 🌸</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Texto emotivo del diseño de referencia -->
+      <div class="story-quote-wrapper">
+        <p class="story-quote-text">
+          “Hay encuentros que llegan sin avisar y terminan cambiándolo todo. Entre conversaciones,
+          momentos compartidos y pequeños instantes que se fueron convirtiendo en recuerdos,
+          descubrimos que queríamos seguir caminando juntos para siempre.”
+        </p>
+        <div class="story-author-signature">Gloria &amp; Marco</div>
       </div>
     </section>
 
@@ -782,7 +872,6 @@
   <!-- Footer de Gala -->
   <footer class="wedding-footer">
     <div class="container text-center">
-      <div class="footer-monogram">G &amp; M</div>
       <h3 class="footer-names">Gloria &amp; Marco</h3>
       <p class="footer-quote">“Dos vidas, un corazón, una sola historia de amor eterno.”</p>
       <div class="footer-date">05 • 12 • 2026</div>

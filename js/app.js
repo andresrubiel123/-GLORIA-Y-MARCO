@@ -4,7 +4,17 @@
  * ============================================================================
  */
 
+// Desactivar restauración automática de scroll del navegador para que siempre inicie arriba
+if ('scrollRestoration' in history) {
+  history.scrollRestoration = 'manual';
+}
+window.scrollTo(0, 0);
+
 document.addEventListener('DOMContentLoaded', () => {
+  window.scrollTo(0, 0);
+  document.documentElement.scrollTop = 0;
+  document.body.scrollTop = 0;
+
   // Configurar volumen por defecto en nivel medio (50%)
   const audio = document.getElementById('weddingAudio');
   if (audio) {
@@ -23,6 +33,10 @@ document.addEventListener('DOMContentLoaded', () => {
   initVideoSync();
 });
 
+window.addEventListener('beforeunload', () => {
+  window.scrollTo(0, 0);
+});
+
 /* ============================================================================
    0. ANIMACIÓN DEL SOBRE DE INVITACIÓN (3 Segundos al dar Clic en Botón Redondo)
    ============================================================================ */
@@ -31,6 +45,9 @@ function initEnvelopeIntro() {
   const envelope = document.getElementById('weddingEnvelope');
   const sealBtn = document.getElementById('waxSealBtn');
   const audio = document.getElementById('weddingAudio');
+
+  // Asegurar siempre posición en la parte superior
+  window.scrollTo(0, 0);
 
   if (audio) {
     audio.volume = 0.5; // Volumen por defecto Medio (50%)
@@ -46,6 +63,11 @@ function initEnvelopeIntro() {
   sealBtn.addEventListener('click', () => {
     if (opened) return;
     opened = true;
+
+    // Asegurar siempre que la página esté en la parte superior
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
 
     // 1. Iniciar la reproducción de la canción (audio/cancion.mpeg)
     if (audio) {
@@ -75,6 +97,10 @@ function initEnvelopeIntro() {
       setTimeout(() => {
         overlay.style.display = 'none';
         document.body.classList.remove('envelope-active');
+        // Garantizar que la página quede fija y perfecta en la parte superior
+        window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+        document.documentElement.scrollTop = 0;
+        document.body.scrollTop = 0;
       }, 800);
     }, 3000);
   });
