@@ -1,0 +1,36 @@
+# ==============================================================================
+# GITIGNORE - BODA GLORIA & MARCO
+# ==============================================================================
+
+# Entornos y Archivos de Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+
+# Archivos de Datos Privados (Lista de Invitados y Asistencia)
+*.xlsx
+*.xls
+*.csv
+
+# Editores y Entornos de Desarrollo
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.swp
+*.swo
+
+# Archivos del Sistema Operativo
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+.DS_Store
+._*
+
+# Logs y Archivos Temporales
+*.log
+temp*
+*.tmp
+*.bak

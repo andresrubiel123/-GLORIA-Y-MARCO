@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>Nuestra Boda | Gloria & Marco 💍</title>
+  <meta name="description"
+    content="Invitación oficial y pase digital para la boda de Gloria y Marco. Conoce todos los detalles del evento, cuenta regresiva, itinerario, ubicación y confirma tu asistencia.">
+  <meta name="theme-color" content="#C5A880">
+
+  <!-- Favicon Monograma -->
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💍</text></svg>">
+
+  <!-- Google Fonts: Caligrafía de lujo y Serif editorial -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- Remix Icon -->
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+
+  <!-- QRCode.js para generar QR interactivo en el pase -->
+  <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+  <!-- html2pdf.js para exportar el Pase Digital en PDF de alta calidad -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+  <!-- Hoja de estilos en carpeta css/ -->
+  <link rel="stylesheet" href="css/styles.css">
+
+  <!-- Preload Imagen de Fondo del Sobre (Local y Google Drive CDN) -->
+  <link rel="preload" as="image" href="imag/fondo_sobre.png">
+</head>
+
+<body class="envelope-active">
+
+  <!-- =====================================================================
+       ANIMACIÓN DEL SOBRE DE INVITACIÓN (SPLASH SCREEN INICIAL)
+       ===================================================================== -->
+  <div class="envelope-intro-overlay" id="envelopeIntroOverlay"
+    style="background-image: linear-gradient(rgba(15, 12, 10, 0.38), rgba(15, 12, 10, 0.62)), url('imag/fondo_sobre.png'), url('https://lh3.googleusercontent.com/d/1RAJdQWiR5RghjdGR0Pu78qE2qmu8aYVa');">
+    <div class="envelope-bg-decor"></div>
+
+    <div class="envelope-intro-header">
+      <div class="wedding-seal-badge">
+        <i class="ri-heart-3-line"></i>
+        <span>Invitación Especial</span>
+      </div>
+      <h2 class="envelope-intro-names">Gloria &amp; Marco</h2>
+      <p class="envelope-intro-subtitle">Tenemos el honor de invitarte a nuestra boda</p>
+    </div>
+
+    <!-- Contenedor 3D del Sobre de Invitación -->
+    <div class="envelope-3d-wrapper">
+      <div class="wedding-envelope" id="weddingEnvelope">
+
+        <!-- Solapa Triangular Superior (Abre hacia arriba en 3D) -->
+        <div class="envelope-flap-top"></div>
+
+        <!-- Bolsillos y Solapas Laterales -->
+        <div class="envelope-pocket-left"></div>
+        <div class="envelope-pocket-right"></div>
+        <div class="envelope-pocket-bottom"></div>
+
+        <!-- Tarjeta con la Foto de los Novios (Google Drive: 001.jpg) que Sale del Sobre -->
+        <div class="envelope-letter-card" id="envelopeLetterCard">
+          <div class="letter-photo-frame">
+            <img src="https://lh3.googleusercontent.com/d/1WaUPhUeQXCRi8DqScb_D1ZoyvF_m-rHV"
+              alt="Gloria y Marco - Novios" class="letter-couple-img" id="envelopeNoviosImg"
+              onerror="this.onerror=null; this.src='https://drive.google.com/thumbnail?id=1WaUPhUeQXCRi8DqScb_D1ZoyvF_m-rHV&sz=w1200';">
+          </div>
+          <div class="letter-caption">
+            <h4>¡Nos Casamos!</h4>
+            <p>5 • DICIEMBRE • 2026</p>
+          </div>
+        </div>
+
+        <!-- BOTÓN REDONDO: SELLO DE CERA DORADO (Inicia canción y animación de 3 segundos) -->
+        <button class="wax-seal-btn" id="waxSealBtn" aria-label="Abrir sobre de invitación"
+          title="Toca para abrir la invitación">
+          <span class="seal-monogram">G &amp; M</span>
+          <span class="seal-subtext">ABRIR</span>
+        </button>
+
+      </div>
+    </div>
+
+    <div class="envelope-instruction">
+      <i class="ri-hand-coin-line"></i>
+      <span>Toca el sello redondo para abrir</span>
+    </div>
+  </div>
+
+  <!-- Dynamic Wedding Atmosphere: Pétalos y Destellos Dorados -->
+  <canvas id="petalsCanvas" class="petals-canvas"></canvas>
+
+  <!-- Top Golden Scroll Progress Bar -->
+  <div class="scroll-progress-container">
+    <div class="scroll-progress-bar" id="progressBar"></div>
+  </div>
+
+  <!-- Reproductor Flotante de Canción Preferida -->
+  <div class="music-floating-widget" id="musicWidget">
+    <button class="music-btn" id="musicToggleBtn" aria-label="Reproducir nuestra canción"
+      title="Reproducir nuestra canción">
+      <div class="disc-vinyl" id="vinylDisc">
+        <i class="ri-music-2-fill music-note-icon"></i>
+      </div>
+      <div class="sound-wave" id="soundWave">
+        <span></span><span></span><span></span><span></span>
+      </div>
+    </button>
+    <div class="music-tooltip" id="musicTooltip">
+      <span class="music-title">Nuestra Canción de Amor</span>
+      <span class="music-status">Toca para reproducir</span>
+    </div>
+  </div>
+
+  <!-- Audio Element con la canción oficial de los novios -->
+  <audio id="weddingAudio" loop preload="auto">
+    <source src="audio/cancion.mpeg" type="audio/mpeg">
+    <source src="https://drive.google.com/uc?export=download&id=16LwIaXGqHgXMqkTKOXEMtRjLPBgJ9Hiv" type="audio/mpeg">
+  </audio>
+
+  <!-- Navegación Glassmorphism Nupcial -->
+  <header class="glass-header">
+    <nav class="glass-nav">
+      <a href="#inicio" class="nav-brand">
+        <div class="wedding-monogram">G &amp; M</div>
+        <span class="nav-brand-text">Gloria &amp; Marco</span>
+      </a>
+
+      <!-- Botón Hamburguesa Móvil -->
+      <button class="mobile-menu-toggle" id="menuToggle" aria-label="Abrir menú">
+        <i class="ri-menu-4-line"></i>
+      </button>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#inicio" class="nav-link active">Inicio</a></li>
+        <li><a href="#video-seccion" class="nav-link">Nuestro Video</a></li>
+        <li><a href="#cuenta-regresiva" class="nav-link">La Fecha</a></li>
+        <li><a href="#itinerario" class="nav-link">Itinerario</a></li>
+        <li><a href="#ubicacion" class="nav-link">Ubicación</a></li>
+        <li><a href="#detalles" class="nav-link">Detalles</a></li>
+        <li><a href="#pase-digital" class="nav-link highlight-link">Pase Digital</a></li>
+        <li><a href="#rsvp" class="nav-link rsvp-link">Confirmar Asistencia</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main class="container" id="inicio">
+
+    <!-- HERO SECTION DE GALA -->
+    <section class="hero-wedding-section">
+      <div class="hero-decorative-frame">
+
+        <!-- Corona o marco botánico superior -->
+        <div class="wedding-seal-badge">
+          <i class="ri-heart-3-line"></i>
+          <span>Nuestra Boda</span>
+        </div>
+
+        <!-- Imagen principal en Google Drive: 01.jpeg -->
+        <div class="hero-photo-wrapper">
+          <div class="photo-glow-border"></div>
+          <img src="https://lh3.googleusercontent.com/d/1OgZ3RAbF3LBbZbF1J8hcD_xX1G49zLPr"
+            alt="Gloria y Marco - Portada de Boda" class="hero-main-photo" id="heroPhoto"
+            onerror="this.onerror=null; this.src='https://drive.google.com/thumbnail?id=1OgZ3RAbF3LBbZbF1J8hcD_xX1G49zLPr&sz=w1200';">
+          <div class="photo-overlay-vignette"></div>
+        </div>
+
+        <div class="hero-headings">
+          <p class="hero-pre-title">Con la bendición de Dios y nuestras familias</p>
+          <h1 class="hero-names">Gloria &amp; Marco</h1>
+          <div class="ornament-divider">
+            <span class="line"></span>
+            <span class="diamond">❦</span>
+            <span class="line"></span>
+          </div>
+          <p class="hero-quote">
+            “Porque el amor es paciente, es bondadoso, todo lo espera, todo lo soporta... y nosotros hemos decidido
+            caminar juntos para siempre.”
+          </p>
+
+          <div class="hero-date-pill">
+            <i class="ri-calendar-event-line"></i>
+            <span>Sábado, 5 de Diciembre de 2026</span>
+          </div>
+
+          <div class="hero-actions">
+            <a href="#rsvp" class="wedding-btn btn-gold">
+              <i class="ri-check-double-line"></i> Confirmar Asistencia
+            </a>
+            <a href="#pase-digital" class="wedding-btn btn-glass">
+              <i class="ri-ticket-2-line"></i> Obtener Pase Digital
+            </a>
+            <button class="wedding-btn btn-icon-music" id="heroMusicBtn" title="Escuchar canción">
+              <i class="ri-volume-up-line"></i> Escuchar Canción
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION: NUESTRO MENSAJE EN VIDEO (Stream Google Drive) -->
+    <section id="video-seccion" class="wedding-card">
+      <div class="card-header">
+        <div class="card-title-group">
+          <div class="card-icon gold-icon">
+            <i class="ri-movie-line"></i>
+          </div>
+          <div>
+            <span class="card-tag">Momentos Inolvidables</span>
+            <h2 class="card-title">Nuestro Video Especial</h2>
+            <p class="card-subtitle">Un vistazo a nuestra historia, los preparativos y el vestido</p>
+          </div>
+        </div>
+        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+          <a href="https://drive.google.com/file/d/1_a0LYkCTgFFct6fBYbT5ONjBj5j7VjXW/view?usp=sharing" target="_blank"
+            rel="noopener noreferrer" class="mini-btn" style="text-decoration:none; padding:8px 16px;">
+            <i class="ri-google-drive-line"></i> Abrir en Google Drive
+          </a>
+        </div>
+      </div>
+
+      <div class="video-container-wedding">
+        <div class="video-frame-inner">
+          <video id="weddingVideoPlayer" class="wedding-video" controls playsinline preload="metadata">
+            <source src="video/video_novios.mp4" type="video/mp4">
+            Tu navegador no soporta la reproducción directa de este video.
+          </video>
+        </div>
+        <div class="video-caption-bar">
+          <p><i class="ri-sparkling-fill"></i> “Lo quiero y lo tengo... felices de compartir este camino con ustedes”
+          </p>
+          <button class="mini-btn" id="videoFullscreenBtn" onclick="toggleVideoFullscreen()">
+            <i class="ri-fullscreen-line"></i> Pantalla Completa
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION: CUENTA REGRESIVA Y FECHA -->
+    <section id="cuenta-regresiva" class="wedding-card countdown-card">
+      <div class="card-header text-center">
+        <span class="card-tag">¡Cada segundo cuenta!</span>
+        <h2 class="card-title">Cuenta Regresiva para el Gran Día</h2>
+        <p class="card-subtitle">Esperamos con ansias celebrar este momento a tu lado</p>
+      </div>
+
+      <div class="countdown-grid" id="countdownGrid">
+        <div class="countdown-item">
+          <div class="countdown-number-box">
+            <span class="countdown-number" id="cdDays">00</span>
+          </div>
+          <span class="countdown-label">Días</span>
+        </div>
+        <div class="countdown-separator">:</div>
+        <div class="countdown-item">
+          <div class="countdown-number-box">
+            <span class="countdown-number" id="cdHours">00</span>
+          </div>
+          <span class="countdown-label">Horas</span>
+        </div>
+        <div class="countdown-separator">:</div>
+        <div class="countdown-item">
+          <div class="countdown-number-box">
+            <span class="countdown-number" id="cdMinutes">00</span>
+          </div>
+          <span class="countdown-label">Minutos</span>
+        </div>
+        <div class="countdown-separator">:</div>
+        <div class="countdown-item">
+          <div class="countdown-number-box">
+            <span class="countdown-number" id="cdSeconds">00</span>
+          </div>
+          <span class="countdown-label">Segundos</span>
+        </div>
+      </div>
+
+      <div class="calendar-actions">
+        <button class="wedding-btn btn-gold-outline" id="addToCalendarBtn">
+          <i class="ri-calendar-check-line"></i> Agendar en Google Calendar
+        </button>
+        <button class="wedding-btn btn-gold-outline" id="downloadIcsBtn">
+          <i class="ri-apple-line"></i> Guardar en Apple / Outlook (.ics)
+        </button>
+      </div>
+    </section>
+
+    <!-- SECTION: ITINERARIO DEL EVENTO -->
+    <section id="itinerario" class="wedding-card">
+      <div class="card-header text-center">
+        <span class="card-tag">Cronograma</span>
+        <h2 class="card-title">Itinerario del Evento</h2>
+        <p class="card-subtitle">Cada momento ha sido preparado con infinito amor</p>
+      </div>
+
+      <div class="timeline-wedding">
+
+        <!-- Momento 1 -->
+        <div class="timeline-item left">
+          <div class="timeline-icon">
+            <i class="ri-church-line"></i>
+          </div>
+          <div class="timeline-content">
+            <span class="timeline-time"><i class="ri-time-line"></i> 4:00 PM</span>
+            <h3 class="timeline-title">Ceremonia Religiosa</h3>
+            <p class="timeline-desc">Bendición sagrada de nuestra unión. Por favor llegar con 15 minutos de
+              anticipación.</p>
+            <div class="timeline-place"><i class="ri-map-pin-2-line"></i> Capilla Principal Nuestra Señora del Carmen
+            </div>
+          </div>
+        </div>
+
+        <!-- Momento 2 -->
+        <div class="timeline-item right">
+          <div class="timeline-icon">
+            <i class="ri-camera-lens-line"></i>
+          </div>
+          <div class="timeline-content">
+            <span class="timeline-time"><i class="ri-time-line"></i> 5:30 PM</span>
+            <h3 class="timeline-title">Cóctel de Bienvenida &amp; Fotos</h3>
+            <p class="timeline-desc">Brindis inicial con cócteles de autor, música instrumental en vivo y fotos con los
+              invitados.</p>
+            <div class="timeline-place"><i class="ri-map-pin-2-line"></i> Terraza Jardín de los Olivos</div>
+          </div>
+        </div>
+
+        <!-- Momento 3 -->
+        <div class="timeline-item left">
+          <div class="timeline-icon">
+            <i class="ri-goblet-line"></i>
+          </div>
+          <div class="timeline-content">
+            <span class="timeline-time"><i class="ri-time-line"></i> 7:00 PM</span>
+            <h3 class="timeline-title">Banquete Nupcial &amp; Brindis</h3>
+            <p class="timeline-desc">Cena formal de tres tiempos preparada especialmente para deleitarte, acompañada de
+              palabras de gratitud.</p>
+            <div class="timeline-place"><i class="ri-map-pin-2-line"></i> Gran Salón Imperial</div>
+          </div>
+        </div>
+
+        <!-- Momento 4 -->
+        <div class="timeline-item right">
+          <div class="timeline-icon">
+            <i class="ri-heart-pulse-line"></i>
+          </div>
+          <div class="timeline-content">
+            <span class="timeline-time"><i class="ri-time-line"></i> 8:30 PM</span>
+            <h3 class="timeline-title">Primer Baile de Esposos</h3>
+            <p class="timeline-desc">Nuestro primer vals como marido y mujer, seguido del tradicional baile con padres.
+            </p>
+            <div class="timeline-place"><i class="ri-map-pin-2-line"></i> Pista Central de Cristal</div>
+          </div>
+        </div>
+
+        <!-- Momento 5 -->
+        <div class="timeline-item left">
+          <div class="timeline-icon">
+            <i class="ri-disc-line"></i>
+          </div>
+          <div class="timeline-content">
+            <span class="timeline-time"><i class="ri-time-line"></i> 9:00 PM - Hasta el Amanecer</span>
+            <h3 class="timeline-title">Gran Fiesta &amp; Celebración</h3>
+            <p class="timeline-desc">Música en vivo, DJ, sorpresas, barra libre y la mejor energía para festejar nuestro
+              amor.</p>
+            <div class="timeline-place"><i class="ri-map-pin-2-line"></i> Área de Pista y Lounge</div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION: UBICACIÓN Y GOOGLE MAPS -->
+    <section id="ubicacion" class="wedding-card">
+      <div class="card-header">
+        <div class="card-title-group">
+          <div class="card-icon gold-icon">
+            <i class="ri-map-pin-fill"></i>
+          </div>
+          <div>
+            <span class="card-tag">¿Cómo Llegar?</span>
+            <h2 class="card-title">Ubicación del Evento</h2>
+            <p class="card-subtitle">Queremos que todos lleguen seguros y a tiempo</p>
+          </div>
+        </div>
+        <div class="header-action-btns">
+          <a href="https://maps.app.goo.gl/goeLVz2qetJhEaPS7" target="_blank" rel="noopener"
+            class="wedding-btn btn-gold">
+            <i class="ri-navigation-line"></i> Abrir en Google Maps
+          </a>
+          <a href="https://waze.com/ul?ll=7.1128542,-73.2187783&navigate=yes" target="_blank" rel="noopener"
+            class="wedding-btn btn-glass">
+            <i class="ri-road-map-line"></i> Abrir en Waze
+          </a>
+        </div>
+      </div>
+
+      <div class="location-details-box">
+        <div class="loc-card">
+          <i class="ri-hotel-line loc-icon"></i>
+          <h4>EL BÚHO NUEVE</h4>
+          <p>Lebrija, Santander, Colombia</p>
+          <span class="loc-badge"><i class="ri-parking-box-line"></i> Espacio Campestre para Eventos • Parqueadero
+            Privado</span>
+        </div>
+      </div>
+
+      <!-- Mapa interactivo embebido con la ubicación exacta en Lebrija, Santander -->
+      <div class="map-embed-wrapper">
+        <iframe
+          src="https://maps.google.com/maps?q=7.1128542,-73.2187783+(EL+B%C3%9AHO+NUEVE+-+Lebrija)&amp;hl=es&amp;z=16&amp;output=embed"
+          width="100%" height="380" style="border:0;" allowfullscreen="" loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Ubicación Boda Gloria y Marco - EL BÚHO NUEVE, Lebrija, Santander">
+        </iframe>
+      </div>
+    </section>
+
+    <!-- SECTION: DETALLES, DRESS CODE, REGALOS Y RECOMENDACIONES -->
+    <section id="detalles" class="wedding-card">
+      <div class="card-header text-center">
+        <span class="card-tag">Para tener en cuenta</span>
+        <h2 class="card-title">Detalles &amp; Recomendaciones</h2>
+        <p class="card-subtitle">Información clave para que disfrutes de la velada</p>
+      </div>
+
+      <div class="details-triple-grid">
+
+        <!-- Código de Vestimenta -->
+        <div class="detail-glass-card">
+          <div class="detail-icon">
+            <i class="ri-t-shirt-air-line"></i>
+          </div>
+          <h3 class="detail-title">Código de Vestimenta</h3>
+          <p class="detail-highlight">Formal / Rigurosa Etiqueta</p>
+          <p class="detail-text">
+            <strong>Caballeros:</strong> Traje formal oscuro o esmoquin con corbata/moño.<br>
+            <strong>Damas:</strong> Vestido largo de gala.
+          </p>
+
+          <div class="color-palette-guide">
+            <span class="palette-title">Colores sugeridos:</span>
+            <div class="palette-swatches">
+              <span class="swatch" style="background:#1B263B;" title="Azul Marino"></span>
+              <span class="swatch" style="background:#582F46;" title="Vino / Borgoña"></span>
+              <span class="swatch" style="background:#3C5A48;" title="Verde Esmeralda / Olivo"></span>
+              <span class="swatch" style="background:#C5A880;" title="Dorado / Champaña"></span>
+              <span class="swatch" style="background:#5C5D67;" title="Plata / Gris Humo"></span>
+            </div>
+          </div>
+
+          <div class="dress-code-alert">
+            <i class="ri-alert-fill"></i>
+            <span>Nota: El color blanco, perla e ivory están reservados con cariño exclusivamente para la novia.</span>
+          </div>
+        </div>
+
+        <!-- Sugerencia de Regalos -->
+        <div class="detail-glass-card">
+          <div class="detail-icon">
+            <i class="ri-gift-line"></i>
+          </div>
+          <h3 class="detail-title">Mesa de Regalos</h3>
+          <p class="detail-highlight">Lluvia de Sobres &amp; Nequi</p>
+          <p class="detail-text">
+            “Lo más importante para nosotros es compartir este momento inolvidable con ustedes”. Sin embargo, si deseáis
+            contribuir a nuestro futuro juntos, y lograr nuestros sueños, puedes hacerlo con mucho cariño a través de
+            nuestra cuenta bancaria en Nequi o utilizando nuestro Buzón de Lluvia de Sobres, que encontraras el día de
+            nuestra boda.
+          </p>
+
+          <div class="bank-details-box">
+            <div class="bank-row">
+              <span class="bank-label">Método:</span>
+              <span class="bank-val">Nequi</span>
+            </div>
+            <div class="bank-row">
+              <span class="bank-label">N.º de Cuenta:</span>
+              <span class="bank-val" id="bankAccountNumber" style="color: var(--gold-dark); font-size: 1.05rem;">317 541
+                9845</span>
+            </div>
+            <div class="bank-row">
+              <span class="bank-label">Titular:</span>
+              <span class="bank-val">Marco Aurelio Ortiz Ardila</span>
+            </div>
+            <div class="bank-row">
+              <span class="bank-label">En el evento:</span>
+              <span class="bank-val">Buzón de Lluvia de Sobres</span>
+            </div>
+            <button class="mini-btn-copy" id="copyAccountBtn" onclick="copyBankAccount()">
+              <i class="ri-file-copy-line"></i> Copiar Número Nequi (3175419845)
+            </button>
+            <span class="copy-success-message" id="copySuccessMsg">¡Número Nequi copiado al portapapeles!</span>
+          </div>
+        </div>
+
+        <!-- Recomendaciones Adicionales -->
+        <div class="detail-glass-card">
+          <div class="detail-icon">
+            <i class="ri-information-line"></i>
+          </div>
+          <h3 class="detail-title">Recomendaciones</h3>
+          <p class="detail-highlight">Para los Invitados</p>
+
+          <ul class="tips-list">
+            <li>
+              <i class="ri-parent-line"></i>
+              <div>
+                <strong>Recepción Solo Adultos:</strong>
+                <p>Amamos a los pequeños, pero deseamos que esta noche nuestros invitados bailen y se relajen sin
+                  preocupaciones.</p>
+              </div>
+            </li>
+            <li>
+              <i class="ri-alarm-line"></i>
+              <div>
+                <strong>Puntualidad:</strong>
+                <p>La ceremonia iniciará puntual a las 4:00 PM. Agradecemos llegar unos minutos antes.</p>
+              </div>
+            </li>
+            <li>
+              <i class="ri-camera-off-line"></i>
+              <div>
+                <strong>Ceremonia Íntima / Unplugged:</strong>
+                <p>Te pedimos guardar tu móvil durante la misa para vivir el momento con nosotros. ¡En la fiesta podrás
+                  tomar todas las fotos!</p>
+              </div>
+            </li>
+            <li>
+              <i class="ri-instagram-line"></i>
+              <div>
+                <strong>Hashtag Oficial:</strong>
+                <p><span class="hashtag">#BodaGloriaYMarco</span> para compartir cada sonrisa en redes.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION: PASE DIGITAL INTERACTIVO Y DESCARGABLE EN PDF -->
+    <section id="pase-digital" class="wedding-card pass-section">
+      <div class="card-header text-center">
+        <span class="card-tag">Exclusivo y Personal</span>
+        <h2 class="card-title">Pase Digital de Acceso</h2>
+        <p class="card-subtitle">Genera tu pase oficial para ingresar al evento, descárgalo en PDF o guárdalo en tu
+          teléfono</p>
+      </div>
+
+      <!-- Configuración del Pase (Nombre del Invitado) -->
+      <div class="pass-configurator">
+        <label for="passGuestNameInput">Personaliza el nombre en tu Pase:</label>
+        <div class="input-with-button">
+          <input type="text" id="passGuestNameInput" placeholder="Ej. Familia Rodríguez / Juan y Laura"
+            value="Invitado de Honor">
+          <button class="wedding-btn btn-gold" id="updatePassBtn">
+            <i class="ri-refresh-line"></i> Actualizar Pase
+          </button>
+        </div>
+      </div>
+
+      <!-- VISUALIZACIÓN DEL PASE DIGITAL (Diseño de Invitación Formal) -->
+      <div class="pass-card-wrapper" id="passCardContainer">
+        <div class="pass-ticket" id="passTicketToPrint">
+
+          <!-- Borde decorativo de alta costura -->
+          <div class="pass-inner-border">
+
+            <!-- Encabezado del Pase con Monograma -->
+            <div class="pass-header">
+              <div class="pass-stamp">PASE DE ACCESO OFICIAL</div>
+              <div class="pass-monogram">G &amp; M</div>
+              <h3 class="pass-wedding-title">Nuestra Boda</h3>
+              <p class="pass-subtitle">Gloria &amp; Marco</p>
+            </div>
+
+            <!-- Foto de los Novios dentro del Pase (Google Drive: 01.jpeg con fallback a 001.jpg) -->
+            <div class="pass-photo-frame">
+              <img src="https://lh3.googleusercontent.com/d/1OgZ3RAbF3LBbZbF1J8hcD_xX1G49zLPr" crossorigin="anonymous"
+                alt="Gloria y Marco" class="pass-novios-img"
+                onerror="this.onerror=null; this.src='https://lh3.googleusercontent.com/d/1WaUPhUeQXCRi8DqScb_D1ZoyvF_m-rHV';">
+            </div>
+
+            <!-- Cuerpo del Pase -->
+            <div class="pass-body">
+              <p class="pass-intro">Tenemos el gran honor de invitarte a celebrar con nosotros:</p>
+              <h2 class="pass-guest-name" id="passDisplayGuestName">Invitado de Honor</h2>
+
+              <div class="pass-info-grid">
+                <div class="pass-info-col">
+                  <span class="info-label"><i class="ri-calendar-line"></i> FECHA</span>
+                  <span class="info-val">5 Diciembre 2026</span>
+                </div>
+                <div class="pass-info-col">
+                  <span class="info-label"><i class="ri-time-line"></i> HORA</span>
+                  <span class="info-val">4:00 PM</span>
+                </div>
+                <div class="pass-info-col">
+                  <span class="info-label"><i class="ri-ticket-line"></i> N° PASES</span>
+                  <span class="info-val" id="passDisplayCount">2 Personas</span>
+                </div>
+                <div class="pass-info-col">
+                  <span class="info-label"><i class="ri-t-shirt-line"></i> VESTIMENTA</span>
+                  <span class="info-val">Rigurosa Etiqueta</span>
+                </div>
+              </div>
+
+              <div class="pass-venue">
+                <i class="ri-map-pin-2-fill"></i>
+                <div>
+                  <strong>EL BÚHO NUEVE</strong>
+                  <span>Lebrija, Santander, Colombia</span>
+                </div>
+              </div>
+
+              <!-- Código QR de Validación Dinámico -->
+              <div class="pass-qr-area">
+                <div id="passQrcode" class="qr-code-box"></div>
+                <div class="qr-info">
+                  <span class="qr-code-id" id="passIdCode">PAS-GM-2026-089</span>
+                  <span class="qr-desc">Presenta este código al ingresar a la recepción</span>
+                </div>
+              </div>
+
+              <!-- Sello de Cera / Monograma Nupcial -->
+              <div class="wax-seal-badge">
+                <span class="seal-text">G&amp;M</span>
+              </div>
+            </div>
+
+            <div class="pass-footer">
+              <span>Boda Gloria &amp; Marco • Diciembre 2026</span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Acciones del Pase Digital -->
+      <div class="pass-download-actions">
+        <button class="wedding-btn btn-gold" id="downloadPdfBtn" onclick="generatePassPDF()">
+          <i class="ri-file-pdf-fill"></i> Descargar Pase Digital en PDF
+        </button>
+        <button class="wedding-btn btn-glass" id="openFullscreenPassBtn" onclick="openPassModal()">
+          <i class="ri-fullscreen-line"></i> Ver Pantalla Completa
+        </button>
+        <button class="wedding-btn btn-whatsapp" id="sharePassWhatsappBtn" onclick="sharePassWhatsapp()">
+          <i class="ri-whatsapp-line"></i> Enviar Pase por WhatsApp
+        </button>
+      </div>
+
+    </section>
+
+    <!-- SECTION: CONFIRMACIÓN DE ASISTENCIA (RSVP FORMAL & WHATSAPP) -->
+    <section id="rsvp" class="wedding-card rsvp-section">
+      <div class="card-header text-center">
+        <span class="card-tag">R.S.V.P.</span>
+        <h2 class="card-title">Confirmación de Asistencia</h2>
+        <p class="card-subtitle">Tu presencia es fundamental para nosotros. Por favor confirma antes del 30 de Octubre
+        </p>
+      </div>
+
+      <div class="rsvp-layout">
+
+        <!-- Formulario Formal -->
+        <form class="rsvp-form" id="rsvpWeddingForm" onsubmit="handleRsvpSubmit(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="guestFullName"><i class="ri-user-line"></i> Nombre y Apellidos Completos *</label>
+              <input type="text" id="guestFullName" required placeholder="Escribe tu nombre completo">
+            </div>
+            <div class="form-group">
+              <label for="guestPhone"><i class="ri-phone-line"></i> Teléfono / Celular *</label>
+              <input type="tel" id="guestPhone" required placeholder="Ej. +57 300 123 4567">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label><i class="ri-question-answer-line"></i> ¿Nos acompañarás en nuestro gran día? *</label>
+            <div class="radio-options-grid">
+              <label class="radio-card">
+                <input type="radio" name="attendanceStatus" value="SI" checked>
+                <div class="radio-box">
+                  <i class="ri-check-line radio-icon"></i>
+                  <div>
+                    <strong>¡Sí, asistiré con gran emoción!</strong>
+                    <span>Cuenten conmigo para celebrar su amor</span>
+                  </div>
+                </div>
+              </label>
+
+              <label class="radio-card">
+                <input type="radio" name="attendanceStatus" value="NO">
+                <div class="radio-box">
+                  <i class="ri-close-line radio-icon"></i>
+                  <div>
+                    <strong>Lamentablemente no podré</strong>
+                    <span>Estaré con ustedes de corazón</span>
+                  </div>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <div class="form-group" id="companionsRow">
+            <label for="guestTickets"><i class="ri-team-line"></i> Número de Personas Confirmadas</label>
+            <select id="guestTickets">
+              <option value="1">1 Pase (Solo yo)</option>
+              <option value="2" selected>2 Pases (Con acompañante)</option>
+              <option value="3">3 Pases</option>
+              <option value="4">4 Pases (Familia)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="songRequest"><i class="ri-music-line"></i> ¿Qué canción te pondría a bailar sí o sí?</label>
+            <input type="text" id="songRequest" placeholder="Artista y Título de la canción">
+          </div>
+
+          <div class="form-group">
+            <label for="loveMessage"><i class="ri-chat-heart-line"></i> Dedicatoria o Mensaje para los Novios</label>
+            <textarea id="loveMessage" rows="3" placeholder="Déjanos unas bellas palabras..."></textarea>
+          </div>
+
+          <div class="form-submit-area">
+            <button type="submit" class="wedding-btn btn-gold btn-large" id="rsvpSubmitBtn">
+              <i class="ri-send-plane-fill"></i> Enviar Confirmación Formal
+            </button>
+            <button type="button" class="wedding-btn btn-whatsapp btn-large" onclick="sendRsvpViaWhatsapp()">
+              <i class="ri-whatsapp-fill"></i> Confirmar Directamente por WhatsApp
+            </button>
+          </div>
+
+          <!-- Mensaje de confirmación exitosa -->
+          <div class="rsvp-alert-success" id="rsvpSuccessAlert">
+            <i class="ri-checkbox-circle-fill"></i>
+            <div>
+              <h4>¡Gracias por tu confirmación!</h4>
+              <p>Hemos registrado tu respuesta con éxito. ¡Nos vemos en el altar para celebrar juntos!</p>
+            </div>
+          </div>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- MODAL DE PANTALLA COMPLETA PARA EL PASE DIGITAL -->
+  <div class="modal-overlay" id="passFullscreenModal">
+    <div class="modal-content wedding-modal-content">
+      <div class="modal-header">
+        <div class="modal-title-box">
+          <i class="ri-ticket-2-fill gold-text"></i>
+          <h3 id="modalPassTitle">Pase Digital Oficial • Gloria &amp; Marco</h3>
+        </div>
+        <button class="modal-close-btn" id="closePassModalBtn" onclick="closePassModal()" title="Cerrar modal">
+          <i class="ri-close-line"></i>
+        </button>
+      </div>
+      <div class="modal-body" id="modalPassBody">
+        <div id="modalPassTarget"></div>
+      </div>
+      <div class="modal-footer">
+        <button class="wedding-btn btn-gold" onclick="generatePassPDF()">
+          <i class="ri-download-2-line"></i> Descargar en PDF
+        </button>
+        <button class="wedding-btn btn-glass" onclick="closePassModal()">
+          <i class="ri-close-circle-line"></i> Cerrar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer de Gala -->
+  <footer class="wedding-footer">
+    <div class="container text-center">
+      <div class="footer-monogram">G &amp; M</div>
+      <h3 class="footer-names">Gloria &amp; Marco</h3>
+      <p class="footer-quote">“Dos vidas, un corazón, una sola historia de amor eterno.”</p>
+      <div class="footer-date">05 • 12 • 2026</div>
+      <div class="footer-copy">
+        <p>Página de Boda &amp; Pase Digital diseñado con cariño</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts en carpeta js/ -->
+  <script src="js/app.js"></script>
+</body>
+
+</html>
