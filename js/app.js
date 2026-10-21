@@ -89,7 +89,7 @@ function initEnvelopeIntro() {
     // 2. Activar la animación de apertura del sobre y salida de la foto (imag/001.jpg)
     envelope.classList.add('opened');
 
-    // 3. Duración de la animación: exactamente 3 segundos (3000 ms)
+    // 3. Duración de visualización del sobre y foto: 5.5 segundos (5500 ms)
     setTimeout(() => {
       // Desvanecer el sobre hacia la página web
       overlay.classList.add('fade-out');
@@ -102,7 +102,7 @@ function initEnvelopeIntro() {
         document.documentElement.scrollTop = 0;
         document.body.scrollTop = 0;
       }, 800);
-    }, 3000);
+    }, 5500);
   });
 }
 

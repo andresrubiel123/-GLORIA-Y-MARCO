@@ -584,18 +584,19 @@ body.envelope-active {
 }
 
 .glass-nav {
-  max-width: 1100px;
+  max-width: 1220px;
   margin: 0 auto;
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.9);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  border: 1px solid var(--glass-border);
+  border: 1.5px solid var(--glass-border);
   border-radius: 50px;
-  padding: 8px 24px;
+  padding: 8px 18px 8px 24px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   box-shadow: var(--glass-shadow);
+  gap: 12px;
 }
 
 .nav-brand {
@@ -603,21 +604,7 @@ body.envelope-active {
   align-items: center;
   gap: 12px;
   text-decoration: none;
-}
-
-.wedding-monogram {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: var(--gold-gradient);
-  color: #ffffff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-serif);
-  font-size: 0.95rem;
-  font-weight: 700;
-  box-shadow: 0 4px 12px var(--gold-glow);
+  flex-shrink: 0;
 }
 
 .nav-brand-text {
@@ -626,23 +613,25 @@ body.envelope-active {
   font-weight: 600;
   color: var(--gold-dark);
   letter-spacing: 0.5px;
+  white-space: nowrap;
 }
 
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 14px;
   list-style: none;
 }
 
 .nav-link {
   text-decoration: none;
-  font-size: 0.9rem;
+  font-size: 0.86rem;
   font-weight: 500;
   color: var(--text-muted);
   transition: var(--transition-smooth);
   position: relative;
   padding: 6px 0;
+  white-space: nowrap;
 }
 
 .nav-link:hover, .nav-link.active {
@@ -671,6 +660,9 @@ body.envelope-active {
   padding: 8px 18px !important;
   border-radius: 20px;
   box-shadow: 0 4px 12px var(--gold-glow);
+  white-space: nowrap;
+  font-weight: 600 !important;
+  flex-shrink: 0;
 }
 
 .rsvp-link:hover {
@@ -876,15 +868,21 @@ body.envelope-active {
 }
 
 .hero-decorative-frame {
-  background: rgba(255, 255, 255, 0.7);
+  background: var(--bg-card);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid var(--glass-border);
+  border: 2.5px solid rgba(212, 175, 55, 0.65);
   border-radius: 40px;
   padding: 60px 30px;
-  box-shadow: 0 25px 60px -15px rgba(143, 107, 62, 0.2);
+  box-shadow: 0 16px 40px -10px rgba(143, 107, 62, 0.18), 0 0 25px rgba(212, 175, 55, 0.15);
+  transition: var(--transition-smooth);
   position: relative;
   overflow: hidden;
+}
+
+.hero-decorative-frame:hover {
+  box-shadow: 0 22px 50px -10px rgba(143, 107, 62, 0.25), 0 0 32px rgba(212, 175, 55, 0.3);
+  border-color: rgba(212, 175, 55, 0.95);
 }
 
 .hero-decorative-frame::before {
@@ -894,7 +892,7 @@ body.envelope-active {
   left: 15px;
   right: 15px;
   bottom: 15px;
-  border: 1px solid rgba(197, 168, 128, 0.25);
+  border: 1.5px solid rgba(212, 175, 55, 0.35);
   border-radius: 30px;
   pointer-events: none;
 }
@@ -2457,30 +2455,32 @@ body.envelope-active {
     top: 95px;
   }
 
-  .envelope-intro-names {
-    font-size: 2.8rem;
-  }
+}
 
+@media (max-width: 1080px) {
   .mobile-menu-toggle {
     display: block;
   }
 
   .nav-links {
     position: fixed;
-    top: 70px;
-    left: 20px;
-    right: 20px;
+    top: 72px;
+    left: 16px;
+    right: 16px;
     background: rgba(255, 255, 255, 0.98);
     backdrop-filter: blur(20px);
-    border: 1px solid var(--gold-light);
+    -webkit-backdrop-filter: blur(20px);
+    border: 2px solid rgba(212, 175, 55, 0.6);
     border-radius: var(--radius-lg);
     flex-direction: column;
-    padding: 24px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    padding: 22px 16px;
+    gap: 8px;
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.2), 0 0 25px rgba(212, 175, 55, 0.15);
     opacity: 0;
     pointer-events: none;
     transform: translateY(-10px);
     transition: var(--transition-bounce);
+    z-index: 600;
   }
 
   .nav-links.active {
@@ -2488,6 +2488,29 @@ body.envelope-active {
     pointer-events: all;
     transform: translateY(0);
   }
+
+  .nav-link {
+    font-size: 1.05rem;
+    padding: 8px 12px;
+    width: 100%;
+    text-align: center;
+    border-radius: 8px;
+  }
+
+  .nav-link:hover {
+    background: rgba(197, 168, 128, 0.12);
+  }
+
+  .rsvp-link {
+    width: 100%;
+    text-align: center;
+    padding: 12px 20px !important;
+    margin-top: 8px;
+    display: block;
+  }
+}
+
+@media (max-width: 768px) {
 
   .hero-names {
     font-size: 3.8rem;
