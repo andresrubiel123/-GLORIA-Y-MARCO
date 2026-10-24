@@ -16,7 +16,7 @@
   --bg-cream: #F5EFEB;
   --bg-card: rgba(255, 255, 255, 0.88);
   --bg-card-hover: rgba(255, 255, 255, 0.96);
-  
+
   --glass-border: rgba(197, 168, 128, 0.35);
   --glass-border-light: rgba(255, 255, 255, 0.6);
   --glass-shadow: 0 15px 35px -10px rgba(143, 107, 62, 0.12), 0 0 20px rgba(197, 168, 128, 0.08);
@@ -44,7 +44,9 @@
 }
 
 /* Reset y Base */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -58,7 +60,7 @@ html {
 
 body {
   background-color: var(--bg-ivory);
-  background-image: 
+  background-image:
     radial-gradient(at 0% 0%, rgba(226, 206, 181, 0.3) 0px, transparent 50%),
     radial-gradient(at 100% 100%, rgba(197, 168, 128, 0.2) 0px, transparent 50%),
     radial-gradient(at 50% 50%, rgba(255, 255, 255, 0.6) 0px, transparent 100%);
@@ -86,7 +88,7 @@ body.envelope-active {
   height: 100vh;
   z-index: 99999;
   background-color: #1a1614;
-  background-image: 
+  background-image:
     linear-gradient(rgba(15, 12, 10, 0.38), rgba(15, 12, 10, 0.62)),
     url('../imag/fondo_sobre.png'),
     url('https://lh3.googleusercontent.com/d/1RAJdQWiR5RghjdGR0Pu78qE2qmu8aYVa');
@@ -116,7 +118,7 @@ body.envelope-active {
   width: 100%;
   height: 100%;
   pointer-events: none;
-  background-image: 
+  background-image:
     radial-gradient(rgba(212, 175, 55, 0.2) 1px, transparent 1px),
     radial-gradient(rgba(255, 240, 200, 0.15) 1.5px, transparent 1.5px);
   background-size: 32px 32px, 64px 64px;
@@ -320,7 +322,7 @@ body.envelope-active {
   border-radius: 50%;
   background: radial-gradient(circle at 35% 35%, #F0DFCC, #C5A880 50%, #8F6B3E 100%);
   border: 3px solid #FFF8F0;
-  box-shadow: 
+  box-shadow:
     0 8px 25px rgba(143, 107, 62, 0.4),
     0 0 15px rgba(212, 175, 55, 0.5),
     inset 0 2px 4px rgba(255, 255, 255, 0.8),
@@ -338,7 +340,7 @@ body.envelope-active {
 
 .wax-seal-btn:hover {
   transform: translateX(-50%) scale(1.12);
-  box-shadow: 
+  box-shadow:
     0 12px 30px rgba(143, 107, 62, 0.5),
     0 0 25px rgba(212, 175, 55, 0.7);
 }
@@ -395,9 +397,11 @@ body.envelope-active {
   0% {
     box-shadow: 0 8px 25px rgba(143, 107, 62, 0.4), 0 0 0 0 rgba(212, 175, 55, 0.4);
   }
+
   70% {
     box-shadow: 0 10px 28px rgba(143, 107, 62, 0.5), 0 0 0 16px rgba(212, 175, 55, 0);
   }
+
   100% {
     box-shadow: 0 8px 25px rgba(143, 107, 62, 0.4), 0 0 0 0 rgba(212, 175, 55, 0);
   }
@@ -424,8 +428,15 @@ body.envelope-active {
 }
 
 @keyframes bounceHint {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-4px); }
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-4px);
+  }
 }
 
 /* ==========================================================================
@@ -520,8 +531,13 @@ body.envelope-active {
 }
 
 @keyframes spinDisc {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .music-note-icon {
@@ -551,14 +567,34 @@ body.envelope-active {
   animation: waveBars 0.8s ease infinite alternate;
 }
 
-.sound-wave span:nth-child(1) { height: 6px; animation-delay: 0.1s; }
-.sound-wave span:nth-child(2) { height: 12px; animation-delay: 0.3s; }
-.sound-wave span:nth-child(3) { height: 8px; animation-delay: 0.2s; }
-.sound-wave span:nth-child(4) { height: 14px; animation-delay: 0.4s; }
+.sound-wave span:nth-child(1) {
+  height: 6px;
+  animation-delay: 0.1s;
+}
+
+.sound-wave span:nth-child(2) {
+  height: 12px;
+  animation-delay: 0.3s;
+}
+
+.sound-wave span:nth-child(3) {
+  height: 8px;
+  animation-delay: 0.2s;
+}
+
+.sound-wave span:nth-child(4) {
+  height: 14px;
+  animation-delay: 0.4s;
+}
 
 @keyframes waveBars {
-  0% { height: 4px; }
-  100% { height: 14px; }
+  0% {
+    height: 4px;
+  }
+
+  100% {
+    height: 14px;
+  }
 }
 
 .music-tooltip {
@@ -630,12 +666,25 @@ body.envelope-active {
 }
 
 .nav-brand-text {
-  font-family: var(--font-serif);
-  font-size: 1.25rem;
-  font-weight: 600;
+  font-family: 'Cormorant Garamond', var(--font-serif);
+  font-size: 1.35rem;
+  font-weight: 700;
   color: var(--gold-dark);
   letter-spacing: 0.5px;
   white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.nav-brand-text .brand-connector {
+  font-family: 'Alex Brush', 'Great Vibes', cursive;
+  font-size: 1.35rem;
+  font-weight: 400;
+  font-style: italic;
+  color: #8F6B3E;
+  position: relative;
+  top: 1px;
 }
 
 .nav-links {
@@ -656,7 +705,8 @@ body.envelope-active {
   white-space: nowrap;
 }
 
-.nav-link:hover, .nav-link.active {
+.nav-link:hover,
+.nav-link.active {
   color: var(--gold-dark);
 }
 
@@ -941,7 +991,8 @@ body.envelope-active {
   width: 270px;
   height: 360px;
   margin: 0 auto 30px;
-  border-radius: 180px 180px 20px 20px; /* Arco arquitectónico de boda */
+  border-radius: 180px 180px 20px 20px;
+  /* Arco arquitectónico de boda */
   overflow: hidden;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15), 0 0 25px var(--gold-glow);
   border: 4px solid #ffffff;
@@ -1094,7 +1145,7 @@ body.envelope-active {
   padding: 12px 12px 34px 12px;
   border-radius: 4px;
   border: 1px solid rgba(220, 210, 195, 0.6);
-  box-shadow: 
+  box-shadow:
     0 16px 36px -8px rgba(0, 0, 0, 0.22),
     0 0 15px rgba(197, 168, 128, 0.18),
     inset 0 0 0 1px rgba(255, 255, 255, 0.8);
@@ -1106,7 +1157,7 @@ body.envelope-active {
 .polaroid-frame:hover {
   transform: scale(1.08) rotate(0deg) !important;
   z-index: 20 !important;
-  box-shadow: 
+  box-shadow:
     0 24px 50px -6px rgba(0, 0, 0, 0.3),
     0 0 25px rgba(212, 175, 55, 0.45);
 }
@@ -1162,7 +1213,7 @@ body.envelope-active {
   top: 115px;
   transform: translateX(-50%) rotate(-1deg);
   z-index: 5;
-  box-shadow: 
+  box-shadow:
     0 20px 45px -5px rgba(0, 0, 0, 0.28),
     0 0 22px rgba(212, 175, 55, 0.25);
 }
@@ -1845,11 +1896,32 @@ body.envelope-active {
 }
 
 .pass-monogram {
-  font-family: var(--font-serif);
-  font-size: 2.2rem;
+  font-family: 'Cormorant Garamond', var(--font-serif);
+  font-size: 2.3rem;
   font-weight: 700;
   color: var(--gold-primary);
   line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  letter-spacing: 0.5px;
+}
+
+.pass-monogram .pass-initial {
+  display: inline-block;
+  font-family: 'Cormorant Garamond', var(--font-serif);
+}
+
+.pass-monogram .pass-connector {
+  font-family: 'Alex Brush', 'Great Vibes', cursive;
+  font-size: 2.2rem;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--gold-dark);
+  display: inline-block;
+  position: relative;
+  top: 2px;
 }
 
 .pass-wedding-title {
@@ -1861,11 +1933,24 @@ body.envelope-active {
 }
 
 .pass-subtitle {
-  font-family: var(--font-serif);
-  font-size: 1.1rem;
-  font-style: italic;
+  font-family: 'Cormorant Garamond', var(--font-serif);
+  font-size: 1.15rem;
+  font-style: normal;
   color: var(--text-muted);
   margin-bottom: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.pass-subtitle .pass-subtitle-connector {
+  font-family: 'Alex Brush', 'Great Vibes', cursive;
+  font-size: 1.25rem;
+  font-style: italic;
+  color: var(--gold-dark);
+  position: relative;
+  top: 1px;
 }
 
 /* Foto de los Novios en el Pase */
@@ -2014,10 +2099,26 @@ body.envelope-active {
 }
 
 .seal-text {
-  font-family: var(--font-serif);
-  font-size: 0.9rem;
+  font-family: 'Cormorant Garamond', var(--font-serif);
+  font-size: 0.95rem;
   font-weight: 700;
   letter-spacing: 0.5px;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.seal-text .seal-initial {
+  display: inline-block;
+  font-family: 'Cormorant Garamond', var(--font-serif);
+}
+
+.seal-text .seal-connector {
+  font-family: 'Alex Brush', 'Great Vibes', cursive;
+  font-size: 0.95rem;
+  font-weight: 400;
+  font-style: italic;
+  color: #FFF6EB;
 }
 
 .pass-footer {
@@ -2137,13 +2238,13 @@ body.envelope-active {
   color: var(--text-muted);
 }
 
-.radio-card input:checked + .radio-box {
+.radio-card input:checked+.radio-box {
   background: #ffffff;
   border-color: var(--gold-primary);
   box-shadow: 0 6px 18px var(--gold-glow);
 }
 
-.radio-card input:checked + .radio-box .radio-icon {
+.radio-card input:checked+.radio-box .radio-icon {
   color: var(--gold-dark);
 }
 
@@ -2486,7 +2587,7 @@ body.envelope-active {
   }
 
   .envelope-front-label {
-    top: 19px;
+    top: 15px;
     width: 86%;
     max-width: 270px;
     height: 44px;
@@ -2704,7 +2805,7 @@ body.envelope-active {
    ========================================================================== */
 .envelope-front-label {
   position: absolute;
-  top: 24px;
+  top: 20px;
   left: 50%;
   transform: translateX(-50%);
   width: 86%;
