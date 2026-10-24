@@ -34,3 +34,6 @@ $RECYCLE.BIN/
 temp*
 *.tmp
 *.bak
+
+# Base de Conocimiento Local (Graphify)
+graphify-out/
