@@ -461,26 +461,22 @@ function initGuestPersonalization() {
   const { name, passes } = getGuestUrlParams();
   if (!name) return;
 
-  // 1. Personalizar Sobre de Apertura
-  const envelopePlaque = document.getElementById('envelopeGuestPlaque');
-  const envelopeName = document.getElementById('envelopeGuestName');
-  const envelopePassesPill = document.getElementById('envelopeGuestPassesPill');
-  const envelopeBadgeDefault = document.getElementById('envelopeBadgeDefault');
+  // 1. Personalizar Rótulo Caligrafiado en el Frente del Sobre
+  const frontLabel = document.getElementById('envelopeFrontLabel');
+  const frontGuestName = document.getElementById('envelopeFrontGuestName');
+  const frontPasses = document.getElementById('envelopeFrontPasses');
   const letterGuestLine = document.getElementById('letterGuestLine');
 
-  if (envelopePlaque && envelopeName) {
-    envelopeName.textContent = name;
+  if (frontLabel && frontGuestName) {
+    frontGuestName.textContent = name;
     if (passes) {
       const passText = (passes === '1') ? '1 Pase Reservado' : `${passes} Pases Reservados`;
-      envelopePassesPill.innerHTML = `<i class="ri-ticket-2-line"></i> ${passText}`;
-      envelopePassesPill.style.display = 'inline-flex';
+      frontPasses.innerHTML = `<i class="ri-ticket-2-line"></i> ${passText}`;
+      frontPasses.style.display = 'inline-flex';
     } else {
-      envelopePassesPill.style.display = 'none';
+      frontPasses.style.display = 'none';
     }
-    envelopePlaque.style.display = 'inline-flex';
-    if (envelopeBadgeDefault) {
-      envelopeBadgeDefault.style.display = 'none';
-    }
+    frontLabel.style.display = 'block';
   }
 
   if (letterGuestLine) {

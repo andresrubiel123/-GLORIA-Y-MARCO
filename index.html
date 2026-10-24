@@ -17,7 +17,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
     rel="stylesheet">
 
   <!-- Remix Icon -->
@@ -59,18 +59,20 @@
       </div>
       <h2 class="envelope-intro-names">Gloria &amp; Marco</h2>
       <p class="envelope-intro-subtitle">Tenemos el honor de invitarte a nuestra boda</p>
-
-      <!-- Placa de lujo para el Invitado Personalizado -->
-      <div class="envelope-guest-plaque" id="envelopeGuestPlaque" style="display: none;">
-        <span class="plaque-tag"><i class="ri-vip-crown-line"></i> Especialmente Para:</span>
-        <h3 class="plaque-name" id="envelopeGuestName"></h3>
-        <span class="plaque-passes-pill" id="envelopeGuestPassesPill"></span>
-      </div>
     </div>
 
     <!-- Contenedor 3D del Sobre de Invitación -->
     <div class="envelope-3d-wrapper">
       <div class="wedding-envelope" id="weddingEnvelope">
+
+        <!-- Rótulo Caligrafiado Personalizado Delante del Sobre (Marcado de Gala) -->
+        <div class="envelope-front-label" id="envelopeFrontLabel" style="display: none;">
+          <div class="envelope-label-inner">
+            <span class="envelope-label-intro">Especialmente para</span>
+            <h3 class="envelope-label-guest-name" id="envelopeFrontGuestName"></h3>
+            <span class="envelope-label-passes" id="envelopeFrontPasses" style="display: none;"></span>
+          </div>
+        </div>
 
         <!-- Solapa Triangular Superior (Abre hacia arriba en 3D) -->
         <div class="envelope-flap-top"></div>
