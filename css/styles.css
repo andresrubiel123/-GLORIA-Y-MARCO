@@ -344,12 +344,34 @@ body.envelope-active {
 }
 
 .seal-monogram {
-  font-family: var(--font-serif);
-  font-size: 1.25rem;
+  font-family: 'Cormorant Garamond', var(--font-serif);
+  font-size: 1.35rem;
   font-weight: 700;
   color: #ffffff;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.45);
   line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  letter-spacing: 0.5px;
+}
+
+.seal-monogram .seal-initial {
+  display: inline-block;
+  font-family: 'Cormorant Garamond', var(--font-serif);
+}
+
+.seal-monogram .seal-connector {
+  font-family: 'Alex Brush', 'Great Vibes', cursive;
+  font-size: 1.35rem;
+  font-weight: 400;
+  font-style: italic;
+  color: #FFF6EB;
+  display: inline-block;
+  position: relative;
+  top: 1px;
+  padding: 0 1px;
 }
 
 .seal-subtext {
@@ -2455,15 +2477,23 @@ body.envelope-active {
     top: 95px;
   }
 
+  .seal-monogram {
+    font-size: 1.2rem;
+  }
+
+  .seal-monogram .seal-connector {
+    font-size: 1.2rem;
+  }
+
   .envelope-front-label {
-    top: 26px;
+    top: 19px;
     width: 86%;
     max-width: 270px;
     height: 44px;
   }
 
   .envelope-label-guest-name {
-    font-size: 1.85rem;
+    font-size: 1.25rem;
   }
 
 }
@@ -2674,7 +2704,7 @@ body.envelope-active {
    ========================================================================== */
 .envelope-front-label {
   position: absolute;
-  top: 34px;
+  top: 24px;
   left: 50%;
   transform: translateX(-50%);
   width: 86%;
@@ -2696,7 +2726,7 @@ body.envelope-active {
 
 .envelope-label-guest-name {
   font-family: 'Alex Brush', 'Great Vibes', cursive;
-  font-size: 2.15rem;
+  font-size: 1.75rem;
   font-weight: 500;
   color: #6E4A1E;
   line-height: 1.1;
