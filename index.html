@@ -53,12 +53,19 @@
     <div class="envelope-bg-decor"></div>
 
     <div class="envelope-intro-header">
-      <div class="wedding-seal-badge">
+      <div class="wedding-seal-badge" id="envelopeBadgeDefault">
         <i class="ri-heart-3-line"></i>
         <span>Invitación Especial</span>
       </div>
       <h2 class="envelope-intro-names">Gloria &amp; Marco</h2>
       <p class="envelope-intro-subtitle">Tenemos el honor de invitarte a nuestra boda</p>
+
+      <!-- Placa de lujo para el Invitado Personalizado -->
+      <div class="envelope-guest-plaque" id="envelopeGuestPlaque" style="display: none;">
+        <span class="plaque-tag"><i class="ri-vip-crown-line"></i> Especialmente Para:</span>
+        <h3 class="plaque-name" id="envelopeGuestName"></h3>
+        <span class="plaque-passes-pill" id="envelopeGuestPassesPill"></span>
+      </div>
     </div>
 
     <!-- Contenedor 3D del Sobre de Invitación -->
@@ -83,6 +90,7 @@
           <div class="letter-caption">
             <h4>¡Nos Casamos!</h4>
             <p>5 • DICIEMBRE • 2026</p>
+            <p class="letter-guest-line" id="letterGuestLine" style="display: none;"></p>
           </div>
         </div>
 
@@ -182,7 +190,7 @@
         </div>
 
         <div class="hero-headings">
-          <p class="hero-pre-title">Con la bendición de Dios y nuestras familias</p>
+          <p class="hero-pre-title">Con la bendición de Dios y nuestros padres</p>
           <h1 class="hero-names">Gloria &amp; Marco</h1>
           <div class="ornament-divider">
             <span class="line"></span>
@@ -190,8 +198,8 @@
             <span class="line"></span>
           </div>
           <p class="hero-quote">
-            “Porque el amor es paciente, es bondadoso, todo lo espera, todo lo soporta... y nosotros hemos decidido
-            caminar juntos para siempre.”
+            “Uno puede ser vencido, pero dos pueden resistir. ¡La cuerda de tres hilos no se rompe fácilmente!"
+            Eclesiastes 4: 12”
           </p>
 
           <div class="hero-date-pill">
@@ -235,9 +243,9 @@
 
         <!-- Adorno floral superior -->
         <div class="story-floral-top">
-          <span>🌸</span>
+          <span>🤍</span>
           <i class="ri-heart-fill" style="font-size: 1.2rem; color: var(--gold-primary);"></i>
-          <span>🌸</span>
+          <span>🤍</span>
         </div>
 
         <!-- Trío de Polaroids estilo Scrapbook -->
@@ -279,7 +287,7 @@
 
             <!-- Detalle floral delicado en la esquina -->
             <div class="story-floral-accent">
-              <span>🤍 🌸</span>
+              <span>🤍 </span>
             </div>
           </div>
         </div>
@@ -393,7 +401,7 @@
             <i class="ri-church-line"></i>
           </div>
           <div class="timeline-content">
-            <span class="timeline-time"><i class="ri-time-line"></i> 4:00 PM</span>
+            <span class="timeline-time"><i class="ri-time-line"></i> 4:30 PM</span>
             <h3 class="timeline-title">Ceremonia Religiosa</h3>
             <p class="timeline-desc">Bendición sagrada de nuestra unión. Por favor llegar con 15 minutos de
               anticipación.</p>
@@ -423,7 +431,7 @@
           </div>
           <div class="timeline-content">
             <span class="timeline-time"><i class="ri-time-line"></i> 7:00 PM</span>
-            <h3 class="timeline-title">Banquete Nupcial &amp; Brindis</h3>
+            <h3 class="timeline-title">Brindis &amp; </h3>
             <p class="timeline-desc">Cena formal de tres tiempos preparada especialmente para deleitarte, acompañada de
               palabras de gratitud.</p>
             <div class="timeline-place"><i class="ri-map-pin-2-line"></i> Gran Salón Imperial</div>
@@ -523,7 +531,7 @@
             <i class="ri-t-shirt-air-line"></i>
           </div>
           <h3 class="detail-title">Código de Vestimenta</h3>
-          <p class="detail-highlight">Formal / Rigurosa Etiqueta</p>
+          <p class="detail-highlight">Formal</p>
           <p class="detail-text">
             <strong>Caballeros:</strong> Traje formal oscuro o esmoquin con corbata/moño.<br>
             <strong>Damas:</strong> Vestido largo de gala.
@@ -871,6 +879,11 @@
       <div class="footer-date">05 • 12 • 2026</div>
       <div class="footer-copy">
         <p>Página de Boda &amp; Pase Digital diseñado con cariño</p>
+        <div class="footer-admin-link-wrapper" style="margin-top: 12px;">
+          <a href="generador.html" class="footer-admin-link" title="Panel Exclusivo de Novios para Generar Pases">
+            <i class="ri-lock-2-line"></i> Panel Novios (Generador de Pases)
+          </a>
+        </div>
       </div>
     </div>
   </footer>

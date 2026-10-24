@@ -27,6 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initMusicPlayer();
   initCountdown();
   initCalendarActions();
+  initGuestPersonalization();
   initPassDigital();
   initRsvpForm();
   initNavigation();
@@ -440,6 +441,91 @@ function initCalendarActions() {
       link.click();
       document.body.removeChild(link);
     });
+  }
+}
+
+/* ============================================================================
+   5.5. PERSONALIZACIÓN DINÁMICA DE INVITADO (Sobre, Pase Digital y RSVP)
+   ============================================================================ */
+function getGuestUrlParams() {
+  const params = new URLSearchParams(window.location.search);
+  const name = params.get('para') || params.get('invitado') || params.get('guest') || params.get('nombre') || '';
+  const passes = params.get('pases') || params.get('cupos') || params.get('personas') || '';
+  return {
+    name: name.trim(),
+    passes: passes.trim()
+  };
+}
+
+function initGuestPersonalization() {
+  const { name, passes } = getGuestUrlParams();
+  if (!name) return;
+
+  // 1. Personalizar Sobre de Apertura
+  const envelopePlaque = document.getElementById('envelopeGuestPlaque');
+  const envelopeName = document.getElementById('envelopeGuestName');
+  const envelopePassesPill = document.getElementById('envelopeGuestPassesPill');
+  const envelopeBadgeDefault = document.getElementById('envelopeBadgeDefault');
+  const letterGuestLine = document.getElementById('letterGuestLine');
+
+  if (envelopePlaque && envelopeName) {
+    envelopeName.textContent = name;
+    if (passes) {
+      const passText = (passes === '1') ? '1 Pase Reservado' : `${passes} Pases Reservados`;
+      envelopePassesPill.innerHTML = `<i class="ri-ticket-2-line"></i> ${passText}`;
+      envelopePassesPill.style.display = 'inline-flex';
+    } else {
+      envelopePassesPill.style.display = 'none';
+    }
+    envelopePlaque.style.display = 'inline-flex';
+    if (envelopeBadgeDefault) {
+      envelopeBadgeDefault.style.display = 'none';
+    }
+  }
+
+  if (letterGuestLine) {
+    letterGuestLine.textContent = `Especialmente Para: ${name}`;
+    letterGuestLine.style.display = 'block';
+  }
+
+  // 2. Personalizar Pase Digital
+  const passNameInput = document.getElementById('passGuestNameInput');
+  const passDisplayGuestName = document.getElementById('passDisplayGuestName');
+  const passDisplayCount = document.getElementById('passDisplayCount');
+
+  if (passNameInput) {
+    passNameInput.value = name;
+  }
+  if (passDisplayGuestName) {
+    passDisplayGuestName.textContent = name;
+  }
+  if (passes && passDisplayCount) {
+    passDisplayCount.textContent = (passes === '1') ? '1 Persona' : `${passes} Personas`;
+  }
+
+  // 3. Personalizar Formulario RSVP
+  const rsvpNameInput = document.getElementById('guestFullName');
+  const rsvpTicketsSelect = document.getElementById('guestTickets');
+
+  if (rsvpNameInput && !rsvpNameInput.value) {
+    rsvpNameInput.value = name;
+  }
+  if (passes && rsvpTicketsSelect) {
+    let optionExists = false;
+    for (let i = 0; i < rsvpTicketsSelect.options.length; i++) {
+      if (rsvpTicketsSelect.options[i].value === passes) {
+        rsvpTicketsSelect.selectedIndex = i;
+        optionExists = true;
+        break;
+      }
+    }
+    if (!optionExists) {
+      const newOpt = document.createElement('option');
+      newOpt.value = passes;
+      newOpt.textContent = `${passes} Pases`;
+      rsvpTicketsSelect.appendChild(newOpt);
+      rsvpTicketsSelect.value = passes;
+    }
   }
 }
 

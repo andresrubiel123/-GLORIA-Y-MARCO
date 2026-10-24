@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>Panel de Novios | Generador de Invitaciones &amp; Pases VIP • Gloria &amp; Marco 💍</title>
+  <meta name="description" content="Herramienta privada de Gloria y Marco para generar enlaces personalizados y pases digitales de boda para WhatsApp.">
+  <meta name="theme-color" content="#C5A880">
+
+  <!-- Favicon Monograma -->
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💍</text></svg>">
+
+  <!-- Google Fonts: Caligrafía de lujo y Sans moderna -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,400&family=Great+Vibes&family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- Remix Icon -->
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+
+  <style>
+    :root {
+      --gold-primary: #C5A880;
+      --gold-light: #E2CEB5;
+      --gold-dark: #8F6B3E;
+      --gold-gradient: linear-gradient(135deg, #D4AF37 0%, #C5A880 50%, #A67C4A 100%);
+      --bg-dark: #14100D;
+      --bg-card: rgba(28, 22, 18, 0.88);
+      --border-gold: rgba(212, 175, 55, 0.4);
+      --border-gold-focus: rgba(212, 175, 55, 0.9);
+      --text-gold: #F8E7C9;
+      --text-muted: #BBAEA5;
+      --whatsapp-color: #25D366;
+      --whatsapp-hover: #1EBE5D;
+      --font-script: 'Great Vibes', cursive;
+      --font-serif: 'Playfair Display', serif;
+      --font-display: 'Cormorant Garamond', serif;
+      --font-body: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      background-image:
+        radial-gradient(at 0% 0%, rgba(212, 175, 55, 0.15) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(143, 107, 62, 0.2) 0px, transparent 50%),
+        radial-gradient(at 50% 50%, rgba(20, 16, 13, 0.9) 0px, transparent 100%);
+      color: #FAF7F2;
+      font-family: var(--font-body);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 24px 16px 60px;
+    }
+
+    /* PANTALLA DE ACCESO PIN */
+    .login-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(15, 11, 9, 0.96);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      transition: opacity 0.4s ease, visibility 0.4s ease;
+    }
+
+    .login-overlay.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .login-card {
+      background: var(--bg-card);
+      border: 1.5px solid var(--border-gold);
+      border-radius: 24px;
+      padding: 36px 28px;
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 30px rgba(212, 175, 55, 0.25);
+      animation: cardAppear 0.5s ease-out;
+    }
+
+    @keyframes cardAppear {
+      from { transform: scale(0.92); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .login-monogram {
+      font-family: var(--font-script);
+      font-size: 3.5rem;
+      background: var(--gold-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .login-title {
+      font-family: var(--font-serif);
+      font-size: 1.4rem;
+      color: #FFFFFF;
+      margin-bottom: 6px;
+    }
+
+    .login-subtitle {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+    }
+
+    .pin-input-group {
+      margin-bottom: 20px;
+    }
+
+    .pin-input {
+      width: 180px;
+      text-align: center;
+      letter-spacing: 12px;
+      font-size: 1.8rem;
+      font-weight: 700;
+      padding: 12px 16px;
+      background: rgba(15, 11, 9, 0.8);
+      border: 2px solid var(--border-gold);
+      border-radius: 14px;
+      color: #F8E7C9;
+      outline: none;
+      transition: all 0.3s ease;
+    }
+
+    .pin-input:focus {
+      border-color: var(--gold-light);
+      box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+    }
+
+    .login-error {
+      color: #FF6B6B;
+      font-size: 0.85rem;
+      margin-top: 8px;
+      display: none;
+    }
+
+    /* HEADER DASHBOARD */
+    .dashboard-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.25);
+      margin-bottom: 28px;
+    }
+
+    .brand-area {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .brand-monogram-circle {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: var(--gold-gradient);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #14100D;
+      font-family: var(--font-script);
+      font-size: 1.8rem;
+      font-weight: 700;
+      box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+    }
+
+    .brand-title {
+      font-family: var(--font-serif);
+      font-size: 1.35rem;
+      color: #FFFFFF;
+    }
+
+    .brand-subtitle {
+      font-size: 0.82rem;
+      color: var(--text-gold);
+      letter-spacing: 0.5px;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-header {
+      padding: 8px 14px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      border-radius: 10px;
+      border: 1px solid var(--border-gold);
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-gold);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+      transition: all 0.25s ease;
+    }
+
+    .btn-header:hover {
+      background: rgba(212, 175, 55, 0.2);
+      border-color: var(--gold-primary);
+      transform: translateY(-1px);
+    }
+
+    /* GRID PRINCIPAL: FORMULARIO Y VISTA PREVIA */
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 24px;
+      margin-bottom: 36px;
+    }
+
+    @media (max-width: 860px) {
+      .dashboard-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-gold);
+      border-radius: 20px;
+      padding: 24px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+    }
+
+    .card-title {
+      font-family: var(--font-serif);
+      font-size: 1.18rem;
+      color: #FFFFFF;
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card-title i {
+      color: var(--gold-primary);
+    }
+
+    /* FORMULARIO */
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-gold);
+      margin-bottom: 8px;
+      letter-spacing: 0.5px;
+    }
+
+    .form-input, .form-select, .form-textarea {
+      width: 100%;
+      padding: 12px 14px;
+      background: rgba(15, 11, 9, 0.7);
+      border: 1px solid rgba(212, 175, 55, 0.35);
+      border-radius: 10px;
+      color: #FFFFFF;
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      outline: none;
+      transition: all 0.3s ease;
+    }
+
+    .form-input:focus, .form-select:focus, .form-textarea:focus {
+      border-color: var(--gold-primary);
+      box-shadow: 0 0 15px rgba(212, 175, 55, 0.25);
+    }
+
+    /* Botones rápidos de selección de pases */
+    .passes-chips {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+
+    .chip-btn {
+      padding: 6px 14px;
+      border-radius: 20px;
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      background: rgba(255, 255, 255, 0.04);
+      color: #FFF2D6;
+      font-size: 0.85rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .chip-btn:hover {
+      border-color: var(--gold-primary);
+      background: rgba(212, 175, 55, 0.15);
+    }
+
+    .chip-btn.active {
+      background: var(--gold-gradient);
+      color: #14100D;
+      font-weight: 700;
+      border-color: transparent;
+      box-shadow: 0 2px 10px rgba(212, 175, 55, 0.4);
+    }
+
+    /* ESTILOS DE MENSAJE */
+    .template-selector {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-top: 6px;
+    }
+
+    .template-btn {
+      padding: 8px 6px;
+      font-size: 0.78rem;
+      border-radius: 8px;
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--text-muted);
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.2s ease;
+    }
+
+    .template-btn.active {
+      border-color: var(--gold-primary);
+      background: rgba(212, 175, 55, 0.2);
+      color: #FFF2D6;
+      font-weight: 600;
+    }
+
+    /* VISTA PREVIA DEL MENSAJE DE WHATSAPP */
+    .whatsapp-preview-card {
+      background: #0B141A;
+      border-radius: 16px;
+      padding: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      position: relative;
+      margin-bottom: 20px;
+      background-image: 
+        radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+      background-size: 16px 16px;
+    }
+
+    .whatsapp-bubble {
+      background: #005C4B;
+      color: #E9EDEF;
+      border-radius: 12px 12px 2px 12px;
+      padding: 12px 14px;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      white-space: pre-wrap;
+      word-break: break-word;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    }
+
+    .whatsapp-bubble a {
+      color: #53BDEB;
+      text-decoration: underline;
+    }
+
+    .link-display-box {
+      background: rgba(15, 11, 9, 0.8);
+      border: 1px dashed rgba(212, 175, 55, 0.4);
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-size: 0.8rem;
+      color: var(--text-gold);
+      word-break: break-all;
+      margin-bottom: 16px;
+    }
+
+    /* BOTONES DE ACCIÓN PRINCIPALES */
+    .action-btn-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .btn-action {
+      width: 100%;
+      padding: 13px 18px;
+      border-radius: 12px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      border: none;
+    }
+
+    .btn-whatsapp {
+      background: var(--whatsapp-color);
+      color: #FFFFFF;
+      box-shadow: 0 4px 15px rgba(37, 211, 102, 0.35);
+    }
+
+    .btn-whatsapp:hover {
+      background: var(--whatsapp-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(37, 211, 102, 0.5);
+    }
+
+    .btn-secondary {
+      background: rgba(212, 175, 55, 0.15);
+      border: 1px solid var(--border-gold);
+      color: #FFF2D6;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(212, 175, 55, 0.3);
+      border-color: var(--gold-light);
+      transform: translateY(-2px);
+    }
+
+    .btn-test {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #FFFFFF;
+    }
+
+    .btn-test:hover {
+      background: rgba(255, 255, 255, 0.12);
+      transform: translateY(-2px);
+    }
+
+    /* HISTORIAL DE INVITACIONES GUARDADAS */
+    .history-card {
+      margin-top: 10px;
+    }
+
+    .history-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .stats-pill {
+      background: rgba(212, 175, 55, 0.15);
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      color: var(--text-gold);
+      font-weight: 600;
+    }
+
+    .search-input {
+      padding: 8px 12px;
+      font-size: 0.85rem;
+      background: rgba(15, 11, 9, 0.7);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      border-radius: 8px;
+      color: #FFF;
+      outline: none;
+      min-width: 200px;
+    }
+
+    .table-responsive {
+      overflow-x: auto;
+      border-radius: 12px;
+      border: 1px solid rgba(212, 175, 55, 0.2);
+    }
+
+    .history-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+      text-align: left;
+    }
+
+    .history-table th {
+      background: rgba(20, 15, 12, 0.9);
+      padding: 12px 14px;
+      color: var(--text-gold);
+      font-family: var(--font-serif);
+      font-weight: 600;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+    }
+
+    .history-table td {
+      padding: 12px 14px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      color: #E6E1DC;
+    }
+
+    .history-table tr:hover td {
+      background: rgba(212, 175, 55, 0.06);
+    }
+
+    .guest-name-cell {
+      font-weight: 600;
+      color: #FFFFFF;
+    }
+
+    .passes-badge {
+      display: inline-block;
+      padding: 2px 8px;
+      background: rgba(212, 175, 55, 0.2);
+      border: 1px solid rgba(212, 175, 55, 0.5);
+      border-radius: 12px;
+      font-size: 0.76rem;
+      color: #FFF2D6;
+    }
+
+    .table-actions {
+      display: flex;
+      gap: 6px;
+    }
+
+    .btn-table-action {
+      background: none;
+      border: none;
+      padding: 6px 8px;
+      border-radius: 6px;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 0.95rem;
+      transition: all 0.2s ease;
+    }
+
+    .btn-table-action:hover {
+      color: #FFFFFF;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .btn-table-action.wa:hover {
+      color: var(--whatsapp-color);
+      background: rgba(37, 211, 102, 0.15);
+    }
+
+    .btn-table-action.del:hover {
+      color: #FF6B6B;
+      background: rgba(255, 107, 107, 0.15);
+    }
+
+    /* TOAST ALERT NOTIFICATION */
+    .toast-alert {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #1C1612;
+      border: 1.5px solid var(--gold-primary);
+      border-radius: 12px;
+      padding: 12px 20px;
+      color: #FFF2D6;
+      font-size: 0.9rem;
+      font-weight: 600;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7), 0 0 20px rgba(212, 175, 55, 0.3);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 2000;
+    }
+
+    .toast-alert.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .toast-alert i {
+      color: var(--gold-primary);
+      font-size: 1.2rem;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- PANTALLA DE ACCESO POR PIN -->
+  <div class="login-overlay" id="loginOverlay">
+    <div class="login-card">
+      <div class="login-monogram">G &amp; M</div>
+      <h2 class="login-title">Panel de Novios</h2>
+      <p class="login-subtitle">Ingresa tu clave de seguridad para gestionar las invitaciones</p>
+
+      <form id="pinLoginForm" onsubmit="handlePinLogin(event)">
+        <div class="pin-input-group">
+          <input type="password" id="pinInput" class="pin-input" maxlength="4" placeholder="••••" autocomplete="off" autofocus>
+        </div>
+        <p class="login-error" id="loginError">Clave incorrecta. Inténtalo de nuevo.</p>
+
+        <button type="submit" class="btn-action btn-whatsapp" style="background: var(--gold-gradient); color: #14100D; font-weight: bold;">
+          <i class="ri-lock-unlock-line"></i> Ingresar al Panel
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- DASHBOARD PRINCIPAL -->
+  <div class="container" id="dashboardContainer" style="display: none;">
+
+    <!-- HEADER -->
+    <header class="dashboard-header">
+      <div class="brand-area">
+        <div class="brand-monogram-circle">G&amp;M</div>
+        <div>
+          <h1 class="brand-title">Generador de Invitaciones</h1>
+          <p class="brand-subtitle">Boda Gloria &amp; Marco • 5 de Diciembre 2026</p>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <a href="index.html" class="btn-header" target="_blank" title="Ver invitación general">
+          <i class="ri-external-link-line"></i> Ver Página Web
+        </a>
+        <button class="btn-header" onclick="exportGuestsCsv()" title="Descargar lista en Excel / CSV">
+          <i class="ri-file-excel-2-line"></i> Exportar Lista
+        </button>
+        <button class="btn-header" onclick="handleLogout()" title="Cerrar sesión">
+          <i class="ri-logout-box-r-line"></i> Salir
+        </button>
+      </div>
+    </header>
+
+    <!-- GRID PRINCIPAL -->
+    <div class="dashboard-grid">
+
+      <!-- COLUMNA 1: FORMULARIO DE INVITADO -->
+      <div class="card">
+        <h2 class="card-title"><i class="ri-user-add-line"></i> Datos del Invitado o Familia</h2>
+
+        <div class="form-group">
+          <label class="form-label" for="guestName">Nombre del Invitado o Familia *</label>
+          <input type="text" id="guestName" class="form-input" placeholder="Ej. Familia Rodríguez / Tía Carmen y Esposo"
+            oninput="updateInvitationLive()" autofocus>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Número de Pases Asignados</label>
+          <div class="passes-chips">
+            <button type="button" class="chip-btn" onclick="selectPasses(1)">1 Pase</button>
+            <button type="button" class="chip-btn active" onclick="selectPasses(2)">2 Pases</button>
+            <button type="button" class="chip-btn" onclick="selectPasses(3)">3 Pases</button>
+            <button type="button" class="chip-btn" onclick="selectPasses(4)">4 Pases</button>
+            <button type="button" class="chip-btn" onclick="selectPasses(5)">5 Pases</button>
+            <button type="button" class="chip-btn" onclick="selectPasses(6)">6 Pases</button>
+          </div>
+          <input type="hidden" id="passesCount" value="2">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="guestPhone">Número de WhatsApp (Opcional)</label>
+          <input type="tel" id="guestPhone" class="form-input" placeholder="Ej. 3001234567 o +57 300 123 4567"
+            oninput="updateInvitationLive()">
+          <span style="font-size: 0.76rem; color: var(--text-muted); display: block; margin-top: 4px;">
+            Si lo colocas, se abrirá directamente el chat privado de esta persona en WhatsApp.
+          </span>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Estilo del Mensaje de WhatsApp</label>
+          <div class="template-selector">
+            <button type="button" class="template-btn active" onclick="selectTemplate('formal')">Formal &amp; Gala</button>
+            <button type="button" class="template-btn" onclick="selectTemplate('familiar')">Cariñoso / Familiar</button>
+            <button type="button" class="template-btn" onclick="selectTemplate('corto')">Corto &amp; Directo</button>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Enlace Personalizado Generado</label>
+          <div class="link-display-box" id="generatedLinkDisplay">https://andresrubiel123.github.io/-GLORIA-Y-MARCO/</div>
+        </div>
+      </div>
+
+      <!-- COLUMNA 2: VISTA PREVIA Y ACCIONES RÁPIDAS -->
+      <div class="card">
+        <h2 class="card-title"><i class="ri-whatsapp-line"></i> Vista Previa en WhatsApp</h2>
+
+        <div class="whatsapp-preview-card">
+          <div class="whatsapp-bubble" id="whatsappMessagePreview">Escribe el nombre del invitado para ver la vista previa...</div>
+        </div>
+
+        <div class="action-btn-group">
+          <button class="btn-action btn-whatsapp" onclick="sendViaWhatsapp()">
+            <i class="ri-whatsapp-fill"></i> Enviar por WhatsApp Ahora
+          </button>
+          <button class="btn-action btn-secondary" onclick="copyFullMessage()">
+            <i class="ri-file-copy-line"></i> Copiar Mensaje Completo
+          </button>
+          <button class="btn-action btn-secondary" onclick="copyOnlyLink()">
+            <i class="ri-links-line"></i> Copiar Solo el Enlace
+          </button>
+          <button class="btn-action btn-test" onclick="previewPersonalizedPage()">
+            <i class="ri-eye-line"></i> Probar Sobre y Pase en Vivo
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- SECCIÓN DE HISTORIAL GUARDADO -->
+    <div class="card history-card">
+      <div class="history-header">
+        <div>
+          <h2 class="card-title" style="margin-bottom: 4px;">
+            <i class="ri-history-line"></i> Invitaciones Enviadas &amp; Registradas
+          </h2>
+          <span class="stats-pill" id="statsPill">0 Invitados • 0 Pases en total</span>
+        </div>
+
+        <input type="text" id="searchInput" class="search-input" placeholder="Buscar invitado..."
+          oninput="renderHistoryTable()">
+      </div>
+
+      <div class="table-responsive">
+        <table class="history-table">
+          <thead>
+            <tr>
+              <th>Invitado / Familia</th>
+              <th>Pases</th>
+              <th>Teléfono</th>
+              <th>Fecha de Creación</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="historyTableBody">
+            <!-- Filas dinámicas -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- NOTIFICACIÓN TOAST -->
+  <div class="toast-alert" id="toastAlert">
+    <i class="ri-checkbox-circle-fill"></i>
+    <span id="toastMessage">¡Copiado al portapapeles!</span>
+  </div>
+
+  <script>
+    const SECURITY_PIN = "2605";
+    const BASE_URL = window.location.origin + window.location.pathname.replace(/generador\.html$/, '').replace(/\/$/, '') + '/';
+
+    let currentTemplate = 'formal';
+    let invitationsHistory = [];
+
+    // INICIALIZACIÓN
+    document.addEventListener('DOMContentLoaded', () => {
+      loadHistory();
+      checkSession();
+      updateInvitationLive();
+    });
+
+    // CONTROL DE ACCESO PIN
+    function checkSession() {
+      const isAuth = sessionStorage.getItem('novios_auth') === 'true' || localStorage.getItem('novios_remember') === 'true';
+      if (isAuth) {
+        showDashboard();
+      } else {
+        document.getElementById('loginOverlay').classList.remove('hidden');
+        document.getElementById('pinInput').focus();
+      }
+    }
+
+    function handlePinLogin(e) {
+      e.preventDefault();
+      const pin = document.getElementById('pinInput').value.trim();
+      const err = document.getElementById('loginError');
+
+      if (pin === SECURITY_PIN) {
+        sessionStorage.setItem('novios_auth', 'true');
+        localStorage.setItem('novios_remember', 'true');
+        err.style.display = 'none';
+        showDashboard();
+        showToast('¡Bienvenido Marco y Gloria! Acceso concedido 💍');
+      } else {
+        err.style.display = 'block';
+        document.getElementById('pinInput').value = '';
+        document.getElementById('pinInput').focus();
+      }
+    }
+
+    function handleLogout() {
+      sessionStorage.removeItem('novios_auth');
+      localStorage.removeItem('novios_remember');
+      document.getElementById('dashboardContainer').style.display = 'none';
+      document.getElementById('loginOverlay').classList.remove('hidden');
+      document.getElementById('pinInput').value = '';
+      document.getElementById('pinInput').focus();
+    }
+
+    function showDashboard() {
+      document.getElementById('loginOverlay').classList.add('hidden');
+      document.getElementById('dashboardContainer').style.display = 'block';
+      document.getElementById('guestName').focus();
+    }
+
+    // GESTIÓN DE PASES
+    function selectPasses(count) {
+      document.getElementById('passesCount').value = count;
+      document.querySelectorAll('.chip-btn').forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.textContent.startsWith(count + ' ')) {
+          btn.classList.add('active');
+        }
+      });
+      updateInvitationLive();
+    }
+
+    // GESTIÓN DE PLANTILLAS
+    function selectTemplate(tpl) {
+      currentTemplate = tpl;
+      document.querySelectorAll('.template-btn').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+      updateInvitationLive();
+    }
+
+    // CONSTRUIR ENLACE Y MENSAJE EN TIEMPO REAL
+    function getGeneratedData() {
+      const rawName = document.getElementById('guestName').value.trim() || 'Invitado Especial';
+      const passes = document.getElementById('passesCount').value || '2';
+      const rawPhone = document.getElementById('guestPhone').value.trim().replace(/[^0-9]/g, '');
+
+      // Generar URL personalizada con parámetros
+      const url = `${BASE_URL}?para=${encodeURIComponent(rawName)}&pases=${encodeURIComponent(passes)}`;
+
+      // Redactar mensaje de WhatsApp según la plantilla
+      const passesLabel = (passes === '1') ? '1 pase personal' : `${passes} pases asignados`;
+      let text = '';
+
+      if (currentTemplate === 'formal') {
+        text = `¡Hola ${rawName}! 💍✨\n\nCon inmensa alegría y la bendición de Dios y nuestras familias, tenemos el honor de invitarte a celebrar nuestra boda este Sábado, 5 de Diciembre de 2026 en Lebrija, Santander.\n\nTe compartimos tu invitación exclusiva y pase digital (${passesLabel}) en el siguiente enlace:\n${url}\n\n¡Será un honor inmenso contar con tu presencia!\n\nCon cariño,\nGloria & Marco 👰🏻🤵🏻`;
+      } else if (currentTemplate === 'familiar') {
+        text = `¡Querid@ ${rawName}! ❤️🎉\n\n¡Nos casamos! Nos emociona enormemente compartir este día tan especial e inolvidable con las personas que más amamos.\n\nAquí tienes tu invitación oficial y pase digital reservado para ${passesLabel}:\n${url}\n\nPor favor abre el sobre virtual y confirma tu asistencia. ¡Te esperamos para bailar y celebrar juntos!\n\nGloria & Marco 💍`;
+      } else {
+        text = `¡Hola ${rawName}! Te invitamos a nuestra boda este 5 de Diciembre de 2026 💍🎉.\n\nAquí tienes tu invitación y pase (${passesLabel}):\n${url}\n\n¡Esperamos celebrar juntos! - Gloria & Marco`;
+      }
+
+      return { name: rawName, passes, phone: rawPhone, url, text };
+    }
+
+    function updateInvitationLive() {
+      const data = getGeneratedData();
+      document.getElementById('generatedLinkDisplay').textContent = data.url;
+      document.getElementById('whatsappMessagePreview').textContent = data.text;
+    }
+
+    // ACCIONES
+    function sendViaWhatsapp() {
+      const data = getGeneratedData();
+      saveInvitationToHistory(data);
+
+      let waUrl = '';
+      if (data.phone) {
+        let phoneFormatted = data.phone;
+        if (!phoneFormatted.startsWith('57') && phoneFormatted.length === 10) {
+          phoneFormatted = '57' + phoneFormatted;
+        }
+        waUrl = `https://api.whatsapp.com/send?phone=${phoneFormatted}&text=${encodeURIComponent(data.text)}`;
+      } else {
+        waUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(data.text)}`;
+      }
+
+      window.open(waUrl, '_blank');
+      showToast('Abriendo WhatsApp...');
+    }
+
+    function copyFullMessage() {
+      const data = getGeneratedData();
+      saveInvitationToHistory(data);
+      navigator.clipboard.writeText(data.text).then(() => {
+        showToast('¡Mensaje completo copiado para WhatsApp! 📋');
+      });
+    }
+
+    function copyOnlyLink() {
+      const data = getGeneratedData();
+      saveInvitationToHistory(data);
+      navigator.clipboard.writeText(data.url).then(() => {
+        showToast('¡Enlace exclusivo copiado! 🔗');
+      });
+    }
+
+    function previewPersonalizedPage() {
+      const data = getGeneratedData();
+      window.open(data.url, '_blank');
+    }
+
+    // HISTORIAL LOCAL
+    function loadHistory() {
+      try {
+        const saved = localStorage.getItem('boda_gm_invitations');
+        if (saved) {
+          invitationsHistory = JSON.parse(saved);
+        }
+      } catch (e) {
+        invitationsHistory = [];
+      }
+      renderHistoryTable();
+    }
+
+    function saveInvitationToHistory(data) {
+      if (!data.name || data.name === 'Invitado Especial') return;
+
+      const existingIndex = invitationsHistory.findIndex(item => item.name.toLowerCase() === data.name.toLowerCase());
+      const record = {
+        name: data.name,
+        passes: data.passes,
+        phone: data.phone || '',
+        url: data.url,
+        date: new Date().toLocaleDateString('es-CO', { day: '2-digit', month: 'short', year: 'numeric' })
+      };
+
+      if (existingIndex >= 0) {
+        invitationsHistory[existingIndex] = record;
+      } else {
+        invitationsHistory.unshift(record);
+      }
+
+      localStorage.setItem('boda_gm_invitations', JSON.stringify(invitationsHistory));
+      renderHistoryTable();
+    }
+
+    function renderHistoryTable() {
+      const tbody = document.getElementById('historyTableBody');
+      const searchTerm = (document.getElementById('searchInput')?.value || '').toLowerCase();
+      tbody.innerHTML = '';
+
+      const filtered = invitationsHistory.filter(item => 
+        item.name.toLowerCase().includes(searchTerm) || (item.phone && item.phone.includes(searchTerm))
+      );
+
+      // Calcular estadísticas totales
+      const totalGuests = invitationsHistory.length;
+      const totalPasses = invitationsHistory.reduce((acc, curr) => acc + parseInt(curr.passes || 1), 0);
+      document.getElementById('statsPill').textContent = `${totalGuests} Invitados Registrados • ${totalPasses} Pases Totales`;
+
+      if (filtered.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: var(--text-muted); padding: 24px;">No hay invitaciones registradas aún. ¡Escribe un nombre arriba y genera la primera!</td></tr>`;
+        return;
+      }
+
+      filtered.forEach((item, index) => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td class="guest-name-cell">${escapeHtml(item.name)}</td>
+          <td><span class="passes-badge">${item.passes} ${item.passes === '1' ? 'Pase' : 'Pases'}</span></td>
+          <td>${item.phone ? escapeHtml(item.phone) : '<span style="color:var(--text-muted)">-</span>'}</td>
+          <td style="font-size: 0.8rem; color: var(--text-muted);">${item.date}</td>
+          <td class="table-actions">
+            <button class="btn-table-action wa" onclick="resendHistoryItem(${index})" title="Reenviar por WhatsApp">
+              <i class="ri-whatsapp-line"></i>
+            </button>
+            <button class="btn-table-action" onclick="copyHistoryLink('${escapeHtml(item.url)}')" title="Copiar enlace">
+              <i class="ri-file-copy-line"></i>
+            </button>
+            <button class="btn-table-action" onclick="window.open('${escapeHtml(item.url)}', '_blank')" title="Ver cómo quedó">
+              <i class="ri-external-link-line"></i>
+            </button>
+            <button class="btn-table-action del" onclick="deleteHistoryItem(${index})" title="Eliminar">
+              <i class="ri-delete-bin-line"></i>
+            </button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function resendHistoryItem(index) {
+      const item = invitationsHistory[index];
+      if (!item) return;
+      document.getElementById('guestName').value = item.name;
+      selectPasses(parseInt(item.passes) || 2);
+      document.getElementById('guestPhone').value = item.phone || '';
+      updateInvitationLive();
+      sendViaWhatsapp();
+    }
+
+    function copyHistoryLink(url) {
+      navigator.clipboard.writeText(url).then(() => {
+        showToast('¡Enlace copiado al portapapeles! 🔗');
+      });
+    }
+
+    function deleteHistoryItem(index) {
+      if (confirm(`¿Eliminar a "${invitationsHistory[index].name}" del historial?`)) {
+        invitationsHistory.splice(index, 1);
+        localStorage.setItem('boda_gm_invitations', JSON.stringify(invitationsHistory));
+        renderHistoryTable();
+        showToast('Invitado eliminado del historial');
+      }
+    }
+
+    function exportGuestsCsv() {
+      if (invitationsHistory.length === 0) {
+        alert('Aún no has generado invitaciones para exportar.');
+        return;
+      }
+
+      let csv = 'Nombre del Invitado,Pases,Telefono,Fecha de Creacion,Enlace\r\n';
+      invitationsHistory.forEach(row => {
+        csv += `"${row.name.replace(/"/g, '""')}",${row.passes},"${row.phone || ''}","${row.date}","${row.url}"\r\n`;
+      });
+
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.setAttribute('download', 'Invitados_Boda_Gloria_y_Marco.csv');
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      showToast('¡Lista descargada en formato Excel / CSV! 📊');
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toastAlert');
+      document.getElementById('toastMessage').textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 3000);
+    }
+
+    function escapeHtml(text) {
+      if (!text) return '';
+      return text
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+  </script>
+</body>
+
+</html>
