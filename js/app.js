@@ -461,7 +461,7 @@ function initGuestPersonalization() {
   const { name, passes } = getGuestUrlParams();
   if (!name) return;
 
-  // 1. Personalizar Rótulo Caligrafiado en el Frente del Sobre (Solo "Especialmente para" y el Nombre)
+  // 1. Personalizar Nombre Caligrafiado Directamente en el Frente del Sobre
   const frontLabel = document.getElementById('envelopeFrontLabel');
   const frontGuestName = document.getElementById('envelopeFrontGuestName');
   const letterGuestLine = document.getElementById('letterGuestLine');
@@ -469,11 +469,28 @@ function initGuestPersonalization() {
   if (frontLabel && frontGuestName) {
     frontGuestName.textContent = name;
     frontLabel.style.display = 'flex';
+    setTimeout(fitEnvelopeGuestName, 50);
+    window.addEventListener('resize', fitEnvelopeGuestName);
   }
 
   if (letterGuestLine) {
     letterGuestLine.textContent = `Especialmente Para: ${name}`;
     letterGuestLine.style.display = 'block';
+  }
+}
+
+function fitEnvelopeGuestName() {
+  const el = document.getElementById('envelopeFrontGuestName');
+  const container = document.getElementById('envelopeFrontLabel');
+  if (!el || !container) return;
+
+  el.style.fontSize = ''; // Restablecer al tamaño base del CSS
+  const maxWidth = container.clientWidth || 300;
+  let currentSize = parseFloat(window.getComputedStyle(el).fontSize) || 34;
+
+  while (el.scrollWidth > maxWidth && currentSize > 16) {
+    currentSize -= 1;
+    el.style.fontSize = currentSize + 'px';
   }
 
   // 2. Personalizar Pase Digital
