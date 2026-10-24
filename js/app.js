@@ -461,22 +461,14 @@ function initGuestPersonalization() {
   const { name, passes } = getGuestUrlParams();
   if (!name) return;
 
-  // 1. Personalizar Rótulo Caligrafiado en el Frente del Sobre
+  // 1. Personalizar Rótulo Caligrafiado en el Frente del Sobre (Solo "Especialmente para" y el Nombre)
   const frontLabel = document.getElementById('envelopeFrontLabel');
   const frontGuestName = document.getElementById('envelopeFrontGuestName');
-  const frontPasses = document.getElementById('envelopeFrontPasses');
   const letterGuestLine = document.getElementById('letterGuestLine');
 
   if (frontLabel && frontGuestName) {
     frontGuestName.textContent = name;
-    if (passes) {
-      const passText = (passes === '1') ? '1 Pase Reservado' : `${passes} Pases Reservados`;
-      frontPasses.innerHTML = `<i class="ri-ticket-2-line"></i> ${passText}`;
-      frontPasses.style.display = 'inline-flex';
-    } else {
-      frontPasses.style.display = 'none';
-    }
-    frontLabel.style.display = 'block';
+    frontLabel.style.display = 'flex';
   }
 
   if (letterGuestLine) {
