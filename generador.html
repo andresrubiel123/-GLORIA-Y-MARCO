@@ -366,6 +366,50 @@
       font-weight: 600;
     }
 
+    .btn-mini-reset {
+      background: none;
+      border: 1px solid rgba(212, 175, 55, 0.35);
+      border-radius: 6px;
+      color: var(--text-gold);
+      font-size: 0.74rem;
+      padding: 3px 8px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.2s ease;
+    }
+
+    .btn-mini-reset:hover {
+      background: rgba(212, 175, 55, 0.2);
+      border-color: var(--gold-primary);
+      color: #FFFFFF;
+    }
+
+    .message-helper-tags {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-top: 6px;
+    }
+
+    .tag-insert-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px dashed rgba(212, 175, 55, 0.4);
+      border-radius: 6px;
+      color: #F8E7C9;
+      font-size: 0.72rem;
+      padding: 3px 7px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .tag-insert-btn:hover {
+      background: rgba(212, 175, 55, 0.25);
+      border-color: var(--gold-light);
+      color: #FFFFFF;
+    }
+
     /* VISTA PREVIA DEL MENSAJE DE WHATSAPP */
     .whatsapp-preview-card {
       background: #0B141A;
@@ -696,11 +740,38 @@
         </div>
 
         <div class="form-group">
-          <label class="form-label">Estilo del Mensaje de WhatsApp</label>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+            <label class="form-label" style="margin-bottom: 0;">Estilo del Mensaje de WhatsApp</label>
+            <button type="button" class="btn-mini-reset" onclick="resetMessageToTemplate()" title="Restablecer a plantilla">
+              <i class="ri-refresh-line"></i> Restablecer Plantilla
+            </button>
+          </div>
+
           <div class="template-selector">
-            <button type="button" class="template-btn active" onclick="selectTemplate('formal')">Formal &amp; Gala</button>
-            <button type="button" class="template-btn" onclick="selectTemplate('familiar')">Cariñoso / Familiar</button>
-            <button type="button" class="template-btn" onclick="selectTemplate('corto')">Corto &amp; Directo</button>
+            <button type="button" class="template-btn active" id="tplBtnFormal" onclick="selectTemplate('formal')">Formal &amp; Gala</button>
+            <button type="button" class="template-btn" id="tplBtnFamiliar" onclick="selectTemplate('familiar')">Cariñoso / Familiar</button>
+            <button type="button" class="template-btn" id="tplBtnCorto" onclick="selectTemplate('corto')">Corto &amp; Directo</button>
+          </div>
+
+          <!-- Cuadro de Texto 100% Editable -->
+          <div style="margin-top: 14px;">
+            <label class="form-label" for="editableMessageText" style="font-size: 0.82rem; color: #FFF2D6; display: flex; align-items: center; justify-content: space-between;">
+              <span><i class="ri-edit-2-line" style="color: var(--gold-primary);"></i> Puedes editar o escribir tu propio texto:</span>
+              <span id="customizedBadge" style="display: none; font-size: 0.72rem; color: #D4AF37; font-weight: bold;">(Texto Personalizado)</span>
+            </label>
+            <textarea id="editableMessageText" class="form-textarea" rows="7"
+              placeholder="Escribe o modifica libremente el texto del mensaje..." oninput="onCustomMessageInput()"></textarea>
+
+            <div class="message-helper-tags">
+              <span style="font-size: 0.72rem; color: var(--text-muted); align-self: center;">Insertar:</span>
+              <button type="button" class="tag-insert-btn" onclick="insertTagIntoMessage('{NOMBRE}')">+ Nombre</button>
+              <button type="button" class="tag-insert-btn" onclick="insertTagIntoMessage('{PASES}')">+ Pases</button>
+              <button type="button" class="tag-insert-btn" onclick="insertTagIntoMessage('{LINK}')">+ Enlace</button>
+              <button type="button" class="tag-insert-btn" onclick="insertTagIntoMessage('💍')">💍</button>
+              <button type="button" class="tag-insert-btn" onclick="insertTagIntoMessage('👰🏻🤵🏻')">👰🏻🤵🏻</button>
+              <button type="button" class="tag-insert-btn" onclick="insertTagIntoMessage('❤️')">❤️</button>
+              <button type="button" class="tag-insert-btn" onclick="insertTagIntoMessage('🥂')">🥂</button>
+            </div>
           </div>
         </div>
 
@@ -781,6 +852,7 @@
     const BASE_URL = window.location.origin + window.location.pathname.replace(/generador\.html$/, '').replace(/\/$/, '') + '/';
 
     let currentTemplate = 'formal';
+    let isMessageCustomized = false;
     let invitationsHistory = [];
 
     // INICIALIZACIÓN
@@ -846,12 +918,71 @@
       updateInvitationLive();
     }
 
+    // Helper para obtener el texto base de una plantilla
+    function getTemplateBaseText(tpl, rawName, passesLabel, url) {
+      if (tpl === 'formal') {
+        return `¡Hola ${rawName}! 💍✨\n\nCon inmensa alegría y la bendición de Dios y nuestras familias, tenemos el honor de invitarte a celebrar nuestra boda este Sábado, 5 de Diciembre de 2026 en Lebrija, Santander.\n\nTe compartimos tu invitación exclusiva y pase digital (${passesLabel}) en el siguiente enlace:\n${url}\n\n¡Será un honor inmenso contar con tu presencia!\n\nCon cariño,\nGloria & Marco 👰🏻🤵🏻`;
+      } else if (tpl === 'familiar') {
+        return `¡Querid@ ${rawName}! ❤️🎉\n\n¡Nos casamos! Nos emociona enormemente compartir este día tan especial e inolvidable con las personas que más amamos.\n\nAquí tienes tu invitación oficial y pase digital reservado para ${passesLabel}:\n${url}\n\nPor favor abre el sobre virtual y confirma tu asistencia. ¡Te esperamos para bailar y celebrar juntos!\n\nGloria & Marco 💍`;
+      } else {
+        return `¡Hola ${rawName}! Te invitamos a nuestra boda este 5 de Diciembre de 2026 💍🎉.\n\nAquí tienes tu invitación y pase (${passesLabel}):\n${url}\n\n¡Esperamos celebrar juntos! - Gloria & Marco`;
+      }
+    }
+
     // GESTIÓN DE PLANTILLAS
     function selectTemplate(tpl) {
       currentTemplate = tpl;
       document.querySelectorAll('.template-btn').forEach(btn => btn.classList.remove('active'));
-      event.target.classList.add('active');
-      updateInvitationLive();
+      const activeBtn = document.getElementById('tplBtn' + tpl.charAt(0).toUpperCase() + tpl.slice(1));
+      if (activeBtn) activeBtn.classList.add('active');
+      isMessageCustomized = false;
+      updateCustomizedBadge();
+      updateInvitationLive(true);
+    }
+
+    function onCustomMessageInput() {
+      isMessageCustomized = true;
+      updateCustomizedBadge();
+      const text = document.getElementById('editableMessageText').value;
+      document.getElementById('whatsappMessagePreview').textContent = text;
+    }
+
+    function resetMessageToTemplate() {
+      isMessageCustomized = false;
+      updateCustomizedBadge();
+      updateInvitationLive(true);
+      showToast('Mensaje restablecido a la plantilla');
+    }
+
+    function updateCustomizedBadge() {
+      const badge = document.getElementById('customizedBadge');
+      if (badge) {
+        badge.style.display = isMessageCustomized ? 'inline' : 'none';
+      }
+    }
+
+    function insertTagIntoMessage(tag) {
+      const textarea = document.getElementById('editableMessageText');
+      if (!textarea) return;
+
+      const rawName = document.getElementById('guestName').value.trim() || 'Invitado Especial';
+      const passes = document.getElementById('passesCount').value || '2';
+      const url = `${BASE_URL}?para=${encodeURIComponent(rawName)}&pases=${encodeURIComponent(passes)}`;
+      const passesLabel = (passes === '1') ? '1 pase personal' : `${passes} pases asignados`;
+
+      let insertVal = tag;
+      if (tag === '{NOMBRE}') insertVal = rawName;
+      if (tag === '{PASES}') insertVal = passesLabel;
+      if (tag === '{LINK}') insertVal = url;
+
+      const start = textarea.selectionStart || 0;
+      const end = textarea.selectionEnd || 0;
+      const text = textarea.value;
+
+      textarea.value = text.substring(0, start) + insertVal + text.substring(end);
+      textarea.selectionStart = textarea.selectionEnd = start + insertVal.length;
+      textarea.focus();
+      onCustomMessageInput();
     }
 
     // CONSTRUIR ENLACE Y MENSAJE EN TIEMPO REAL
@@ -862,26 +993,33 @@
 
       // Generar URL personalizada con parámetros
       const url = `${BASE_URL}?para=${encodeURIComponent(rawName)}&pases=${encodeURIComponent(passes)}`;
-
-      // Redactar mensaje de WhatsApp según la plantilla
       const passesLabel = (passes === '1') ? '1 pase personal' : `${passes} pases asignados`;
+
+      const textarea = document.getElementById('editableMessageText');
       let text = '';
 
-      if (currentTemplate === 'formal') {
-        text = `¡Hola ${rawName}! 💍✨\n\nCon inmensa alegría y la bendición de Dios y nuestras familias, tenemos el honor de invitarte a celebrar nuestra boda este Sábado, 5 de Diciembre de 2026 en Lebrija, Santander.\n\nTe compartimos tu invitación exclusiva y pase digital (${passesLabel}) en el siguiente enlace:\n${url}\n\n¡Será un honor inmenso contar con tu presencia!\n\nCon cariño,\nGloria & Marco 👰🏻🤵🏻`;
-      } else if (currentTemplate === 'familiar') {
-        text = `¡Querid@ ${rawName}! ❤️🎉\n\n¡Nos casamos! Nos emociona enormemente compartir este día tan especial e inolvidable con las personas que más amamos.\n\nAquí tienes tu invitación oficial y pase digital reservado para ${passesLabel}:\n${url}\n\nPor favor abre el sobre virtual y confirma tu asistencia. ¡Te esperamos para bailar y celebrar juntos!\n\nGloria & Marco 💍`;
+      if (isMessageCustomized && textarea && textarea.value.trim()) {
+        text = textarea.value;
       } else {
-        text = `¡Hola ${rawName}! Te invitamos a nuestra boda este 5 de Diciembre de 2026 💍🎉.\n\nAquí tienes tu invitación y pase (${passesLabel}):\n${url}\n\n¡Esperamos celebrar juntos! - Gloria & Marco`;
+        text = getTemplateBaseText(currentTemplate, rawName, passesLabel, url);
       }
 
       return { name: rawName, passes, phone: rawPhone, url, text };
     }
 
-    function updateInvitationLive() {
+    function updateInvitationLive(forceReset = false) {
       const data = getGeneratedData();
       document.getElementById('generatedLinkDisplay').textContent = data.url;
-      document.getElementById('whatsappMessagePreview').textContent = data.text;
+
+      const textarea = document.getElementById('editableMessageText');
+      if (forceReset || !isMessageCustomized || !textarea || !textarea.value.trim()) {
+        const passesLabel = (data.passes === '1') ? '1 pase personal' : `${data.passes} pases asignados`;
+        const templateText = getTemplateBaseText(currentTemplate, data.name, passesLabel, data.url);
+        if (textarea) textarea.value = templateText;
+        document.getElementById('whatsappMessagePreview').textContent = templateText;
+      } else {
+        document.getElementById('whatsappMessagePreview').textContent = textarea.value;
+      }
     }
 
     // ACCIONES
@@ -1011,7 +1149,9 @@
       document.getElementById('guestName').value = item.name;
       selectPasses(parseInt(item.passes) || 2);
       document.getElementById('guestPhone').value = item.phone || '';
-      updateInvitationLive();
+      isMessageCustomized = false;
+      updateCustomizedBadge();
+      updateInvitationLive(true);
       sendViaWhatsapp();
     }
 
