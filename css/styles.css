@@ -1037,11 +1037,21 @@ body.envelope-active {
   height: 100%;
   object-fit: cover;
   object-position: center top;
-  transition: transform 0.8s ease;
+  animation: heroPhotoBreathing 8.5s ease-in-out infinite alternate;
+  will-change: transform;
+  transform-origin: center 35%;
 }
 
-.hero-photo-wrapper:hover .hero-main-photo {
-  transform: scale(1.05);
+@keyframes heroPhotoBreathing {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.06);
+  }
+  100% {
+    transform: scale(1.12);
+  }
 }
 
 .hero-pre-title {
@@ -1055,10 +1065,49 @@ body.envelope-active {
 .hero-names {
   font-family: var(--font-script);
   font-size: 5rem;
-  color: var(--gold-dark);
   line-height: 1.1;
-  text-shadow: 0 4px 15px rgba(197, 168, 128, 0.2);
   margin-bottom: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  position: relative;
+  /* Tinta líquida dorada con brillo caligráfico dinámico */
+  background: linear-gradient(
+    115deg,
+    #734C1D 0%,
+    #C5A880 20%,
+    #FFFDF7 40%,
+    #D4AF37 55%,
+    #8F6B3E 75%,
+    #C5A880 90%,
+    #734C1D 100%
+  );
+  background-size: 260% 100%;
+  background-position: 0% center;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 4px 15px rgba(197, 168, 128, 0.35));
+  will-change: transform, background-position, letter-spacing;
+  transition: transform 0.15s cubic-bezier(0.2, 0.8, 0.2, 1), letter-spacing 0.2s ease;
+}
+
+.hero-names .hero-name-word {
+  display: inline-block;
+  will-change: transform;
+  transition: transform 0.2s ease;
+}
+
+.hero-names .hero-connector {
+  font-family: 'Alex Brush', var(--font-script);
+  font-size: 4.2rem;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--gold-dark);
+  position: relative;
+  top: 4px;
+  margin: 0 4px;
+  display: inline-block;
 }
 
 .ornament-divider {
@@ -2813,7 +2862,13 @@ body.envelope-active {
 @media (max-width: 768px) {
 
   .hero-names {
-    font-size: 3.8rem;
+    font-size: 3.6rem;
+    gap: 8px;
+  }
+
+  .hero-names .hero-connector {
+    font-size: 3.1rem;
+    top: 2px;
   }
 
   .hero-photo-wrapper {

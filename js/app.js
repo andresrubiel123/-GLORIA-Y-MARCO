@@ -23,6 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   initEnvelopeIntro();
   initScrollProgress();
+  initHeroTitleScrollEffect();
   initPetalsCanvas();
   initMusicPlayer();
   initCountdown();
@@ -139,6 +140,65 @@ function initScrollProgress() {
     const scrolled = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
     progressBar.style.width = `${scrolled}%`;
   }, { passive: true });
+}
+
+/* ============================================================================
+   1.1. EFECTO DINÁMICO DE SCROLL: TÍTULO CALIGRÁFICO Y PARALAJE
+   ============================================================================ */
+function initHeroTitleScrollEffect() {
+  const heroTitle = document.getElementById('heroNamesTitle');
+  if (!heroTitle) return;
+
+  const words = heroTitle.querySelectorAll('.hero-name-word');
+  let ticking = false;
+
+  function updateHeroParallax() {
+    const scrollY = window.scrollY || document.documentElement.scrollTop;
+    const heroSection = document.querySelector('.hero-wedding-section');
+    if (!heroSection) {
+      ticking = false;
+      return;
+    }
+
+    const rect = heroSection.getBoundingClientRect();
+    const winHeight = window.innerHeight;
+
+    // Si la portada está dentro del área visible
+    if (rect.bottom > 0 && rect.top < winHeight) {
+      // Progreso de desplazamiento normalizado
+      const progress = Math.min(Math.max((winHeight - rect.top) / (winHeight + rect.height), 0), 1);
+
+      // 1. Desplazamiento de paralaje vertical y ligera inclinación caligráfica
+      const translateY = (progress - 0.4) * 35;
+      const rotate = (progress - 0.5) * 2;
+      const letterSpacing = 0.5 + Math.sin(progress * Math.PI) * 2;
+
+      heroTitle.style.transform = `translateY(${translateY.toFixed(1)}px) rotate(${rotate.toFixed(2)}deg)`;
+      heroTitle.style.letterSpacing = `${letterSpacing.toFixed(2)}px`;
+
+      // 2. Efecto de tinta líquida que fluye y se "escribe" con el avance del scroll
+      const inkFlow = ((scrollY * 0.45) % 260);
+      heroTitle.style.backgroundPosition = `${inkFlow.toFixed(1)}% center`;
+
+      // 3. Suave balanceo reactivo en las palabras independientes
+      if (words && words.length >= 2) {
+        const spread = (progress - 0.5) * 6;
+        words[0].style.transform = `translateX(${-spread.toFixed(1)}px)`;
+        words[1].style.transform = `translateX(${spread.toFixed(1)}px)`;
+      }
+    }
+
+    ticking = false;
+  }
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      window.requestAnimationFrame(updateHeroParallax);
+      ticking = true;
+    }
+  }, { passive: true });
+
+  updateHeroParallax();
 }
 
 /* ============================================================================
