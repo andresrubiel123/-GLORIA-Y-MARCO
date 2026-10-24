@@ -1138,16 +1138,152 @@ body.envelope-active {
   padding: 15px 10px 20px;
 }
 
-/* Adorno floral superior */
-.story-floral-top {
+/* Corazón Dorado Principal con Fuente de Corazones Flotantes */
+.story-heart-fountain {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 8px;
-  font-size: 1.5rem;
-  color: var(--gold-primary);
-  margin-bottom: 25px;
-  filter: drop-shadow(0 4px 8px rgba(197, 168, 128, 0.3));
+  margin: 0 auto 28px;
+  width: 70px;
+  height: 52px;
+}
+
+.main-golden-heart {
+  position: relative;
+  z-index: 2;
+  font-size: 2.25rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #FFF5DE 0%, #D4AF37 45%, #9E743A 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 4px 10px rgba(212, 175, 55, 0.45)) drop-shadow(0 0 16px rgba(212, 175, 55, 0.25));
+  animation: heartPulseGentle 2.6s ease-in-out infinite;
+  cursor: default;
+}
+
+@keyframes heartPulseGentle {
+  0%, 100% {
+    transform: scale(1);
+    filter: drop-shadow(0 4px 10px rgba(212, 175, 55, 0.45));
+  }
+  50% {
+    transform: scale(1.14);
+    filter: drop-shadow(0 6px 18px rgba(212, 175, 55, 0.7));
+  }
+}
+
+/* Cascada / Fuente de Corazones que brotan continuamente y se disuelven */
+.floating-hearts-stream {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.stream-heart {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  font-size: 1rem;
+  opacity: 0;
+  pointer-events: none;
+  user-select: none;
+  animation: floatAndDissolveHeart 3.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
+}
+
+/* Variaciones individuales para dispersión y flujo orgánico */
+.stream-heart.h-1 {
+  --drift-x: -18px;
+  --rot: -12deg;
+  font-size: 0.95rem;
+  color: #D4AF37;
+  animation-delay: 0s;
+}
+
+.stream-heart.h-2 {
+  --drift-x: 14px;
+  --rot: 15deg;
+  font-size: 0.8rem;
+  color: #E6CEAC;
+  animation-delay: 0.4s;
+}
+
+.stream-heart.h-3 {
+  --drift-x: -8px;
+  --rot: -8deg;
+  font-size: 1.15rem;
+  color: #C5A880;
+  animation-delay: 0.8s;
+}
+
+.stream-heart.h-4 {
+  --drift-x: 22px;
+  --rot: 20deg;
+  font-size: 0.75rem;
+  color: #F8E7C9;
+  animation-delay: 1.2s;
+}
+
+.stream-heart.h-5 {
+  --drift-x: -24px;
+  --rot: -16deg;
+  font-size: 0.9rem;
+  color: #D4AF37;
+  animation-delay: 1.6s;
+}
+
+.stream-heart.h-6 {
+  --drift-x: 6px;
+  --rot: 10deg;
+  font-size: 1.05rem;
+  color: #E2CEB5;
+  animation-delay: 2.0s;
+}
+
+.stream-heart.h-7 {
+  --drift-x: -12px;
+  --rot: -10deg;
+  font-size: 0.7rem;
+  color: #FFF0D4;
+  animation-delay: 2.4s;
+}
+
+.stream-heart.h-8 {
+  --drift-x: 18px;
+  --rot: 14deg;
+  font-size: 0.85rem;
+  color: #C5A880;
+  animation-delay: 2.8s;
+}
+
+@keyframes floatAndDissolveHeart {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, 0) scale(0.3) rotate(0deg);
+  }
+  15% {
+    opacity: 0.92;
+    transform: translate(calc(-50% + (var(--drift-x, 0px) * 0.25)), -14px) scale(0.85) rotate(var(--rot, 0deg));
+  }
+  55% {
+    opacity: 0.8;
+    transform: translate(calc(-50% + (var(--drift-x, 0px) * 0.75)), -38px) scale(1) rotate(calc(var(--rot, 0deg) * 1.4));
+  }
+  85% {
+    opacity: 0.35;
+    transform: translate(calc(-50% + var(--drift-x, 0px)), -54px) scale(0.75) rotate(calc(var(--rot, 0deg) * 1.8));
+  }
+  100% {
+    opacity: 0;
+    transform: translate(calc(-50% + var(--drift-x, 0px)), -65px) scale(0.4) rotate(calc(var(--rot, 0deg) * 2));
+  }
 }
 
 /* Cluster de Polaroids estilo scrapbook */
