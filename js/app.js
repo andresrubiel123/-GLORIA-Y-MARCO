@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   initEnvelopeIntro();
   initScrollProgress();
-  initHeroTitleScrollEffect();
+  initHeroTitleEffect();
   initPetalsCanvas();
   initMusicPlayer();
   initCountdown();
@@ -103,8 +103,19 @@ function initEnvelopeIntro() {
         window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
         document.documentElement.scrollTop = 0;
         document.body.scrollTop = 0;
+
+        // Activar el efecto caligráfico de escritura en el título principal
+        const heroTitle = document.getElementById('heroNamesTitle');
+        if (heroTitle) {
+          heroTitle.classList.remove('writing-finished');
+          heroTitle.classList.add('writing-active');
+          setTimeout(() => {
+            heroTitle.classList.remove('writing-active');
+            heroTitle.classList.add('writing-finished');
+          }, 2400);
+        }
       }, 800);
-    }, 5500);
+    }, 3500);
   });
 }
 
@@ -143,62 +154,23 @@ function initScrollProgress() {
 }
 
 /* ============================================================================
-   1.1. EFECTO DINÁMICO DE SCROLL: TÍTULO CALIGRÁFICO Y PARALAJE
+   1.1. EFECTO DE ESCRITURA CALIGRÁFICA (Handwriting Reveal Estático)
    ============================================================================ */
-function initHeroTitleScrollEffect() {
+function initHeroTitleEffect() {
   const heroTitle = document.getElementById('heroNamesTitle');
   if (!heroTitle) return;
 
-  const words = heroTitle.querySelectorAll('.hero-name-word');
-  let ticking = false;
+  // Si el sobre ya no está activo al cargar (ej. acceso directo), animar de inmediato
+  const overlay = document.getElementById('envelopeIntroOverlay');
+  const isOverlayHidden = !overlay || overlay.style.display === 'none' || !document.body.classList.contains('envelope-active');
 
-  function updateHeroParallax() {
-    const scrollY = window.scrollY || document.documentElement.scrollTop;
-    const heroSection = document.querySelector('.hero-wedding-section');
-    if (!heroSection) {
-      ticking = false;
-      return;
-    }
-
-    const rect = heroSection.getBoundingClientRect();
-    const winHeight = window.innerHeight;
-
-    // Si la portada está dentro del área visible
-    if (rect.bottom > 0 && rect.top < winHeight) {
-      // Progreso de desplazamiento normalizado
-      const progress = Math.min(Math.max((winHeight - rect.top) / (winHeight + rect.height), 0), 1);
-
-      // 1. Desplazamiento de paralaje vertical y ligera inclinación caligráfica
-      const translateY = (progress - 0.4) * 35;
-      const rotate = (progress - 0.5) * 2;
-      const letterSpacing = 0.5 + Math.sin(progress * Math.PI) * 2;
-
-      heroTitle.style.transform = `translateY(${translateY.toFixed(1)}px) rotate(${rotate.toFixed(2)}deg)`;
-      heroTitle.style.letterSpacing = `${letterSpacing.toFixed(2)}px`;
-
-      // 2. Efecto de tinta líquida que fluye y se "escribe" con el avance del scroll
-      const inkFlow = ((scrollY * 0.45) % 260);
-      heroTitle.style.backgroundPosition = `${inkFlow.toFixed(1)}% center`;
-
-      // 3. Suave balanceo reactivo en las palabras independientes
-      if (words && words.length >= 2) {
-        const spread = (progress - 0.5) * 6;
-        words[0].style.transform = `translateX(${-spread.toFixed(1)}px)`;
-        words[1].style.transform = `translateX(${spread.toFixed(1)}px)`;
-      }
-    }
-
-    ticking = false;
+  if (isOverlayHidden) {
+    heroTitle.classList.add('writing-active');
+    setTimeout(() => {
+      heroTitle.classList.remove('writing-active');
+      heroTitle.classList.add('writing-finished');
+    }, 2400);
   }
-
-  window.addEventListener('scroll', () => {
-    if (!ticking) {
-      window.requestAnimationFrame(updateHeroParallax);
-      ticking = true;
-    }
-  }, { passive: true });
-
-  updateHeroParallax();
 }
 
 /* ============================================================================
@@ -218,13 +190,17 @@ function initPetalsCanvas() {
   });
 
   const petals = [];
-  const petalCount = window.innerWidth < 768 ? 16 : 28;
+  const petalCount = window.innerWidth < 768 ? 36 : 60;
 
   const petalColors = [
-    'rgba(244, 219, 216, 0.65)', // Rubor suave
-    'rgba(255, 255, 255, 0.75)', // Blanco seda
-    'rgba(226, 206, 181, 0.6)',  // Champaña
-    'rgba(212, 175, 55, 0.45)'   // Destello dorado
+    'rgba(255, 255, 255, 0.95)', // Blanco puro brillante
+    'rgba(255, 255, 255, 0.88)', // Blanco seda nupcial
+    'rgba(255, 255, 255, 0.80)', // Blanco perla
+    'rgba(255, 250, 245, 0.85)', // Blanco marfil delicado
+    'rgba(255, 255, 255, 0.70)', // Blanco translúcido suave
+    'rgba(248, 230, 226, 0.65)', // Rubor pétalo suave
+    'rgba(235, 218, 195, 0.60)', // Champaña dorado sutil
+    'rgba(212, 175, 55, 0.45)'   // Destello oro nupcial
   ];
 
   class Petal {
@@ -262,6 +238,8 @@ function initPetalsCanvas() {
       ctx.translate(this.x, this.y);
       ctx.rotate((this.rotation * Math.PI) / 180);
       ctx.fillStyle = this.color;
+      ctx.shadowColor = 'rgba(255, 255, 255, 0.45)';
+      ctx.shadowBlur = 4;
       ctx.beginPath();
       ctx.ellipse(0, 0, this.size, this.size * 0.6, 0, 0, Math.PI * 2);
       ctx.fill();
@@ -607,8 +585,8 @@ function initPassDigital() {
   const passIdEl = document.getElementById('passIdCode');
 
   function updatePassData() {
-    const rawName = (nameInput && nameInput.value.trim()) || 'Invitado de Honor';
-    if (displayGuestName) {
+    const rawName = (displayGuestName && displayGuestName.textContent.trim()) || (nameInput && nameInput.value.trim()) || 'Invitado de Honor';
+    if (displayGuestName && !displayGuestName.textContent.trim()) {
       displayGuestName.textContent = rawName;
     }
 
@@ -618,6 +596,7 @@ function initPassDigital() {
     const qrPayload = JSON.stringify({
       evento: 'Boda Gloria & Marco',
       fecha: '2026-12-05',
+      lugar: 'Chocofresitas Lebrija, Finca La Arboleda',
       invitado: rawName,
       codigo: codeId
     });

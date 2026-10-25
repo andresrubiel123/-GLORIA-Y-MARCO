@@ -90,8 +90,8 @@ body.envelope-active {
   background-color: #1a1614;
   background-image:
     linear-gradient(rgba(15, 12, 10, 0.38), rgba(15, 12, 10, 0.62)),
-    url('../imag/fondo_sobre.png'),
-    url('https://lh3.googleusercontent.com/d/1RAJdQWiR5RghjdGR0Pu78qE2qmu8aYVa');
+    url('../imag/Ceremonia%20nupcial%20bajo%20un%20%C3%A1rbol%20floreado.png'),
+    url('https://lh3.googleusercontent.com/d/11SJOLMSPnMzC57iNla29pHmH865SAKN4');
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -494,106 +494,202 @@ body.envelope-active {
   gap: 12px;
 }
 
-.music-btn {
-  width: 58px;
-  height: 58px;
-  border-radius: 50%;
-  background: #ffffff;
-  border: 2px solid var(--gold-primary);
-  box-shadow: 0 8px 24px rgba(143, 107, 62, 0.25), 0 0 15px var(--gold-glow);
+/* ==========================================================================
+   BOTÓN FLOTANTE DE MÚSICA: CORAZÓN DORADO DE AMOR CON CASCADA DE CORAZONES
+   ========================================================================== */
+.music-heart-btn {
+  width: 64px;
+  height: 64px;
+  background: transparent;
+  border: none;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
-  transition: var(--transition-bounce);
   outline: none;
+  padding: 0;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-.music-btn:hover {
-  transform: scale(1.08);
+.music-heart-btn:hover {
+  transform: scale(1.12);
 }
 
-.disc-vinyl {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: radial-gradient(circle, #3a322c 35%, #181514 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: inset 0 0 0 2px var(--gold-light);
+.music-heart-btn:active {
+  transform: scale(0.95);
+}
+
+/* Corazón Dorado Principal */
+.music-main-heart {
+  position: relative;
+  font-size: 3.2rem;
+  line-height: 1;
+  color: #D4AF37;
+  filter: drop-shadow(0 6px 16px rgba(184, 134, 11, 0.45)) drop-shadow(0 0 10px rgba(255, 215, 0, 0.3));
+  transition: transform 0.3s ease, filter 0.3s ease;
+  animation: heartGlowBreathing 3s ease-in-out infinite alternate;
+}
+
+.music-main-heart .ri-heart-3-fill {
+  background: linear-gradient(145deg, #FFF0D0 0%, #E5B842 35%, #C59B27 70%, #8F6B1E 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: block;
+}
+
+/* Nota musical incrustada delicadamente */
+.music-badge-note {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.15rem;
+  color: #5C3D11;
+  filter: drop-shadow(0 1px 2px rgba(255, 255, 255, 0.8));
+  pointer-events: none;
   transition: transform 0.3s ease;
 }
 
-.music-btn.playing .disc-vinyl {
-  animation: spinDisc 4s linear infinite;
+/* Latido rítmico cuando está reproduciendo la canción */
+.music-heart-btn.playing .music-main-heart {
+  animation: musicHeartPulsePlay 1.2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+  filter: drop-shadow(0 8px 22px rgba(212, 175, 55, 0.65)) drop-shadow(0 0 16px rgba(255, 230, 150, 0.5));
 }
 
-@keyframes spinDisc {
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
-  }
+.music-heart-btn.playing .music-badge-note {
+  animation: noteWiggle 1.2s ease-in-out infinite;
 }
 
-.music-note-icon {
-  color: var(--gold-primary);
-  font-size: 1.2rem;
-}
-
-.sound-wave {
-  position: absolute;
-  bottom: -6px;
-  display: flex;
-  gap: 2px;
-  height: 14px;
-  align-items: flex-end;
-  opacity: 0;
-  transition: opacity 0.3s;
-}
-
-.music-btn.playing .sound-wave {
-  opacity: 1;
-}
-
-.sound-wave span {
-  width: 3px;
-  background: var(--gold-primary);
-  border-radius: 2px;
-  animation: waveBars 0.8s ease infinite alternate;
-}
-
-.sound-wave span:nth-child(1) {
-  height: 6px;
-  animation-delay: 0.1s;
-}
-
-.sound-wave span:nth-child(2) {
-  height: 12px;
-  animation-delay: 0.3s;
-}
-
-.sound-wave span:nth-child(3) {
-  height: 8px;
-  animation-delay: 0.2s;
-}
-
-.sound-wave span:nth-child(4) {
-  height: 14px;
-  animation-delay: 0.4s;
-}
-
-@keyframes waveBars {
+@keyframes heartGlowBreathing {
   0% {
-    height: 4px;
+    transform: scale(1);
+    filter: drop-shadow(0 4px 12px rgba(184, 134, 11, 0.35));
   }
-
   100% {
-    height: 14px;
+    transform: scale(1.05);
+    filter: drop-shadow(0 6px 18px rgba(212, 175, 55, 0.55));
+  }
+}
+
+@keyframes musicHeartPulsePlay {
+  0% {
+    transform: scale(1);
+  }
+  14% {
+    transform: scale(1.15);
+  }
+  28% {
+    transform: scale(1);
+  }
+  42% {
+    transform: scale(1.1);
+  }
+  70% {
+    transform: scale(1);
+  }
+}
+
+@keyframes noteWiggle {
+  0%, 100% {
+    transform: translate(-50%, -50%) rotate(-6deg);
+  }
+  50% {
+    transform: translate(-50%, -50%) rotate(8deg);
+  }
+}
+
+/* Cascada de Corazoncitos Flotantes que Brotan y se Disuelven */
+.music-floating-hearts-stream {
+  position: absolute;
+  bottom: 50%;
+  left: 50%;
+  width: 60px;
+  height: 80px;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.m-stream-heart {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, 0);
+  opacity: 0;
+  pointer-events: none;
+  user-select: none;
+  will-change: transform, opacity;
+  animation: musicFloatDissolve 3s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
+}
+
+.m-stream-heart.mh-1 {
+  --m-drift: -14px;
+  --m-rot: -12deg;
+  font-size: 0.85rem;
+  color: #D4AF37;
+  animation-delay: 0s;
+}
+
+.m-stream-heart.mh-2 {
+  --m-drift: 12px;
+  --m-rot: 14deg;
+  font-size: 0.7rem;
+  color: #F3E0BE;
+  animation-delay: 0.5s;
+}
+
+.m-stream-heart.mh-3 {
+  --m-drift: -6px;
+  --m-rot: -8deg;
+  font-size: 1.05rem;
+  color: #C5A880;
+  animation-delay: 1.0s;
+}
+
+.m-stream-heart.mh-4 {
+  --m-drift: 18px;
+  --m-rot: 18deg;
+  font-size: 0.65rem;
+  color: #FFF2DC;
+  animation-delay: 1.5s;
+}
+
+.m-stream-heart.mh-5 {
+  --m-drift: -18px;
+  --m-rot: -15deg;
+  font-size: 0.8rem;
+  color: #D4AF37;
+  animation-delay: 2.0s;
+}
+
+.m-stream-heart.mh-6 {
+  --m-drift: 5px;
+  --m-rot: 10deg;
+  font-size: 0.95rem;
+  color: #E2CEB5;
+  animation-delay: 2.5s;
+}
+
+@keyframes musicFloatDissolve {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, 0) scale(0.3) rotate(0deg);
+  }
+  15% {
+    opacity: 0.95;
+    transform: translate(calc(-50% + (var(--m-drift, 0px) * 0.3)), -18px) scale(0.9) rotate(var(--m-rot, 0deg));
+  }
+  50% {
+    opacity: 0.85;
+    transform: translate(calc(-50% + (var(--m-drift, 0px) * 0.75)), -45px) scale(1.05) rotate(calc(var(--m-rot, 0deg) * 1.3));
+  }
+  80% {
+    opacity: 0.4;
+    transform: translate(calc(-50% + var(--m-drift, 0px)), -68px) scale(0.8) rotate(calc(var(--m-rot, 0deg) * 1.7));
+  }
+  100% {
+    opacity: 0;
+    transform: translate(calc(-50% + var(--m-drift, 0px)), -84px) scale(0.4) rotate(calc(var(--m-rot, 0deg) * 2));
   }
 }
 
@@ -864,6 +960,42 @@ body.envelope-active {
   border-color: rgba(212, 175, 55, 0.95);
 }
 
+/* ==========================================================================
+   TARJETAS INTERCALADAS CON FONDO BOTÁNICO DIFUMINADO (EUCALIPTO Y ORO)
+   ========================================================================== */
+.wedding-card.card-botanical {
+  position: relative;
+  overflow: hidden;
+}
+
+.wedding-card.card-botanical::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 360px;
+  background-image:
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.32) 0%, rgba(255, 255, 255, 0.85) 65%, var(--bg-card) 100%),
+    url('../imag/fondo_botanico_tarjetas.jpg');
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  opacity: 0.65;
+  pointer-events: none;
+  z-index: 0;
+  transition: opacity 0.4s ease;
+}
+
+.wedding-card.card-botanical:hover::before {
+  opacity: 0.78;
+}
+
+.wedding-card.card-botanical > * {
+  position: relative;
+  z-index: 1;
+}
+
 .card-header {
   margin-bottom: 30px;
   display: flex;
@@ -912,21 +1044,23 @@ body.envelope-active {
 }
 
 .card-title {
-  font-family: var(--font-serif);
-  font-size: 2rem;
-  color: var(--text-dark);
-  font-weight: 700;
-  line-height: 1.2;
+  font-family: var(--font-script);
+  font-size: 3.2rem;
+  color: var(--gold-dark);
+  font-weight: 400;
+  line-height: 1.15;
+  text-shadow: 0 2px 10px rgba(197, 168, 128, 0.28);
+  letter-spacing: 0.5px;
 }
 
 .card-title .title-connector {
   font-family: 'Alex Brush', 'Great Vibes', cursive;
-  font-size: 2.1rem;
+  font-size: 2.9rem;
   font-weight: 400;
   font-style: italic;
   color: var(--gold-dark);
   position: relative;
-  top: 2px;
+  top: 3px;
   margin: 0 4px;
 }
 
@@ -1065,37 +1199,48 @@ body.envelope-active {
 .hero-names {
   font-family: var(--font-script);
   font-size: 5rem;
-  line-height: 1.1;
+  line-height: 1.2;
   margin-bottom: 10px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 12px;
   position: relative;
-  /* Tinta líquida dorada con brillo caligráfico dinámico */
-  background: linear-gradient(
-    115deg,
-    #734C1D 0%,
-    #C5A880 20%,
-    #FFFDF7 40%,
-    #D4AF37 55%,
-    #8F6B3E 75%,
-    #C5A880 90%,
-    #734C1D 100%
-  );
-  background-size: 260% 100%;
-  background-position: 0% center;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 4px 15px rgba(197, 168, 128, 0.35));
-  will-change: transform, background-position, letter-spacing;
-  transition: transform 0.15s cubic-bezier(0.2, 0.8, 0.2, 1), letter-spacing 0.2s ease;
+  /* Color nupcial oro puro y cálido sin recortes ni clipping */
+  color: var(--gold-dark);
+  text-shadow: 0 3px 14px rgba(143, 107, 62, 0.32), 0 0 1px rgba(212, 175, 55, 0.4);
+  padding: 8px 18px;
+  overflow: visible;
+  /* Revelado caligráfico de una sola vez que queda estático */
+  clip-path: inset(0 0 0 0);
+}
+
+.hero-names.writing-active {
+  animation: handwritingReveal 2.2s cubic-bezier(0.25, 0.9, 0.35, 1) forwards;
+}
+
+.hero-names.writing-finished {
+  clip-path: inset(0 0 0 0);
+  transform: none !important;
+}
+
+@keyframes handwritingReveal {
+  0% {
+    clip-path: inset(0 100% 0 0);
+    opacity: 0.15;
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    clip-path: inset(0 0 0 0);
+    opacity: 1;
+  }
 }
 
 .hero-names .hero-name-word {
   display: inline-block;
-  will-change: transform;
-  transition: transform 0.2s ease;
+  color: inherit;
 }
 
 .hero-names .hero-connector {
@@ -1378,6 +1523,36 @@ body.envelope-active {
   position: relative;
 }
 
+/* Efecto de Papel Rasgado Artesanal (Torn Paper Edge) Arriba */
+.polaroid-photo-box::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: -2px;
+  right: -2px;
+  height: 28px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 100' preserveAspectRatio='none'%3E%3Cdefs%3E%3Cfilter id='tornDropShadow' x='-5%25' y='-5%25' width='110%25' height='160%25'%3E%3CfeDropShadow dx='0' dy='3' stdDeviation='3' flood-color='rgba(0,0,0,0.28)'/%3E%3C/filter%3E%3C/defs%3E%3Cpath d='M0,0 L1000,0 L1000,42 L975,58 L955,36 L940,62 L920,44 L900,52 L885,32 L865,58 L845,42 L825,66 L805,48 L785,58 L770,34 L750,56 L730,42 L710,68 L690,46 L670,60 L650,36 L630,62 L610,44 L590,56 L575,34 L555,60 L535,40 L515,64 L495,44 L475,58 L455,32 L435,62 L415,42 L395,58 L380,36 L360,64 L340,46 L320,58 L305,34 L285,62 L265,42 L245,60 L225,38 L205,64 L185,44 L165,58 L150,34 L130,62 L110,42 L90,58 L70,36 L50,66 L30,46 L15,58 L0,36 Z' fill='%23ffffff' filter='url(%23tornDropShadow)'/%3E%3C/svg%3E");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  z-index: 5;
+  pointer-events: none;
+}
+
+/* Efecto de Papel Rasgado Artesanal (Torn Paper Edge) Abajo */
+.polaroid-photo-box::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: -2px;
+  right: -2px;
+  height: 32px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 100' preserveAspectRatio='none'%3E%3Cdefs%3E%3Cfilter id='tornDropShadowUp' x='-5%25' y='-30%25' width='110%25' height='160%25'%3E%3CfeDropShadow dx='0' dy='-3' stdDeviation='3' flood-color='rgba(0,0,0,0.28)'/%3E%3C/filter%3E%3C/defs%3E%3Cpath d='M0,100 L1000,100 L1000,58 L980,38 L960,64 L940,40 L920,58 L905,34 L885,60 L865,44 L845,68 L825,46 L805,62 L790,38 L770,64 L750,44 L730,70 L710,48 L690,62 L670,38 L650,64 L630,46 L610,60 L590,38 L570,66 L550,44 L530,62 L510,38 L490,66 L470,44 L450,60 L430,36 L410,64 L390,44 L370,60 L355,36 L335,66 L315,46 L295,60 L280,36 L260,64 L240,44 L220,62 L200,40 L180,68 L160,46 L140,62 L120,38 L100,64 L80,44 L60,60 L40,36 L25,56 L0,40 Z' fill='%23ffffff' filter='url(%23tornDropShadowUp)'/%3E%3C/svg%3E");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  z-index: 5;
+  pointer-events: none;
+}
+
 .polaroid-img {
   width: 100%;
   height: 100%;
@@ -1633,6 +1808,177 @@ body.envelope-active {
   margin-top: -25px;
 }
 
+/* ==========================================================================
+   MES CALENDARIO NUPCIAL: DICIEMBRE 2026 CON CORAZÓN DORADO
+   ========================================================================== */
+.wedding-calendar-card {
+  max-width: 480px;
+  margin: 32px auto 38px;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 2px solid rgba(212, 175, 55, 0.55);
+  border-radius: var(--radius-lg);
+  padding: 26px 22px 28px;
+  box-shadow: 0 14px 34px rgba(143, 107, 62, 0.15), 0 0 24px rgba(212, 175, 55, 0.14);
+  position: relative;
+  overflow: visible;
+}
+
+.cal-card-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  gap: 4px;
+}
+
+.cal-header-title-box {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--gold-dark);
+}
+
+.cal-header-icon {
+  font-size: 1.5rem;
+  color: #D4AF37;
+}
+
+.cal-month-title {
+  font-family: var(--font-serif);
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--gold-dark);
+  letter-spacing: 0.5px;
+}
+
+.cal-badge-subtitle {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 0.5px;
+}
+
+.cal-table-wrapper {
+  width: 100%;
+}
+
+.cal-weekdays-row {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+  text-align: center;
+  margin-bottom: 12px;
+  border-bottom: 1.5px solid rgba(197, 168, 128, 0.3);
+  padding-bottom: 8px;
+}
+
+.cal-weekday {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--gold-dark);
+  letter-spacing: 1px;
+}
+
+.cal-days-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px 6px;
+  text-align: center;
+}
+
+.cal-day-cell {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  transition: all 0.2s ease;
+}
+
+.cal-day-cell .day-num {
+  position: relative;
+  z-index: 2;
+}
+
+.cal-day-cell.cal-empty {
+  pointer-events: none;
+  opacity: 0;
+}
+
+.cal-day-cell:not(.wedding-special-day):not(.cal-empty):hover {
+  background: rgba(197, 168, 128, 0.15);
+  color: var(--gold-dark);
+  transform: translateY(-1px);
+}
+
+/* Sábado 5 de Diciembre: Día Especial de Boda con Corazón Dorado */
+.cal-day-cell.wedding-special-day {
+  z-index: 10;
+  cursor: pointer;
+}
+
+.cal-golden-heart-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2.9rem;
+  z-index: 1;
+  line-height: 1;
+  background: linear-gradient(145deg, #FFF4D8 0%, #E6BA47 30%, #C99C2B 70%, #8F691E 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 4px 10px rgba(184, 134, 11, 0.45));
+  animation: calHeartPulse 2.4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.cal-day-cell.wedding-special-day .day-num {
+  font-weight: 800;
+  font-size: 0.95rem;
+  color: #4A330B;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.9);
+  position: relative;
+  z-index: 3;
+}
+
+.cal-event-tag {
+  position: absolute;
+  bottom: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--gold-gradient);
+  color: #ffffff;
+  font-size: 0.58rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 2px 7px;
+  border-radius: 12px;
+  white-space: nowrap;
+  box-shadow: 0 3px 8px rgba(143, 107, 62, 0.35);
+  pointer-events: none;
+  z-index: 4;
+}
+
+@keyframes calHeartPulse {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(1);
+    filter: drop-shadow(0 3px 8px rgba(184, 134, 11, 0.4));
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.16);
+    filter: drop-shadow(0 6px 16px rgba(212, 175, 55, 0.7)) drop-shadow(0 0 12px rgba(255, 235, 170, 0.55));
+  }
+}
+
 .calendar-actions {
   display: flex;
   justify-content: center;
@@ -1730,10 +2076,21 @@ body.envelope-active {
 }
 
 .timeline-title {
-  font-family: var(--font-serif);
-  font-size: 1.3rem;
-  color: var(--text-dark);
+  font-family: var(--font-script);
+  font-size: 2.2rem;
+  color: var(--gold-dark);
+  font-weight: 400;
+  line-height: 1.15;
+  text-shadow: 0 1px 6px rgba(197, 168, 128, 0.22);
   margin-bottom: 6px;
+}
+
+.timeline-title .timeline-connector {
+  font-family: 'Alex Brush', var(--font-script);
+  font-size: 2rem;
+  font-style: italic;
+  color: var(--gold-dark);
+  margin: 0 3px;
 }
 
 .timeline-desc {
@@ -1851,9 +2208,12 @@ body.envelope-active {
 }
 
 .detail-title {
-  font-family: var(--font-serif);
-  font-size: 1.4rem;
-  color: var(--text-dark);
+  font-family: var(--font-script);
+  font-size: 2.4rem;
+  color: var(--gold-dark);
+  font-weight: 400;
+  line-height: 1.2;
+  text-shadow: 0 1px 6px rgba(197, 168, 128, 0.22);
   margin-bottom: 4px;
 }
 
@@ -2187,10 +2547,12 @@ body.envelope-active {
 }
 
 .pass-guest-name {
-  font-family: var(--font-serif);
-  font-size: 1.6rem;
-  color: var(--text-dark);
-  font-weight: 700;
+  font-family: var(--font-script);
+  font-size: 2.6rem;
+  color: var(--gold-dark);
+  font-weight: 400;
+  line-height: 1.2;
+  text-shadow: 0 1px 8px rgba(197, 168, 128, 0.25);
   margin-bottom: 16px;
   border-bottom: 1px solid rgba(197, 168, 128, 0.3);
   padding-bottom: 8px;
@@ -2198,10 +2560,10 @@ body.envelope-active {
 
 .pass-info-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
   margin-bottom: 18px;
-  text-align: left;
+  text-align: center;
 }
 
 .pass-info-col {
@@ -2883,7 +3245,20 @@ body.envelope-active {
   }
 
   .card-title {
-    font-size: 1.6rem;
+    font-size: 2.4rem;
+    line-height: 1.2;
+  }
+
+  .timeline-title {
+    font-size: 1.85rem;
+  }
+
+  .detail-title {
+    font-size: 2rem;
+  }
+
+  .pass-guest-name {
+    font-size: 2.1rem;
   }
 
   .form-row {
@@ -2926,7 +3301,20 @@ body.envelope-active {
   }
 
   .pass-info-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+  }
+
+  .pass-info-col {
+    padding: 6px 4px;
+  }
+
+  .pass-info-col .info-label {
+    font-size: 0.62rem;
+  }
+
+  .pass-info-col .info-val {
+    font-size: 0.78rem;
   }
 
   .pass-ticket {
@@ -3010,6 +3398,33 @@ body.envelope-active {
 
   .header-action-btns {
     width: 100%;
+  }
+
+  .wedding-calendar-card {
+    padding: 18px 12px 22px;
+    margin: 24px 0 28px;
+  }
+
+  .cal-month-title {
+    font-size: 1.45rem;
+  }
+
+  .cal-days-grid {
+    gap: 5px 3px;
+  }
+
+  .cal-day-cell {
+    font-size: 0.85rem;
+  }
+
+  .cal-golden-heart-icon {
+    font-size: 2.3rem;
+  }
+
+  .cal-event-tag {
+    font-size: 0.52rem;
+    padding: 1px 5px;
+    bottom: -13px;
   }
 }
 

@@ -32,7 +32,7 @@
   <link rel="stylesheet" href="css/styles.css">
 
   <!-- Preload Imagen de Fondo del Sobre (Local y Google Drive CDN) -->
-  <link rel="preload" as="image" href="imag/fondo_sobre.png">
+  <link rel="preload" as="image" href="imag/Ceremonia%20nupcial%20bajo%20un%20%C3%A1rbol%20floreado.png">
 
   <!-- Forzar scroll al inicio inmediatamente para evitar restauración de scroll al recargar -->
   <script>
@@ -49,7 +49,7 @@
        ANIMACIÓN DEL SOBRE DE INVITACIÓN (SPLASH SCREEN INICIAL)
        ===================================================================== -->
   <div class="envelope-intro-overlay" id="envelopeIntroOverlay"
-    style="background-image: linear-gradient(rgba(15, 12, 10, 0.38), rgba(15, 12, 10, 0.62)), url('imag/fondo_sobre.png'), url('https://lh3.googleusercontent.com/d/1RAJdQWiR5RghjdGR0Pu78qE2qmu8aYVa');">
+    style="background-image: linear-gradient(rgba(15, 12, 10, 0.38), rgba(15, 12, 10, 0.62)), url('imag/Ceremonia%20nupcial%20bajo%20un%20%C3%A1rbol%20floreado.png'), url('https://lh3.googleusercontent.com/d/11SJOLMSPnMzC57iNla29pHmH865SAKN4');">
     <div class="envelope-bg-decor"></div>
 
     <div class="envelope-intro-header">
@@ -116,15 +116,24 @@
     <div class="scroll-progress-bar" id="progressBar"></div>
   </div>
 
-  <!-- Reproductor Flotante de Canción Preferida -->
+  <!-- Reproductor Flotante de Canción Preferida (Corazón Dorado de Amor & Música) -->
   <div class="music-floating-widget" id="musicWidget">
-    <button class="music-btn" id="musicToggleBtn" aria-label="Reproducir nuestra canción"
+    <button class="music-heart-btn" id="musicToggleBtn" aria-label="Reproducir nuestra canción"
       title="Reproducir nuestra canción">
-      <div class="disc-vinyl" id="vinylDisc">
-        <i class="ri-music-2-fill music-note-icon"></i>
+      <!-- Cascada de corazoncitos flotantes que brotan y se disuelven -->
+      <div class="music-floating-hearts-stream" aria-hidden="true">
+        <span class="m-stream-heart mh-1">❤</span>
+        <span class="m-stream-heart mh-2">❤</span>
+        <span class="m-stream-heart mh-3">❤</span>
+        <span class="m-stream-heart mh-4">❤</span>
+        <span class="m-stream-heart mh-5">❤</span>
+        <span class="m-stream-heart mh-6">❤</span>
       </div>
-      <div class="sound-wave" id="soundWave">
-        <span></span><span></span><span></span><span></span>
+
+      <!-- Corazón Dorado Principal con Nota Musical -->
+      <div class="music-main-heart" id="musicMainHeart">
+        <i class="ri-heart-3-fill"></i>
+        <i class="ri-music-2-fill music-badge-note"></i>
       </div>
     </button>
     <div class="music-tooltip" id="musicTooltip">
@@ -226,7 +235,7 @@
     </section>
 
     <!-- SECTION: NUESTRA HISTORIA (Collage Polaroid y Cita Emotiva) -->
-    <section id="nuestra-historia" class="wedding-card story-card">
+    <section id="nuestra-historia" class="wedding-card story-card card-botanical">
       <div class="card-header text-center">
         <div class="wedding-seal-badge">
           <i class="ri-heart-3-line"></i>
@@ -350,7 +359,7 @@
     </section>
 
     <!-- SECTION: CUENTA REGRESIVA Y FECHA -->
-    <section id="cuenta-regresiva" class="wedding-card countdown-card">
+    <section id="cuenta-regresiva" class="wedding-card countdown-card card-botanical">
       <div class="card-header text-center">
         <span class="card-tag">¡Cada segundo cuenta!</span>
         <h2 class="card-title">Cuenta Regresiva para el Gran Día</h2>
@@ -384,6 +393,74 @@
             <span class="countdown-number" id="cdSeconds">00</span>
           </div>
           <span class="countdown-label">Segundos</span>
+        </div>
+      </div>
+
+      <!-- Mes Calendario Nupcial: Diciembre 2026 con Corazón Dorado -->
+      <div class="wedding-calendar-card" id="weddingCalendarCard">
+        <div class="cal-card-header">
+          <div class="cal-header-title-box">
+            <i class="ri-calendar-2-line cal-header-icon"></i>
+            <h3 class="cal-month-title">Diciembre 2026</h3>
+          </div>
+          <span class="cal-badge-subtitle">Sábado, 5 de Diciembre — El Gran Día</span>
+        </div>
+
+        <div class="cal-table-wrapper">
+          <div class="cal-weekdays-row">
+            <span class="cal-weekday">DOM</span>
+            <span class="cal-weekday">LUN</span>
+            <span class="cal-weekday">MAR</span>
+            <span class="cal-weekday">MIÉ</span>
+            <span class="cal-weekday">JUE</span>
+            <span class="cal-weekday">VIE</span>
+            <span class="cal-weekday">SÁB</span>
+          </div>
+          <div class="cal-days-grid">
+            <!-- Días vacíos previos (Noviembre) -->
+            <div class="cal-day-cell cal-empty"></div>
+            <div class="cal-day-cell cal-empty"></div>
+            <!-- Días de Diciembre -->
+            <div class="cal-day-cell"><span class="day-num">1</span></div>
+            <div class="cal-day-cell"><span class="day-num">2</span></div>
+            <div class="cal-day-cell"><span class="day-num">3</span></div>
+            <div class="cal-day-cell"><span class="day-num">4</span></div>
+            <!-- Sábado 5: Día de la Boda con Corazón Dorado -->
+            <div class="cal-day-cell wedding-special-day" title="¡El Gran Día de Nuestra Boda!">
+              <div class="cal-heart-glow"></div>
+              <span class="day-num">5</span>
+              <i class="ri-heart-3-fill cal-golden-heart-icon" aria-hidden="true"></i>
+              <span class="cal-event-tag">Nuestra Boda</span>
+            </div>
+            <div class="cal-day-cell"><span class="day-num">6</span></div>
+            <div class="cal-day-cell"><span class="day-num">7</span></div>
+            <div class="cal-day-cell"><span class="day-num">8</span></div>
+            <div class="cal-day-cell"><span class="day-num">9</span></div>
+            <div class="cal-day-cell"><span class="day-num">10</span></div>
+            <div class="cal-day-cell"><span class="day-num">11</span></div>
+            <div class="cal-day-cell"><span class="day-num">12</span></div>
+            <div class="cal-day-cell"><span class="day-num">13</span></div>
+            <div class="cal-day-cell"><span class="day-num">14</span></div>
+            <div class="cal-day-cell"><span class="day-num">15</span></div>
+            <div class="cal-day-cell"><span class="day-num">16</span></div>
+            <div class="cal-day-cell"><span class="day-num">17</span></div>
+            <div class="cal-day-cell"><span class="day-num">18</span></div>
+            <div class="cal-day-cell"><span class="day-num">19</span></div>
+            <div class="cal-day-cell"><span class="day-num">20</span></div>
+            <div class="cal-day-cell"><span class="day-num">21</span></div>
+            <div class="cal-day-cell"><span class="day-num">22</span></div>
+            <div class="cal-day-cell"><span class="day-num">23</span></div>
+            <div class="cal-day-cell"><span class="day-num">24</span></div>
+            <div class="cal-day-cell"><span class="day-num">25</span></div>
+            <div class="cal-day-cell"><span class="day-num">26</span></div>
+            <div class="cal-day-cell"><span class="day-num">27</span></div>
+            <div class="cal-day-cell"><span class="day-num">28</span></div>
+            <div class="cal-day-cell"><span class="day-num">29</span></div>
+            <div class="cal-day-cell"><span class="day-num">30</span></div>
+            <div class="cal-day-cell"><span class="day-num">31</span></div>
+            <div class="cal-day-cell cal-empty"></div>
+            <div class="cal-day-cell cal-empty"></div>
+          </div>
         </div>
       </div>
 
@@ -429,7 +506,7 @@
           </div>
           <div class="timeline-content">
             <span class="timeline-time"><i class="ri-time-line"></i> 5:30 PM</span>
-            <h3 class="timeline-title">Cóctel de Bienvenida &amp; Fotos</h3>
+            <h3 class="timeline-title">Cóctel de Bienvenida <span class="timeline-connector">&amp;</span> Fotos</h3>
             <p class="timeline-desc">Brindis inicial con cócteles de autor, música instrumental en vivo y fotos con los
               invitados.</p>
             <div class="timeline-place"><i class="ri-map-pin-2-line"></i> Terraza Jardín de los Olivos</div>
@@ -443,7 +520,7 @@
           </div>
           <div class="timeline-content">
             <span class="timeline-time"><i class="ri-time-line"></i> 7:00 PM</span>
-            <h3 class="timeline-title">Brindis &amp; </h3>
+            <h3 class="timeline-title">Brindis</h3>
             <p class="timeline-desc">Cena formal de tres tiempos preparada especialmente para deleitarte, acompañada de
               palabras de gratitud.</p>
             <div class="timeline-place"><i class="ri-map-pin-2-line"></i> Gran Salón Imperial</div>
@@ -457,7 +534,7 @@
           </div>
           <div class="timeline-content">
             <span class="timeline-time"><i class="ri-time-line"></i> 8:30 PM</span>
-            <h3 class="timeline-title">Primer Baile de Esposos</h3>
+            <h3 class="timeline-title">Baile de Esposos</h3>
             <p class="timeline-desc">Nuestro primer vals como marido y mujer, seguido del tradicional baile con padres.
             </p>
             <div class="timeline-place"><i class="ri-map-pin-2-line"></i> Pista Central de Cristal</div>
@@ -471,7 +548,7 @@
           </div>
           <div class="timeline-content">
             <span class="timeline-time"><i class="ri-time-line"></i> 9:00 PM - Hasta el Amanecer</span>
-            <h3 class="timeline-title">Gran Fiesta &amp; Celebración</h3>
+            <h3 class="timeline-title">Gran Fiesta <span class="timeline-connector">&amp;</span> Celebración</h3>
             <p class="timeline-desc">Música en vivo, DJ, sorpresas, barra libre y la mejor energía para festejar nuestro
               amor.</p>
             <div class="timeline-place"><i class="ri-map-pin-2-line"></i> Área de Pista y Lounge</div>
@@ -482,7 +559,7 @@
     </section>
 
     <!-- SECTION: UBICACIÓN Y GOOGLE MAPS -->
-    <section id="ubicacion" class="wedding-card">
+    <section id="ubicacion" class="wedding-card card-botanical">
       <div class="card-header">
         <div class="card-title-group">
           <div class="card-icon gold-icon">
@@ -495,11 +572,11 @@
           </div>
         </div>
         <div class="header-action-btns">
-          <a href="https://maps.app.goo.gl/goeLVz2qetJhEaPS7" target="_blank" rel="noopener"
+          <a href="https://www.google.com/maps/search/?api=1&query=7.103253763708318,-73.21798677032473" target="_blank" rel="noopener"
             class="wedding-btn btn-gold">
             <i class="ri-navigation-line"></i> Abrir en Google Maps
           </a>
-          <a href="https://waze.com/ul?ll=7.1128542,-73.2187783&navigate=yes" target="_blank" rel="noopener"
+          <a href="https://waze.com/ul?ll=7.103253763708318,-73.21798677032473&navigate=yes" target="_blank" rel="noopener"
             class="wedding-btn btn-glass">
             <i class="ri-road-map-line"></i> Abrir en Waze
           </a>
@@ -509,8 +586,8 @@
       <div class="location-details-box">
         <div class="loc-card">
           <i class="ri-hotel-line loc-icon"></i>
-          <h4>EL BÚHO NUEVE</h4>
-          <p>Lebrija, Santander, Colombia</p>
+          <h4>CHOCOFRESITAS LEBRIJA</h4>
+          <p>Finca la arboleda, Lebrija, Santander, Colombia</p>
           <span class="loc-badge"><i class="ri-parking-box-line"></i> Espacio Campestre para Eventos • Parqueadero
             Privado</span>
         </div>
@@ -519,10 +596,10 @@
       <!-- Mapa interactivo embebido con la ubicación exacta en Lebrija, Santander -->
       <div class="map-embed-wrapper">
         <iframe
-          src="https://maps.google.com/maps?q=7.1128542,-73.2187783+(EL+B%C3%9AHO+NUEVE+-+Lebrija)&amp;hl=es&amp;z=16&amp;output=embed"
+          src="https://maps.google.com/maps?q=7.103253763708318,-73.21798677032473+(Chocofresitas+Lebrija)&amp;hl=es&amp;z=17&amp;output=embed"
           width="100%" height="380" style="border:0;" allowfullscreen="" loading="lazy"
           referrerpolicy="no-referrer-when-downgrade"
-          title="Ubicación Boda Gloria y Marco - EL BÚHO NUEVE, Lebrija, Santander">
+          title="Ubicación Boda Gloria y Marco - Chocofresitas Lebrija, Finca La Arboleda, Santander">
         </iframe>
       </div>
     </section>
@@ -650,26 +727,8 @@
       </div>
     </section>
 
-    <!-- SECTION: PASE DIGITAL INTERACTIVO Y DESCARGABLE EN PDF -->
-    <section id="pase-digital" class="wedding-card pass-section">
-      <div class="card-header text-center">
-        <span class="card-tag">Exclusivo y Personal</span>
-        <h2 class="card-title">Pase Digital de Acceso</h2>
-        <p class="card-subtitle">Genera tu pase oficial para ingresar al evento, descárgalo en PDF o guárdalo en tu
-          teléfono</p>
-      </div>
-
-      <!-- Configuración del Pase (Nombre del Invitado) -->
-      <div class="pass-configurator">
-        <label for="passGuestNameInput">Personaliza el nombre en tu Pase:</label>
-        <div class="input-with-button">
-          <input type="text" id="passGuestNameInput" placeholder="Ej. Familia Rodríguez / Juan y Laura"
-            value="Invitado de Honor">
-          <button class="wedding-btn btn-gold" id="updatePassBtn">
-            <i class="ri-refresh-line"></i> Actualizar Pase
-          </button>
-        </div>
-      </div>
+    <!-- SECTION: PASE DIGITAL INTERACTIVO -->
+    <section id="pase-digital" class="wedding-card pass-section card-botanical">
 
       <!-- VISUALIZACIÓN DEL PASE DIGITAL (Diseño de Invitación Formal) -->
       <div class="pass-card-wrapper" id="passCardContainer">
@@ -711,17 +770,13 @@
                   <span class="info-label"><i class="ri-ticket-line"></i> N° PASES</span>
                   <span class="info-val" id="passDisplayCount">2 Personas</span>
                 </div>
-                <div class="pass-info-col">
-                  <span class="info-label"><i class="ri-t-shirt-line"></i> VESTIMENTA</span>
-                  <span class="info-val">Rigurosa Etiqueta</span>
-                </div>
               </div>
 
               <div class="pass-venue">
                 <i class="ri-map-pin-2-fill"></i>
                 <div>
-                  <strong>EL BÚHO NUEVE</strong>
-                  <span>Lebrija, Santander, Colombia</span>
+                  <strong>CHOCOFRESITAS LEBRIJA</strong>
+                  <span>Finca la arboleda, Lebrija, Santander</span>
                 </div>
               </div>
 
@@ -746,19 +801,6 @@
 
           </div>
         </div>
-      </div>
-
-      <!-- Acciones del Pase Digital -->
-      <div class="pass-download-actions">
-        <button class="wedding-btn btn-gold" id="downloadPdfBtn" onclick="generatePassPDF()">
-          <i class="ri-file-pdf-fill"></i> Descargar Pase Digital en PDF
-        </button>
-        <button class="wedding-btn btn-glass" id="openFullscreenPassBtn" onclick="openPassModal()">
-          <i class="ri-fullscreen-line"></i> Ver Pantalla Completa
-        </button>
-        <button class="wedding-btn btn-whatsapp" id="sharePassWhatsappBtn" onclick="sharePassWhatsapp()">
-          <i class="ri-whatsapp-line"></i> Enviar Pase por WhatsApp
-        </button>
       </div>
 
     </section>
