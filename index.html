@@ -64,9 +64,6 @@
     <div class="envelope-3d-wrapper">
       <div class="wedding-envelope" id="weddingEnvelope">
 
-        <!-- Fondo interior del sobre -->
-        <div class="envelope-back-inside"></div>
-
         <!-- Tarjeta con la Foto de los Novios que Emerge del Sobre (Optimizada WebP/JPG) -->
         <div class="envelope-letter-card" id="envelopeLetterCard">
           <div class="letter-photo-frame">
@@ -80,68 +77,18 @@
           <div class="letter-caption">
             <h4>¡Nos Casamos!</h4>
             <p>5 • DICIEMBRE • 2026</p>
-            <p class="letter-guest-line" id="letterGuestLine" style="display: none;"></p>
           </div>
         </div>
 
-        <!-- Solapas Laterales e Inferior con Pliegues Sombreados en Verde Oliva Profundo -->
-        <div class="envelope-pocket-left"></div>
-        <div class="envelope-pocket-right"></div>
-        <div class="envelope-pocket-bottom"></div>
-
-        <!-- Rótulo Personalizado para Invitados en la Parte Inferior sobre el Sobre -->
-        <div class="envelope-front-label" id="envelopeFrontLabel">
-          <span class="envelope-label-intro" id="envelopeLabelIntro">Invitación de Honor:</span>
-          <h3 class="envelope-label-guest-name" id="envelopeFrontGuestName">Nuestra Querida Familia y Amigos</h3>
+        <!-- Imagen Real del Sobre de Lujo con Iniciales G|M y Fecha (Optimizada WebP/JPG) -->
+        <div class="envelope-real-body">
+          <picture>
+            <source srcset="imag/sobre.webp" type="image/webp">
+            <img src="imag/sobre.jpg" alt="Sobre de Invitación de Gloria y Marco" class="envelope-real-img" id="envelopeRealImg">
+          </picture>
         </div>
 
-        <!-- Solapa Triangular Superior (Abre hacia arriba en 3D con Iniciales, Ramitas y Fecha Dorada) -->
-        <div class="envelope-flap-top">
-          <div class="flap-gold-details">
-            <!-- Fila Superior: Ramas de Olivo e Iniciales G | M -->
-            <div class="flap-initials-row">
-              <svg class="flap-leaves-svg flap-leaves-left" viewBox="0 0 54 26" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <path d="M52 23C38 20 25 12 12 3" stroke="url(#goldGradFlap)" stroke-width="1.8" stroke-linecap="round"/>
-                <path d="M12 3C9 1 6 1.5 7 5C8.5 8.5 12.5 6 12 3Z" fill="url(#goldGradFlap)"/>
-                <path d="M20 7C18.5 3 14 4.5 15.5 8C17 11.5 21 10.5 20 7Z" fill="url(#goldGradFlap)"/>
-                <path d="M29 11.5C26.5 7.5 22 9 24 12.5C26 16 30 15 29 11.5Z" fill="url(#goldGradFlap)"/>
-                <path d="M38.5 16C36 12 31.5 14 33.5 17.5C35.5 21 39.5 19.5 38.5 16Z" fill="url(#goldGradFlap)"/>
-                <path d="M47 20C44.5 17 40.5 19 42.5 22C44.5 24.5 48 23 47 20Z" fill="url(#goldGradFlap)"/>
-                <path d="M23 11C24.5 14.5 29 13.5 28 10C27 6.5 22.5 7.5 23 11Z" fill="url(#goldGradFlap)"/>
-                <path d="M32 15C33.5 18.5 38 17.5 37 14C36 10.5 31.5 11.5 32 15Z" fill="url(#goldGradFlap)"/>
-              </svg>
-
-              <div class="flap-monogram-box">
-                <span class="flap-letter">G</span>
-                <span class="flap-divider-vertical"></span>
-                <span class="flap-letter">M</span>
-              </div>
-
-              <svg class="flap-leaves-svg flap-leaves-right" viewBox="0 0 54 26" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <path d="M2 23C16 20 29 12 42 3" stroke="url(#goldGradFlap)" stroke-width="1.8" stroke-linecap="round"/>
-                <path d="M42 3C45 1 48 1.5 47 5C45.5 8.5 41.5 6 42 3Z" fill="url(#goldGradFlap)"/>
-                <path d="M34 7C35.5 3 40 4.5 38.5 8C37 11.5 33 10.5 34 7Z" fill="url(#goldGradFlap)"/>
-                <path d="M25 11.5C27.5 7.5 32 9 30 12.5C28 16 24 15 25 11.5Z" fill="url(#goldGradFlap)"/>
-                <path d="M15.5 16C18 12 22.5 14 20.5 17.5C18.5 21 14.5 19.5 15.5 16Z" fill="url(#goldGradFlap)"/>
-                <path d="M7 20C9.5 17 13.5 19 11.5 22C9.5 24.5 6 23 7 20Z" fill="url(#goldGradFlap)"/>
-                <path d="M31 11C29.5 14.5 25 13.5 26 10C27 6.5 31.5 7.5 31 11Z" fill="url(#goldGradFlap)"/>
-                <path d="M22 15C20.5 18.5 16 17.5 17 14C18 10.5 22.5 11.5 22 15Z" fill="url(#goldGradFlap)"/>
-              </svg>
-            </div>
-
-            <!-- Fila Central: Línea Divisoria Dorada con Rombo / Destello -->
-            <div class="flap-divider-horizontal">
-              <span class="flap-line-half"></span>
-              <span class="flap-sparkle">✦</span>
-              <span class="flap-line-half"></span>
-            </div>
-
-            <!-- Fila Inferior: Fecha Oficial de la Boda en Dorado -->
-            <div class="flap-wedding-date">05.12.2026</div>
-          </div>
-        </div>
-
-        <!-- BOTÓN REDONDO: SELLO DE LACRE DORADO EN RELIEVE (Wax Seal) -->
+        <!-- BOTÓN REDONDO: SELLO DE LACRE DORADO EN RELIEVE PARA ABRIR -->
         <button class="wax-seal-btn" id="waxSealBtn" aria-label="Abrir sobre de invitación"
           title="Toca el sello para abrir">
           <div class="wax-seal-outer-rim">
@@ -159,15 +106,9 @@
           </div>
         </button>
 
-        <!-- Definición de Gradientes Dorados para Elementos SVG -->
+        <!-- Definición de Gradiente Dorado para el Sello SVG -->
         <svg width="0" height="0" style="position: absolute; pointer-events: none;">
           <defs>
-            <linearGradient id="goldGradFlap" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#FFF5D6"/>
-              <stop offset="35%" stop-color="#ECC575"/>
-              <stop offset="70%" stop-color="#D4AF37"/>
-              <stop offset="100%" stop-color="#9C7423"/>
-            </linearGradient>
             <linearGradient id="goldGradSeal" x1="0%" y1="0%" x2="100%" y2="100%">
               <stop offset="0%" stop-color="#FFF8E0"/>
               <stop offset="25%" stop-color="#F5CE77"/>
@@ -181,7 +122,6 @@
     </div>
 
     <div class="envelope-instruction">
-      <i class="ri-hand-coin-line"></i>
       <span>Toca el sello redondo para abrir</span>
     </div>
   </div>
@@ -215,7 +155,7 @@
       </div>
     </button>
     <div class="music-tooltip" id="musicTooltip">
-      <span class="music-title">Nuestra Canción de Amor</span>
+      <span class="music-title">Será Porque Te Amo</span>
       <span class="music-status">Toca para reproducir</span>
     </div>
   </div>
@@ -223,7 +163,6 @@
   <!-- Audio Element con la canción oficial de los novios -->
   <audio id="weddingAudio" loop preload="auto">
     <source src="audio/cancion.mpeg" type="audio/mpeg">
-    <source src="https://drive.google.com/uc?export=download&id=16LwIaXGqHgXMqkTKOXEMtRjLPBgJ9Hiv" type="audio/mpeg">
   </audio>
 
   <!-- Navegación Glassmorphism Nupcial -->

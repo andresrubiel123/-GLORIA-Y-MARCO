@@ -498,33 +498,8 @@ function getGuestUrlParams() {
 function initGuestPersonalization() {
   const { name, passes } = getGuestUrlParams();
 
-  // 1. Personalizar Rótulo de Invitados en la Parte Inferior sobre el Sobre
-  const frontLabel = document.getElementById('envelopeFrontLabel');
-  const frontGuestName = document.getElementById('envelopeFrontGuestName');
-  const labelIntro = document.getElementById('envelopeLabelIntro');
-  const letterGuestLine = document.getElementById('letterGuestLine');
-
-  if (frontLabel && frontGuestName) {
-    if (name) {
-      frontGuestName.textContent = name;
-      if (labelIntro) labelIntro.textContent = 'Especialmente Para:';
-    } else {
-      frontGuestName.textContent = 'Nuestra Querida Familia y Amigos';
-      if (labelIntro) labelIntro.textContent = 'Invitación de Honor:';
-    }
-    frontLabel.style.display = 'flex';
-    setTimeout(fitEnvelopeGuestName, 50);
-    window.addEventListener('resize', fitEnvelopeGuestName);
-  }
-
-  if (letterGuestLine) {
-    if (name) {
-      letterGuestLine.textContent = `Especialmente Para: ${name}`;
-    } else {
-      letterGuestLine.textContent = 'Nuestra Querida Familia y Amigos';
-    }
-    letterGuestLine.style.display = 'block';
-  }
+  // Personalización opcional solo para pases de gala
+  if (!name) return;
 
   if (!name) return;
 }
