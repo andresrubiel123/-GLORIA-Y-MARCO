@@ -56,6 +56,8 @@
 html {
   scroll-behavior: smooth;
   font-size: 16px;
+  overflow-x: hidden;
+  max-width: 100vw;
 }
 
 body {
@@ -68,6 +70,7 @@ body {
   font-family: var(--font-body);
   line-height: 1.6;
   overflow-x: hidden;
+  max-width: 100vw;
   position: relative;
   min-height: 100vh;
 }
@@ -172,10 +175,11 @@ body.envelope-active {
 /* Contenedor 3D del Sobre */
 .envelope-3d-wrapper {
   position: relative;
-  width: 440px;
-  height: 288px;
+  width: min(440px, 92vw);
+  height: clamp(210px, 58vw, 288px);
   perspective: 1200px;
   z-index: 2;
+  margin: 0 auto;
 }
 
 /* El Sobre Verde Oliva / Salvia Bosque */
@@ -403,9 +407,9 @@ body.envelope-active {
    ========================================================================== */
 .music-floating-widget {
   position: fixed;
-  bottom: 24px;
-  right: 24px;
-  z-index: 900;
+  bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+  right: calc(20px + env(safe-area-inset-right, 0px));
+  z-index: 9999;
   display: flex;
   align-items: center;
   gap: 12px;
@@ -3430,8 +3434,6 @@ body.envelope-active {
   }
 }
 
-}
-
 @media (max-width: 1080px) {
   .mobile-menu-toggle {
     display: block;
@@ -3564,8 +3566,9 @@ body.envelope-active {
   }
 
   .music-floating-widget {
-    bottom: 16px;
-    right: 16px;
+    bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+    right: calc(16px + env(safe-area-inset-right, 0px));
+    z-index: 9999;
   }
 
   .music-tooltip {
