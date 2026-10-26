@@ -2346,7 +2346,7 @@ body.envelope-active {
   background: #ffffff;
   border: 2px solid rgba(212, 175, 55, 0.55);
   border-radius: var(--radius-md);
-  padding: 20px;
+  padding: 16px 20px;
   box-shadow: 0 8px 25px rgba(197, 168, 128, 0.14);
   transition: var(--transition-smooth);
 }
@@ -2365,17 +2365,17 @@ body.envelope-active {
   font-weight: 700;
   padding: 4px 12px;
   border-radius: 12px;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 
 .timeline-title {
   font-family: var(--font-script);
-  font-size: 2.2rem;
+  font-size: clamp(1.65rem, 3.2vw, 2.1rem);
   color: var(--gold-dark);
   font-weight: 400;
-  line-height: 1.15;
+  line-height: 1.2;
   text-shadow: 0 1px 6px rgba(197, 168, 128, 0.22);
-  margin-bottom: 6px;
+  margin-bottom: 0;
 }
 
 .timeline-title .timeline-connector {
