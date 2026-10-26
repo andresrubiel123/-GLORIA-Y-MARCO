@@ -31,8 +31,8 @@
   <!-- Hoja de estilos en carpeta css/ -->
   <link rel="stylesheet" href="css/styles.css">
 
-  <!-- Preload Imagen de Fondo del Sobre (WebP Panorámico Alejado) -->
-  <link rel="preload" as="image" href="imag/fondo_sobre_boda_panoramico.webp">
+  <!-- Preload Imagen de Fondo del Sobre (WebP Jardín Verde Panorámico) -->
+  <link rel="preload" as="image" href="imag/fondo_sobre_jardin_panoramico.webp">
 
   <!-- Forzar scroll al inicio inmediatamente para evitar restauración de scroll al recargar -->
   <script>
@@ -49,7 +49,7 @@
        ANIMACIÓN DEL SOBRE DE INVITACIÓN (SPLASH SCREEN INICIAL)
        ===================================================================== -->
   <div class="envelope-intro-overlay" id="envelopeIntroOverlay"
-    style="background-image: linear-gradient(rgba(15, 12, 10, 0.35), rgba(15, 12, 10, 0.58)), url('imag/fondo_sobre_boda_panoramico.webp'), url('imag/fondo_sobre_boda_panoramico.jpg');">
+    style="background-image: linear-gradient(rgba(15, 12, 10, 0.35), rgba(15, 12, 10, 0.58)), url('imag/fondo_sobre_jardin_panoramico.webp'), url('imag/fondo_sobre_jardin_panoramico.jpg');">
     <div class="envelope-bg-decor"></div>
 
     <div class="envelope-intro-header">
@@ -57,7 +57,6 @@
         <i class="ri-heart-3-line"></i>
         <span>Invitación Especial</span>
       </div>
-      <h2 class="envelope-intro-names">Gloria &amp; Marco</h2>
       <p class="envelope-intro-subtitle">Tenemos el honor de invitarte a nuestra boda</p>
     </div>
 
@@ -458,6 +457,22 @@
           </div>
         </div>
 
+      </div>
+
+      <!-- Escaparate Panorámico de Nuestra Historia: El Sendero de Nuestro Amor -->
+      <div class="story-panoramic-showcase">
+        <div class="story-panoramic-card">
+          <picture>
+            <source srcset="imag/fondo_sobre_boda_panoramico.webp" type="image/webp">
+            <img src="imag/fondo_sobre_boda_panoramico.jpg"
+              alt="Gloria y Marco - El sendero de nuestro amor"
+              class="story-panoramic-img" loading="lazy">
+          </picture>
+          <div class="story-panoramic-overlay">
+            <span class="story-panoramic-star">✦</span>
+            <p class="story-panoramic-phrase">“Caminando el mismo sendero, construyendo un solo corazón”</p>
+          </div>
+        </div>
       </div>
 
       <!-- Texto emotivo del diseño de referencia -->
