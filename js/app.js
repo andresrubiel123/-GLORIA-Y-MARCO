@@ -497,24 +497,36 @@ function getGuestUrlParams() {
 
 function initGuestPersonalization() {
   const { name, passes } = getGuestUrlParams();
-  if (!name) return;
 
-  // 1. Personalizar Nombre Caligrafiado Directamente en el Frente del Sobre
+  // 1. Personalizar Rótulo de Invitados en la Parte Inferior sobre el Sobre
   const frontLabel = document.getElementById('envelopeFrontLabel');
   const frontGuestName = document.getElementById('envelopeFrontGuestName');
+  const labelIntro = document.getElementById('envelopeLabelIntro');
   const letterGuestLine = document.getElementById('letterGuestLine');
 
   if (frontLabel && frontGuestName) {
-    frontGuestName.textContent = name;
+    if (name) {
+      frontGuestName.textContent = name;
+      if (labelIntro) labelIntro.textContent = 'Especialmente Para:';
+    } else {
+      frontGuestName.textContent = 'Nuestra Querida Familia y Amigos';
+      if (labelIntro) labelIntro.textContent = 'Invitación de Honor:';
+    }
     frontLabel.style.display = 'flex';
     setTimeout(fitEnvelopeGuestName, 50);
     window.addEventListener('resize', fitEnvelopeGuestName);
   }
 
   if (letterGuestLine) {
-    letterGuestLine.textContent = `Especialmente Para: ${name}`;
+    if (name) {
+      letterGuestLine.textContent = `Especialmente Para: ${name}`;
+    } else {
+      letterGuestLine.textContent = 'Nuestra Querida Familia y Amigos';
+    }
     letterGuestLine.style.display = 'block';
   }
+
+  if (!name) return;
 }
 
 function fitEnvelopeGuestName() {

@@ -21,8 +21,8 @@ BODA_GLORIA_Y_MARCO/
 │   └── styles.css              # Hoja de estilos de gala nupcial & animaciones 3D
 │
 ├── imag/
-│   ├── 001.jpg                 # Fotografía de los novios que emerge del sobre
-│   └── 01.jpeg                 # Fotografía de portada de los novios (Hero & Pase)
+│   ├── pareja_novios_sobre.webp # Fotografía optimizada de los novios que emerge del sobre (164 KB)
+│   └── pareja_novios_sobre.jpg  # Fallback de alta compatibilidad (216 KB)
 │
 ├── js/
 │   └── app.js                  # Lógica interactiva, control de sobre, sync de audio/video, QR y PDF
@@ -39,14 +39,15 @@ BODA_GLORIA_Y_MARCO/
 
 ## 🌟 Características Principales
 
-1. **Animación Inicial de Entrada (Sobre de Invitación)**:
-   - Al cargar la página, aparece un sobre de invitación de gala sellado.
-   - Cuenta con un **botón redondo de sello de cera dorada** con monograma `G & M`.
-   - Al dar clic sobre el botón redondo:
+1. **Animación Inicial de Entrada (Sobre de Invitación Verde Oliva de Gala)**:
+   - Al cargar la página, aparece el sobre de gala verde oliva con sombreado oscuro en los pliegues, detalles dorados (hojas de olivo, iniciales `G | M`, divisor con destello y fecha `05.12.2026`).
+   - Cuenta con el **botón redondo de sello de lacre dorado** con textura y relieve 3D.
+   - En la parte inferior sobre el sobre luce el rótulo de invitados (personalizado o de honor).
+   - Al dar clic sobre el sello de lacre dorado:
      * Inicia de inmediato la reproducción de la canción `audio/cancion.mpeg`.
-     * La solapa superior se abre en perspectiva 3D.
-     * Emerge deslizándose la fotografía de los novios `imag/001.jpg`.
-     * La animación dura **3 segundos**, tras los cuales se desvanece suavemente para revelar toda la página web con la música continuando en reproducción armónica.
+     * La solapa superior se abre en perspectiva 3D (180°).
+     * Emerge deslizándose la fotografía optimizada de los novios `imag/pareja_novios_sobre.webp`.
+     * Tras unos segundos, se desvanece suavemente para revelar toda la página web con la música continuando en reproducción armónica.
 
 2. **Portada de Honor & Imagen Superior**:
    - Fotografía `imag/01.jpeg` enmarcada en un arco arquitectónico nupcial con iluminación dorada sutil y tipografía de gala (*Great Vibes* y *Playfair Display*).

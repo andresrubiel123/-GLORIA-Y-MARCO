@@ -87,11 +87,11 @@ body.envelope-active {
   width: 100vw;
   height: 100vh;
   z-index: 99999;
-  background-color: #1a1614;
+  background-color: #162014;
   background-image:
-    linear-gradient(rgba(15, 12, 10, 0.38), rgba(15, 12, 10, 0.62)),
-    url('../imag/Ceremonia%20nupcial%20bajo%20un%20%C3%A1rbol%20floreado.png'),
-    url('https://lh3.googleusercontent.com/d/11SJOLMSPnMzC57iNla29pHmH865SAKN4');
+    linear-gradient(rgba(15, 12, 10, 0.35), rgba(15, 12, 10, 0.58)),
+    url('../imag/fondo_sobre_boda_panoramico.webp'),
+    url('../imag/fondo_sobre_boda_panoramico.jpg');
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -102,6 +102,17 @@ body.envelope-active {
   overflow: hidden;
   transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s ease;
   perspective: 1200px;
+}
+
+/* En pantallas verticales móviles, encuadrar con la versión vertical nativa */
+@media (max-aspect-ratio: 1/1) {
+  .envelope-intro-overlay {
+    background-image:
+      linear-gradient(rgba(15, 12, 10, 0.35), rgba(15, 12, 10, 0.58)),
+      url('../imag/fondo_sobre_boda.webp'),
+      url('../imag/fondo_sobre_boda.jpg');
+    background-position: center 20%;
+  }
 }
 
 .envelope-intro-overlay.fade-out {
@@ -165,56 +176,176 @@ body.envelope-active {
 /* Contenedor 3D del Sobre */
 .envelope-3d-wrapper {
   position: relative;
-  width: 380px;
+  width: 400px;
   height: 270px;
   perspective: 1200px;
   z-index: 2;
 }
 
-/* El Sobre */
+/* El Sobre Verde Oliva / Salvia Bosque */
 .wedding-envelope {
   position: relative;
   width: 100%;
   height: 100%;
-  background: #FAF7F2;
-  border-radius: 12px;
-  box-shadow: 0 25px 60px -15px rgba(90, 65, 38, 0.3), 0 0 30px rgba(197, 168, 128, 0.15);
-  border: 1px solid rgba(197, 168, 128, 0.35);
+  background: #3e4935;
+  border-radius: 14px;
+  box-shadow:
+    0 30px 65px -10px rgba(0, 0, 0, 0.65),
+    0 0 35px rgba(85, 105, 70, 0.25);
+  border: 1px solid rgba(135, 155, 115, 0.25);
   position: relative;
 }
 
-/* Solapa Triangular Superior (Flap) */
+/* Sombra oscura profunda en el cruce central de los pliegues */
+.wedding-envelope::after {
+  content: '';
+  position: absolute;
+  top: 48%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 140px;
+  height: 100px;
+  background: radial-gradient(ellipse at center, rgba(14, 18, 12, 0.7) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 4;
+}
+
+/* Fondo interior del sobre */
+.envelope-back-inside {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 14px;
+  background: radial-gradient(circle at 50% 35%, #46543b 0%, #2b3523 100%);
+  z-index: 1;
+}
+
+/* Solapa Triangular Superior (Flap con Detalles Dorados) */
 .envelope-flap-top {
   position: absolute;
   top: 0;
   left: 0;
-  width: 0;
-  height: 0;
-  border-left: 190px solid transparent;
-  border-right: 190px solid transparent;
-  border-top: 145px solid #F5EFEB;
+  width: 100%;
+  height: 160px;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  background: linear-gradient(180deg, #5c6b51 0%, #4e5c43 65%, #3c4934 100%);
+  filter: drop-shadow(0 7px 12px rgba(14, 19, 11, 0.6));
   transform-origin: top center;
-  transition: transform 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.95s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 5;
-  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+  backface-visibility: hidden;
+  display: flex;
+  justify-content: center;
 }
 
 .wedding-envelope.opened .envelope-flap-top {
   transform: rotateX(180deg);
   z-index: 1;
   transition-delay: 0.1s;
+  filter: drop-shadow(0 -4px 8px rgba(0, 0, 0, 0.35));
 }
 
-/* Solapas Laterales e Inferior (Bolsillo) */
+/* Detalles Dorados en la Solapa Superior */
+.flap-gold-details {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 14px;
+  user-select: none;
+  pointer-events: none;
+}
+
+.flap-initials-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.flap-leaves-svg {
+  width: 44px;
+  height: 22px;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.45));
+}
+
+.flap-monogram-box {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+}
+
+.flap-letter {
+  font-family: 'Cinzel', 'Playfair Display', serif;
+  font-size: 2.15rem;
+  font-weight: 600;
+  line-height: 1;
+  color: #FFF2D1;
+  background: linear-gradient(135deg, #FFF9E6 0%, #ECC575 45%, #B88B35 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 1.5px 2px rgba(0, 0, 0, 0.5));
+  letter-spacing: 1px;
+}
+
+.flap-divider-vertical {
+  width: 1.5px;
+  height: 40px;
+  background: linear-gradient(180deg, rgba(236, 197, 117, 0.2) 0%, #ECC575 50%, rgba(184, 139, 53, 0.2) 100%);
+  margin: 0 4px;
+  box-shadow: 0 0 4px rgba(236, 197, 117, 0.4);
+}
+
+.flap-divider-horizontal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 130px;
+  margin-top: 7px;
+  margin-bottom: 5px;
+}
+
+.flap-line-half {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #ECC575, transparent);
+}
+
+.flap-sparkle {
+  font-size: 0.75rem;
+  color: #ECC575;
+  line-height: 1;
+  filter: drop-shadow(0 0 5px rgba(236, 197, 117, 0.7));
+}
+
+.flap-wedding-date {
+  font-family: 'Cinzel', 'Cormorant Garamond', serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 3.2px;
+  color: #FFF2D1;
+  background: linear-gradient(135deg, #FFF7DC 0%, #ECC575 50%, #B88B35 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 1px 1.5px rgba(0, 0, 0, 0.55));
+  margin-top: 2px;
+}
+
+/* Solapas Laterales e Inferior (Efecto Oscuro de Pliegues Realistas) */
 .envelope-pocket-left {
   position: absolute;
   top: 0;
   left: 0;
-  width: 0;
-  height: 0;
-  border-top: 135px solid transparent;
-  border-bottom: 135px solid transparent;
-  border-left: 195px solid #F2ECE5;
+  width: 100%;
+  height: 100%;
+  clip-path: polygon(0 0, 50% 50%, 0 100%);
+  background: linear-gradient(135deg, #536248 0%, #45523b 45%, #2a3423 100%);
+  filter: drop-shadow(4px 0 8px rgba(15, 20, 12, 0.5));
   z-index: 3;
 }
 
@@ -222,11 +353,11 @@ body.envelope-active {
   position: absolute;
   top: 0;
   right: 0;
-  width: 0;
-  height: 0;
-  border-top: 135px solid transparent;
-  border-bottom: 135px solid transparent;
-  border-right: 195px solid #EFE8E0;
+  width: 100%;
+  height: 100%;
+  clip-path: polygon(100% 0, 50% 50%, 100% 100%);
+  background: linear-gradient(225deg, #536248 0%, #45523b 45%, #2a3423 100%);
+  filter: drop-shadow(-4px 0 8px rgba(15, 20, 12, 0.5));
   z-index: 3;
 }
 
@@ -234,13 +365,12 @@ body.envelope-active {
   position: absolute;
   bottom: 0;
   left: 0;
-  width: 0;
-  height: 0;
-  border-left: 190px solid transparent;
-  border-right: 190px solid transparent;
-  border-bottom: 145px solid #FAF7F2;
+  width: 100%;
+  height: 100%;
+  clip-path: polygon(0 100%, 50% 48%, 100% 100%);
+  background: linear-gradient(0deg, #59674f 0%, #4b5941 50%, #313d29 100%);
+  filter: drop-shadow(0 -5px 12px rgba(12, 16, 10, 0.65));
   z-index: 4;
-  filter: drop-shadow(0 -3px 6px rgba(0, 0, 0, 0.05));
 }
 
 /* Tarjeta / Foto de los Novios que Emerge (001.jpg) */
@@ -248,11 +378,11 @@ body.envelope-active {
   position: absolute;
   top: 15px;
   left: 25px;
-  width: 330px;
+  width: 350px;
   height: 240px;
   background: #ffffff;
   border-radius: 10px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
   border: 2px solid var(--gold-light);
   padding: 10px;
   z-index: 2;
@@ -265,7 +395,7 @@ body.envelope-active {
 
 .wedding-envelope.opened .envelope-letter-card {
   transform: translateY(-165px) scale(1.08);
-  box-shadow: 0 35px 70px -15px rgba(70, 50, 30, 0.35);
+  box-shadow: 0 35px 70px -15px rgba(0, 0, 0, 0.6);
   transition-delay: 0.6s;
   z-index: 6;
 }
@@ -279,12 +409,19 @@ body.envelope-active {
   position: relative;
 }
 
+.letter-photo-frame picture {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
 .letter-couple-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center 25%;
   transition: transform 1.5s ease;
+  display: block;
 }
 
 .wedding-envelope.opened .letter-couple-img {
@@ -311,99 +448,108 @@ body.envelope-active {
   color: var(--text-muted);
 }
 
-/* BOTÓN REDONDO: SELLO DE CERA DORADO INTERACTIVO */
+
+
+/* BOTÓN REDONDO: SELLO DE LACRE DORADO EN RELIEVE (Wax Seal) */
 .wax-seal-btn {
   position: absolute;
-  top: 110px;
+  top: 125px;
   left: 50%;
   transform: translateX(-50%);
-  width: 78px;
-  height: 78px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 35% 35%, #F0DFCC, #C5A880 50%, #8F6B3E 100%);
-  border: 3px solid #FFF8F0;
+  width: 76px;
+  height: 76px;
+  border-radius: 50% 48% 52% 49% / 49% 51% 48% 52%;
+  background: radial-gradient(circle at 35% 32%, #FFF4D1 0%, #E5BE64 30%, #B38634 70%, #6E4E18 100%);
+  border: none;
+  padding: 0;
   box-shadow:
-    0 8px 25px rgba(143, 107, 62, 0.4),
-    0 0 15px rgba(212, 175, 55, 0.5),
+    0 10px 25px rgba(0, 0, 0, 0.5),
+    0 0 20px rgba(236, 197, 117, 0.45),
     inset 0 2px 4px rgba(255, 255, 255, 0.8),
-    inset 0 -2px 5px rgba(0, 0, 0, 0.3);
+    inset 0 -3px 6px rgba(0, 0, 0, 0.55);
   z-index: 10;
   cursor: pointer;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
   transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
   outline: none;
-  animation: sealPulse 2s infinite ease-in-out;
+  animation: sealGlowPulse 2.4s infinite ease-in-out;
 }
 
 .wax-seal-btn:hover {
   transform: translateX(-50%) scale(1.12);
   box-shadow:
-    0 12px 30px rgba(143, 107, 62, 0.5),
-    0 0 25px rgba(212, 175, 55, 0.7);
+    0 14px 32px rgba(0, 0, 0, 0.6),
+    0 0 28px rgba(236, 197, 117, 0.75),
+    inset 0 2px 5px rgba(255, 255, 255, 0.9),
+    inset 0 -3px 6px rgba(0, 0, 0, 0.6);
 }
 
-.seal-monogram {
-  font-family: 'Cormorant Garamond', var(--font-serif);
-  font-size: 1.35rem;
-  font-weight: 700;
-  color: #ffffff;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.45);
-  line-height: 1;
-  display: inline-flex;
+.wax-seal-outer-rim {
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  display: flex;
   align-items: center;
   justify-content: center;
-  gap: 3px;
-  letter-spacing: 0.5px;
-}
-
-.seal-monogram .seal-initial {
-  display: inline-block;
-  font-family: 'Cormorant Garamond', var(--font-serif);
-}
-
-.seal-monogram .seal-connector {
-  font-family: 'Alex Brush', 'Great Vibes', cursive;
-  font-size: 1.35rem;
-  font-weight: 400;
-  font-style: italic;
-  color: #FFF6EB;
-  display: inline-block;
   position: relative;
-  top: 1px;
-  padding: 0 1px;
 }
 
-.seal-subtext {
-  font-size: 0.62rem;
+.wax-seal-inner-bed {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #F0CE7B 0%, #C4953B 55%, #8A5E1C 100%);
+  box-shadow:
+    inset 0 3px 6px rgba(0, 0, 0, 0.6),
+    inset 0 -2px 4px rgba(255, 255, 255, 0.4),
+    0 1px 2px rgba(255, 255, 255, 0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.wax-seal-emboss-svg {
+  width: 44px;
+  height: 44px;
+  filter: drop-shadow(0 1px 1.5px rgba(255, 255, 255, 0.35)) drop-shadow(0 -1px 1px rgba(0, 0, 0, 0.6));
+}
+
+.seal-touch-text {
+  position: absolute;
+  bottom: 7px;
+  font-family: 'Cinzel', 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.52rem;
   font-weight: 700;
-  text-transform: uppercase;
   letter-spacing: 1.5px;
-  color: #FFF2E0;
-  margin-top: 3px;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  color: #FFF6DF;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.75);
 }
 
 .wedding-envelope.opened .wax-seal-btn {
-  transform: translateX(-50%) translateY(-30px) scale(0.6);
+  transform: translateX(-50%) translateY(25px) scale(0.5);
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.4s ease, transform 0.5s ease;
 }
 
-@keyframes sealPulse {
-  0% {
-    box-shadow: 0 8px 25px rgba(143, 107, 62, 0.4), 0 0 0 0 rgba(212, 175, 55, 0.4);
+@keyframes sealGlowPulse {
+  0%, 100% {
+    box-shadow:
+      0 10px 25px rgba(0, 0, 0, 0.5),
+      0 0 15px rgba(236, 197, 117, 0.35),
+      inset 0 2px 4px rgba(255, 255, 255, 0.8),
+      inset 0 -3px 6px rgba(0, 0, 0, 0.55);
   }
-
-  70% {
-    box-shadow: 0 10px 28px rgba(143, 107, 62, 0.5), 0 0 0 16px rgba(212, 175, 55, 0);
-  }
-
-  100% {
-    box-shadow: 0 8px 25px rgba(143, 107, 62, 0.4), 0 0 0 0 rgba(212, 175, 55, 0);
+  50% {
+    box-shadow:
+      0 12px 28px rgba(0, 0, 0, 0.6),
+      0 0 30px rgba(236, 197, 117, 0.7),
+      inset 0 2px 5px rgba(255, 255, 255, 0.95),
+      inset 0 -3px 6px rgba(0, 0, 0, 0.55);
   }
 }
 
@@ -1324,10 +1470,10 @@ body.envelope-active {
   margin-top: 6px;
 }
 
-/* Contenedor del collage */
+/* Contenedor del collage amplio para las 8 fotos */
 .story-collage-container {
   position: relative;
-  max-width: 680px;
+  max-width: 1080px;
   margin: 25px auto 35px;
   padding: 15px 10px 20px;
 }
@@ -1480,57 +1626,67 @@ body.envelope-active {
   }
 }
 
-/* Cluster de Polaroids estilo scrapbook */
-.polaroid-cluster {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 450px;
-  margin: 0 auto;
+/* Álbum Scrapbook con las 8 Polaroids en Cuadrícula de Gala */
+.story-polaroids-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px 22px;
+  margin: 15px auto 35px;
+  padding: 10px 5px;
 }
 
 /* Marco Polaroid Individual */
-.polaroid-frame {
-  position: absolute;
+.polaroid-item {
+  position: relative;
   background: #ffffff;
-  padding: 12px 12px 34px 12px;
+  padding: 12px 12px 28px 12px;
   border-radius: 4px;
-  border: 1px solid rgba(220, 210, 195, 0.6);
+  border: 1px solid rgba(220, 210, 195, 0.65);
   box-shadow:
-    0 16px 36px -8px rgba(0, 0, 0, 0.22),
-    0 0 15px rgba(197, 168, 128, 0.18),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.8);
+    0 14px 30px -6px rgba(0, 0, 0, 0.16),
+    0 0 15px rgba(197, 168, 128, 0.14),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.9);
   transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s ease, z-index 0.2s;
   cursor: pointer;
   user-select: none;
+  width: 100%;
 }
 
-.polaroid-frame:hover {
-  transform: scale(1.08) rotate(0deg) !important;
+.polaroid-item:hover {
+  transform: scale(1.08) translateY(-8px) rotate(0deg) !important;
   z-index: 20 !important;
   box-shadow:
     0 24px 50px -6px rgba(0, 0, 0, 0.3),
     0 0 25px rgba(212, 175, 55, 0.45);
 }
 
+/* Rotaciones orgánicas alternadas estilo Álbum de recuerdos */
+.item-rot-1 { transform: rotate(-3deg); }
+.item-rot-2 { transform: rotate(2.5deg); }
+.item-rot-3 { transform: rotate(-2deg); }
+.item-rot-4 { transform: rotate(3deg); }
+.item-rot-5 { transform: rotate(-2.5deg); }
+.item-rot-6 { transform: rotate(2deg); }
+.item-rot-7 { transform: rotate(-3deg); }
+.item-rot-8 { transform: rotate(1.5deg); }
+
 .polaroid-photo-box {
-  width: 215px;
-  height: 250px;
+  width: 100%;
+  aspect-ratio: 4 / 5;
   overflow: hidden;
   border-radius: 2px;
   background: #f0ece6;
   position: relative;
 }
 
-/* Efecto de Papel Rasgado Artesanal (Torn Paper Edge) Arriba */
+/* Efecto de Papel Rasgado Artesanal Arriba */
 .polaroid-photo-box::before {
   content: '';
   position: absolute;
   top: -1px;
   left: -2px;
   right: -2px;
-  height: 28px;
+  height: 24px;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 100' preserveAspectRatio='none'%3E%3Cdefs%3E%3Cfilter id='tornDropShadow' x='-5%25' y='-5%25' width='110%25' height='160%25'%3E%3CfeDropShadow dx='0' dy='3' stdDeviation='3' flood-color='rgba(0,0,0,0.28)'/%3E%3C/filter%3E%3C/defs%3E%3Cpath d='M0,0 L1000,0 L1000,42 L975,58 L955,36 L940,62 L920,44 L900,52 L885,32 L865,58 L845,42 L825,66 L805,48 L785,58 L770,34 L750,56 L730,42 L710,68 L690,46 L670,60 L650,36 L630,62 L610,44 L590,56 L575,34 L555,60 L535,40 L515,64 L495,44 L475,58 L455,32 L435,62 L415,42 L395,58 L380,36 L360,64 L340,46 L320,58 L305,34 L285,62 L265,42 L245,60 L225,38 L205,64 L185,44 L165,58 L150,34 L130,62 L110,42 L90,58 L70,36 L50,66 L30,46 L15,58 L0,36 Z' fill='%23ffffff' filter='url(%23tornDropShadow)'/%3E%3C/svg%3E");
   background-size: 100% 100%;
   background-repeat: no-repeat;
@@ -1538,14 +1694,14 @@ body.envelope-active {
   pointer-events: none;
 }
 
-/* Efecto de Papel Rasgado Artesanal (Torn Paper Edge) Abajo */
+/* Efecto de Papel Rasgado Artesanal Abajo */
 .polaroid-photo-box::after {
   content: '';
   position: absolute;
   bottom: -1px;
   left: -2px;
   right: -2px;
-  height: 32px;
+  height: 28px;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 100' preserveAspectRatio='none'%3E%3Cdefs%3E%3Cfilter id='tornDropShadowUp' x='-5%25' y='-30%25' width='110%25' height='160%25'%3E%3CfeDropShadow dx='0' dy='-3' stdDeviation='3' flood-color='rgba(0,0,0,0.28)'/%3E%3C/filter%3E%3C/defs%3E%3Cpath d='M0,100 L1000,100 L1000,58 L980,38 L960,64 L940,40 L920,58 L905,34 L885,60 L865,44 L845,68 L825,46 L805,62 L790,38 L770,64 L750,44 L730,70 L710,48 L690,62 L670,38 L650,64 L630,46 L610,60 L590,38 L570,66 L550,44 L530,62 L510,38 L490,66 L470,44 L450,60 L430,36 L410,64 L390,44 L370,60 L355,36 L335,66 L315,46 L295,60 L280,36 L260,64 L240,44 L220,62 L200,40 L180,68 L160,46 L140,62 L120,38 L100,64 L80,44 L60,60 L40,36 L25,56 L0,40 Z' fill='%23ffffff' filter='url(%23tornDropShadowUp)'/%3E%3C/svg%3E");
   background-size: 100% 100%;
   background-repeat: no-repeat;
@@ -1553,7 +1709,8 @@ body.envelope-active {
   pointer-events: none;
 }
 
-.polaroid-img {
+.polaroid-photo-box picture,
+.polaroid-photo-box img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -1562,60 +1719,58 @@ body.envelope-active {
   display: block;
 }
 
-.polaroid-frame:hover .polaroid-img {
-  transform: scale(1.05);
+.polaroid-item:hover .polaroid-img {
+  transform: scale(1.06);
 }
 
 .polaroid-caption {
   margin-top: 10px;
   text-align: center;
   font-family: var(--font-script);
-  font-size: 1.35rem;
+  font-size: 1.4rem;
   color: #5A4738;
-  line-height: 1;
+  line-height: 1.1;
 }
 
-/* Posiciones y rotaciones según la imagen de referencia */
-.polaroid-left {
-  left: 20px;
-  top: 5px;
-  transform: rotate(-8deg);
-  z-index: 2;
-}
-
-.polaroid-right {
-  right: 20px;
-  top: 15px;
-  transform: rotate(7deg);
-  z-index: 1;
-}
-
-.polaroid-center {
-  left: 50%;
-  top: 115px;
-  transform: translateX(-50%) rotate(-1deg);
-  z-index: 5;
-  box-shadow:
-    0 20px 45px -5px rgba(0, 0, 0, 0.28),
-    0 0 22px rgba(212, 175, 55, 0.25);
-}
-
-/* Flor blanca en la esquina de la polaroid frontal */
+/* Flor blanca en la última foto */
 .story-floral-accent {
   position: absolute;
-  bottom: -15px;
-  right: -15px;
+  bottom: -10px;
+  right: -10px;
   background: rgba(255, 255, 255, 0.95);
-  padding: 6px 12px;
+  padding: 4px 10px;
   border-radius: 50px;
-  font-size: 1.1rem;
+  font-size: 1rem;
   display: flex;
   align-items: center;
-  gap: 4px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  gap: 3px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   border: 1px solid rgba(212, 175, 55, 0.4);
   pointer-events: none;
 }
+
+/* Responsividad de las Polaroids */
+@media (max-width: 992px) {
+  .story-polaroids-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px 16px;
+  }
+}
+
+@media (max-width: 680px) {
+  .story-polaroids-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px 12px;
+  }
+  .polaroid-item {
+    padding: 8px 8px 20px 8px;
+  }
+  .polaroid-caption {
+    font-size: 1.2rem;
+    margin-top: 6px;
+  }
+}
+
 
 /* Cita emotiva */
 .story-quote-wrapper {
@@ -3099,37 +3254,41 @@ body.envelope-active {
 
 @media (max-width: 768px) {
   .envelope-3d-wrapper {
-    width: 320px;
+    width: 340px;
     height: 230px;
   }
 
   .envelope-flap-top {
-    border-left: 160px solid transparent;
-    border-right: 160px solid transparent;
-    border-top: 125px solid #F5EFEB;
+    height: 136px;
   }
 
-  .envelope-pocket-left {
-    border-top: 115px solid transparent;
-    border-bottom: 115px solid transparent;
-    border-left: 165px solid #F2ECE5;
+  .flap-monogram-box .flap-letter {
+    font-size: 1.85rem;
   }
 
-  .envelope-pocket-right {
-    border-top: 115px solid transparent;
-    border-bottom: 115px solid transparent;
-    border-right: 165px solid #EFE8E0;
+  .flap-divider-vertical {
+    height: 32px;
   }
 
-  .envelope-pocket-bottom {
-    border-left: 160px solid transparent;
-    border-right: 160px solid transparent;
-    border-bottom: 125px solid #FAF7F2;
+  .flap-leaves-svg {
+    width: 36px;
+    height: 18px;
+  }
+
+  .flap-divider-horizontal {
+    width: 110px;
+    margin-top: 5px;
+    margin-bottom: 4px;
+  }
+
+  .flap-wedding-date {
+    font-size: 0.82rem;
+    letter-spacing: 2.5px;
   }
 
   .envelope-letter-card {
-    width: 280px;
-    height: 210px;
+    width: 300px;
+    height: 205px;
     left: 20px;
   }
 
@@ -3142,29 +3301,43 @@ body.envelope-active {
   }
 
   .wax-seal-btn {
-    width: 70px;
-    height: 70px;
-    top: 95px;
+    width: 66px;
+    height: 66px;
+    top: 104px;
   }
 
-  .seal-monogram {
-    font-size: 1.2rem;
+  .wax-seal-inner-bed {
+    width: 52px;
+    height: 52px;
   }
 
-  .seal-monogram .seal-connector {
-    font-size: 1.2rem;
+  .wax-seal-emboss-svg {
+    width: 38px;
+    height: 38px;
   }
+
+  .seal-touch-text {
+    font-size: 0.46rem;
+    bottom: 5px;
+  }
+
+
 
   .envelope-front-label {
-    top: 15px;
-    width: 86%;
-    max-width: 270px;
-    height: 44px;
+    bottom: 12px;
+    width: 90%;
+    max-width: 290px;
+  }
+
+  .envelope-label-intro {
+    font-size: 0.58rem;
+    letter-spacing: 2px;
   }
 
   .envelope-label-guest-name {
-    font-size: 1.25rem;
+    font-size: 1.15rem;
   }
+}
 
 }
 
@@ -3328,42 +3501,84 @@ body.envelope-active {
 
 @media (max-width: 420px) {
   .envelope-3d-wrapper {
-    width: 290px;
-    height: 210px;
+    width: 300px;
+    height: 205px;
   }
 
   .envelope-flap-top {
-    border-left: 145px solid transparent;
-    border-right: 145px solid transparent;
-    border-top: 115px solid #F5EFEB;
+    height: 122px;
   }
 
-  .envelope-pocket-left {
-    border-top: 105px solid transparent;
-    border-bottom: 105px solid transparent;
-    border-left: 150px solid #F2ECE5;
+  .flap-monogram-box .flap-letter {
+    font-size: 1.55rem;
   }
 
-  .envelope-pocket-right {
-    border-top: 105px solid transparent;
-    border-bottom: 105px solid transparent;
-    border-right: 150px solid #EFE8E0;
+  .flap-divider-vertical {
+    height: 26px;
   }
 
-  .envelope-pocket-bottom {
-    border-left: 145px solid transparent;
-    border-right: 145px solid transparent;
-    border-bottom: 115px solid #FAF7F2;
+  .flap-leaves-svg {
+    width: 28px;
+    height: 14px;
+  }
+
+  .flap-divider-horizontal {
+    width: 95px;
+    margin-top: 4px;
+    margin-bottom: 3px;
+  }
+
+  .flap-wedding-date {
+    font-size: 0.72rem;
+    letter-spacing: 2px;
   }
 
   .envelope-letter-card {
-    width: 250px;
-    height: 190px;
+    width: 260px;
+    height: 185px;
     left: 20px;
   }
 
   .letter-photo-frame {
-    height: 135px;
+    height: 130px;
+  }
+
+  .wax-seal-btn {
+    width: 58px;
+    height: 58px;
+    top: 92px;
+  }
+
+  .wax-seal-inner-bed {
+    width: 46px;
+    height: 46px;
+  }
+
+  .wax-seal-emboss-svg {
+    width: 32px;
+    height: 32px;
+  }
+
+  .seal-touch-text {
+    font-size: 0.42rem;
+    bottom: 4px;
+  }
+
+
+
+  .envelope-front-label {
+    bottom: 8px;
+    width: 92%;
+    max-width: 260px;
+  }
+
+  .envelope-label-intro {
+    font-size: 0.52rem;
+    letter-spacing: 1.5px;
+  }
+
+  .envelope-label-guest-name {
+    font-size: 1.05rem;
   }
 
   .hero-names {
@@ -3429,45 +3644,58 @@ body.envelope-active {
 }
 
 /* ==========================================================================
-   PERSONALIZACIÓN DINÁMICA DE INVITADOS (NOMBRE CALIGRAFIADO EN EL SOBRE)
+   PERSONALIZACIÓN DINÁMICA DE INVITADOS (PARTE INFERIOR SOBRE EL SOBRE)
    ========================================================================== */
 .envelope-front-label {
   position: absolute;
-  top: 20px;
+  bottom: 14px;
   left: 50%;
   transform: translateX(-50%);
-  width: 86%;
-  max-width: 330px;
-  height: 50px;
-  z-index: 12;
+  width: 88%;
+  max-width: 340px;
+  z-index: 7;
   text-align: center;
   pointer-events: none;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  transition: opacity 0.5s ease, transform 0.5s ease;
+  gap: 2px;
+  transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
 .wedding-envelope.opened .envelope-front-label {
   opacity: 0;
-  transform: translateX(-50%) translateY(-15px) scale(0.92);
+  transform: translateX(-50%) translateY(14px) scale(0.95);
+}
+
+.envelope-label-intro {
+  font-family: 'Cinzel', 'Cormorant Garamond', serif;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: #E2C27D;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.85);
+  opacity: 0.92;
 }
 
 .envelope-label-guest-name {
-  font-family: 'Alex Brush', 'Great Vibes', cursive;
-  font-size: 1.75rem;
-  font-weight: 500;
-  color: #6E4A1E;
-  line-height: 1.1;
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: #FFF3D4;
+  line-height: 1.15;
   margin: 0;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.6px;
   white-space: nowrap;
   text-align: center;
   max-width: 100%;
-  background: linear-gradient(135deg, #664314 0%, #8F6B3E 45%, #59390F 100%);
+  background: linear-gradient(135deg, #FFF7DC 0%, #ECC575 45%, #C2953B 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 1px 1px rgba(255, 255, 255, 0.95)) drop-shadow(0 0 10px rgba(212, 175, 55, 0.3));
+  filter: drop-shadow(0 1.5px 2px rgba(0, 0, 0, 0.8)) drop-shadow(0 0 12px rgba(236, 197, 117, 0.35));
 }
 
 .letter-guest-line {
