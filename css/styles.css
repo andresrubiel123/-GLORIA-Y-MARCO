@@ -1261,31 +1261,22 @@ body.envelope-active {
 }
 
 .parents-column {
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(212, 175, 55, 0.22);
-  border-radius: 20px;
-  padding: 32px 24px 28px;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 10px 15px;
   text-align: center;
-  box-shadow: 0 8px 24px rgba(197, 168, 128, 0.08);
-  transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
   position: relative;
 }
 
 .parents-column::before {
-  content: "";
-  position: absolute;
-  inset: 5px;
-  border: 1px dashed rgba(212, 175, 55, 0.18);
-  border-radius: 16px;
-  pointer-events: none;
+  display: none;
 }
 
 .parents-column:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 14px 32px rgba(184, 140, 74, 0.15);
-  border-color: rgba(212, 175, 55, 0.45);
+  transform: none;
+  box-shadow: none;
+  border-color: transparent;
 }
 
 .parents-badge-role {
@@ -1382,6 +1373,59 @@ body.envelope-active {
   }
 }
 
+/* Fecha y Hora al final de la tarjeta Nuestra Familia */
+.parents-event-datetime {
+  margin-top: 36px;
+  text-align: center;
+  position: relative;
+}
+
+.parents-datetime-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  max-width: 420px;
+  margin: 0 auto 16px;
+}
+
+.parents-datetime-divider .line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.45), transparent);
+}
+
+.parents-datetime-divider i {
+  color: var(--gold-primary, #C5A880);
+  font-size: 0.95rem;
+}
+
+.parents-datetime-content {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-family: var(--font-serif);
+  font-size: clamp(1.05rem, 2.3vw, 1.28rem);
+  color: var(--gold-dark, #8A6424);
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.parents-datetime-content .p-dot-separator {
+  color: var(--gold-primary, #C5A880);
+  font-size: 1.3rem;
+  line-height: 1;
+}
+
+.parents-datetime-content .p-time-text i {
+  margin-right: 4px;
+  font-size: 1.1rem;
+  color: var(--gold-primary, #C5A880);
+  vertical-align: middle;
+}
+
 /* Responsivo para la sección de los Padres */
 @media (max-width: 768px) {
   .parents-card {
@@ -1438,7 +1482,30 @@ body.envelope-active {
   margin-top: 6px;
 }
 
-/* Contenedor del collage amplio para las 8 fotos */
+/* Mensaje de apertura emotivo de Nuestra Historia */
+.story-opening-message {
+  max-width: 780px;
+  margin: 18px auto 25px;
+  padding: 0 16px;
+  text-align: center;
+}
+
+.story-narrative-p {
+  font-family: var(--font-serif);
+  font-size: clamp(1.05rem, 2.2vw, 1.18rem);
+  line-height: 1.8;
+  color: #4A3E38;
+  margin-bottom: 14px;
+}
+
+.story-narrative-p.highlight-p {
+  font-style: italic;
+  font-weight: 600;
+  color: var(--gold-dark, #8A6424);
+  margin-top: 18px;
+}
+
+/* Contenedor del collage amplio para las 5 fotos */
 .story-collage-container {
   position: relative;
   max-width: 1080px;
@@ -1594,17 +1661,22 @@ body.envelope-active {
   }
 }
 
-/* Álbum Scrapbook con las 8 Polaroids en Cuadrícula de Gala */
+/* Álbum Scrapbook con las 5 Polaroids en Distribución de Gala */
 .story-polaroids-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 30px 22px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 28px 24px;
+  max-width: 960px;
   margin: 15px auto 35px;
   padding: 10px 5px;
 }
 
 /* Marco Polaroid Individual */
 .polaroid-item {
+  flex: 0 1 245px;
+  max-width: 260px;
   position: relative;
   background: #ffffff;
   padding: 12px 12px 28px 12px;
@@ -1720,22 +1792,33 @@ body.envelope-active {
 /* Responsividad de las Polaroids */
 @media (max-width: 992px) {
   .story-polaroids-grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 22px 16px;
+    gap: 22px 18px;
+  }
+  .polaroid-item {
+    flex: 0 1 220px;
+    max-width: 240px;
   }
 }
 
 @media (max-width: 680px) {
   .story-polaroids-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 18px 12px;
+    gap: 16px 12px;
   }
   .polaroid-item {
-    padding: 8px 8px 20px 8px;
+    flex: 0 1 calc(50% - 10px);
+    max-width: 190px;
+    padding: 8px 8px 18px 8px;
   }
   .polaroid-caption {
-    font-size: 1.2rem;
+    font-size: 1.15rem;
     margin-top: 6px;
+  }
+}
+
+@media (max-width: 420px) {
+  .polaroid-item {
+    flex: 0 1 100%;
+    max-width: 280px;
   }
 }
 
