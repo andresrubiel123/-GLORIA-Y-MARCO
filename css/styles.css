@@ -4,6 +4,16 @@
    Optimizado Mobile-First & Responsive Completo
    ========================================================================== */
 
+@font-face {
+  font-family: 'WeddingAmpersand';
+  src: url('fonts/WeddingAmpersand.woff2') format('woff2'),
+       url('fonts/WeddingAmpersand.woff') format('woff'),
+       url('fonts/WeddingAmpersand.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   /* Paleta Cromática Nupcial de Lujo */
   --gold-primary: #C5A880;
@@ -30,6 +40,7 @@
 
   /* Tipografías */
   --font-script: 'Great Vibes', cursive;
+  --font-connector: 'WeddingAmpersand', serif;
   --font-serif: 'Playfair Display', serif;
   --font-display: 'Cormorant Garamond', serif;
   --font-body: 'Plus Jakarta Sans', sans-serif;
@@ -149,13 +160,38 @@ body.envelope-active {
 }
 
 .envelope-intro-header .wedding-seal-badge {
-  background: rgba(20, 15, 12, 0.65);
-  border: 1px solid rgba(212, 175, 55, 0.7);
+  background: transparent;
+  border: none;
   color: #F8E7C9;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  margin-bottom: 10px;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  margin-bottom: 8px;
+  padding: 0;
+  border-radius: 0;
+  font-size: 0.88rem;
+  letter-spacing: 3px;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.9), 0 0 16px rgba(212, 175, 55, 0.4);
+}
+
+.envelope-intro-header .wedding-seal-badge::before,
+.envelope-intro-header .wedding-seal-badge::after {
+  content: '';
+  display: inline-block;
+  width: 30px;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(248, 218, 142, 0.85));
+  vertical-align: middle;
+}
+
+.envelope-intro-header .wedding-seal-badge::after {
+  background: linear-gradient(to left, transparent, rgba(248, 218, 142, 0.85));
+}
+
+.envelope-intro-header .wedding-seal-badge i {
+  color: #F8DA8E;
+  font-size: 1rem;
+  filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.7));
 }
 
 .envelope-intro-subtitle {
@@ -695,13 +731,16 @@ body.envelope-active {
 }
 
 .nav-brand-text .brand-connector {
-  font-family: 'Alex Brush', 'Great Vibes', cursive;
-  font-size: 1.35rem;
+  font-family: var(--font-connector) !important;
+  font-style: normal !important;
   font-weight: 400;
-  font-style: italic;
+  font-size: 1.25rem;
+  line-height: 1;
   color: #8F6B3E;
+  margin: 0 4px;
+  display: inline-block;
   position: relative;
-  top: 1px;
+  top: -1px;
 }
 
 .nav-links {
@@ -898,6 +937,7 @@ body.envelope-active {
   height: 360px;
   background-image:
     linear-gradient(to bottom, rgba(255, 255, 255, 0.32) 0%, rgba(255, 255, 255, 0.85) 65%, var(--bg-card) 100%),
+    url('../imag/fondo_botanico_tarjetas.webp'),
     url('../imag/fondo_botanico_tarjetas.jpg');
   background-size: cover;
   background-position: center top;
@@ -975,14 +1015,16 @@ body.envelope-active {
 }
 
 .card-title .title-connector {
-  font-family: 'Alex Brush', 'Great Vibes', cursive;
-  font-size: 2.9rem;
+  font-family: var(--font-connector) !important;
+  font-style: normal !important;
   font-weight: 400;
-  font-style: italic;
+  font-size: 2.8rem;
+  line-height: 1;
   color: var(--gold-dark);
+  margin: 0 8px;
+  display: inline-block;
   position: relative;
-  top: 3px;
-  margin: 0 4px;
+  top: -2px;
 }
 
 .detail-highlight .highlight-connector {
@@ -1049,17 +1091,39 @@ body.envelope-active {
 .wedding-seal-badge {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  background: rgba(197, 168, 128, 0.12);
-  border: 1px solid var(--gold-light);
-  padding: 6px 18px;
-  border-radius: 20px;
+  justify-content: center;
+  gap: 10px;
+  background: transparent;
+  border: none;
+  padding: 0;
+  border-radius: 0;
+  box-shadow: none;
   color: var(--gold-dark);
-  font-size: 0.85rem;
+  font-family: var(--font-body);
+  font-size: 0.84rem;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 2px;
-  margin-bottom: 30px;
+  letter-spacing: 2.5px;
+  margin-bottom: 22px;
+}
+
+.wedding-seal-badge::before,
+.wedding-seal-badge::after {
+  content: '';
+  display: inline-block;
+  width: 32px;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--gold-primary));
+  vertical-align: middle;
+}
+
+.wedding-seal-badge::after {
+  background: linear-gradient(to left, transparent, var(--gold-primary));
+}
+
+.wedding-seal-badge i {
+  color: var(--gold-primary);
+  font-size: 0.95rem;
 }
 
 /* Marco arquitectónico para la foto 01.jpeg */
@@ -1165,15 +1229,17 @@ body.envelope-active {
 }
 
 .hero-names .hero-connector {
-  font-family: 'Alex Brush', var(--font-script);
-  font-size: 4.2rem;
-  font-style: italic;
+  font-family: var(--font-connector) !important;
+  font-style: normal !important;
   font-weight: 400;
+  font-size: 4.6rem;
+  line-height: 1;
   color: var(--gold-dark);
-  position: relative;
-  top: 4px;
-  margin: 0 4px;
+  text-shadow: 0 3px 14px rgba(143, 107, 62, 0.32), 0 0 1px rgba(212, 175, 55, 0.4);
+  margin: 0 12px;
   display: inline-block;
+  position: relative;
+  top: -3px;
 }
 
 .ornament-divider {
@@ -1325,13 +1391,29 @@ body.envelope-active {
 }
 
 .parents-ampersand {
-  font-family: var(--font-script, 'Great Vibes', cursive);
-  font-size: 2.2rem;
-  color: var(--gold-primary, #C5A880);
+  font-family: var(--font-connector) !important;
+  font-style: normal !important;
+  font-weight: 400;
+  font-size: 2.3rem;
   line-height: 1;
+  color: var(--gold-primary, #C5A880);
   margin: 4px 0 2px;
   user-select: none;
+  display: inline-block;
   filter: drop-shadow(0 1px 2px rgba(212, 175, 55, 0.25));
+}
+
+.footer-names .footer-connector {
+  font-family: var(--font-connector) !important;
+  font-style: normal !important;
+  font-weight: 400;
+  font-size: 3.2rem;
+  line-height: 1;
+  color: var(--gold-dark);
+  margin: 0 8px;
+  display: inline-block;
+  position: relative;
+  top: -2px;
 }
 
 /* Divisor central decorativo entre ambas familias */
@@ -1497,26 +1579,26 @@ body.envelope-active {
 .story-opening-message p {
   font-family: var(--font-serif);
   font-size: clamp(1.02rem, 2.1vw, 1.15rem);
-  line-height: 1.8;
+  font-style: italic;
+  font-weight: 400;
+  color: #1a1a1a;
+  line-height: 1.85;
   margin-bottom: 14px;
 }
 
-/* Frases en Dorado y Negrilla (mismo tamaño de fuente) */
-.story-p-gold-bold {
-  font-weight: 700;
-  font-style: normal;
-  color: var(--gold-dark, #8A6424);
-  background: linear-gradient(135deg, #B8860B 0%, #D4AF37 50%, #8A6424 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-shadow: 0 1px 2px rgba(197, 168, 128, 0.22);
-}
-
-/* Párrafo central en cursiva, no negrilla */
+/* Formato unificado: todo en Negro y todo en Cursiva */
+.story-text-italic,
+.story-p-gold-bold,
 .story-p-italic {
-  font-style: italic;
-  font-weight: 400;
-  color: var(--text-dark, #4A3E38);
+  font-family: var(--font-serif) !important;
+  font-style: italic !important;
+  font-weight: 400 !important;
+  color: #111111 !important;
+  background: none !important;
+  -webkit-text-fill-color: #111111 !important;
+  text-shadow: none !important;
+  line-height: 1.85;
+  margin-bottom: 14px;
 }
 
 /* Contenedor del collage amplio para las 5 fotos */
@@ -2463,6 +2545,15 @@ body.envelope-active {
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
 }
 
+.map-action-btns {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 24px;
+}
+
 /* ==========================================================================
    DETALLES, VESTIMENTA Y REGALOS
    ========================================================================== */
@@ -2559,6 +2650,43 @@ body.envelope-active {
 
 .swatch:hover {
   transform: scale(1.2);
+}
+
+.dress-code-visual {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 8px 0 14px;
+}
+
+.dress-code-img {
+  width: auto;
+  max-width: 105px;
+  height: auto;
+  max-height: 160px;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 12px rgba(44, 30, 20, 0.10));
+  transition: transform 0.3s ease, filter 0.3s ease;
+  user-select: none;
+}
+
+.detail-glass-card:hover .dress-code-img {
+  transform: translateY(-2px) scale(1.03);
+  filter: drop-shadow(0 6px 16px rgba(197, 168, 128, 0.25));
+}
+
+.dress-code-reservation-text {
+  font-family: var(--font-serif);
+  font-size: 0.96rem;
+  font-weight: 500;
+  line-height: 1.6;
+  color: var(--text-primary);
+  text-align: center;
+  margin: 0 0 16px;
+  padding: 12px 14px;
+  background: rgba(197, 168, 128, 0.10);
+  border-left: 3px solid var(--gold-primary);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
 }
 
 .dress-code-alert {
@@ -2778,14 +2906,15 @@ body.envelope-active {
 }
 
 .pass-monogram .pass-connector {
-  font-family: 'Alex Brush', 'Great Vibes', cursive;
-  font-size: 2.2rem;
+  font-family: var(--font-connector) !important;
+  font-size: 2.1rem;
   font-weight: 400;
-  font-style: italic;
+  font-style: normal !important;
   color: var(--gold-dark);
   display: inline-block;
   position: relative;
-  top: 2px;
+  top: -1px;
+  margin: 0 2px;
 }
 
 .pass-wedding-title {
@@ -2809,12 +2938,15 @@ body.envelope-active {
 }
 
 .pass-subtitle .pass-subtitle-connector {
-  font-family: 'Alex Brush', 'Great Vibes', cursive;
-  font-size: 1.25rem;
-  font-style: italic;
+  font-family: var(--font-connector) !important;
+  font-size: 1.3rem;
+  font-weight: 400;
+  font-style: normal !important;
   color: var(--gold-dark);
   position: relative;
-  top: 1px;
+  top: -1px;
+  margin: 0 4px;
+  display: inline-block;
 }
 
 /* Foto de los Novios en el Pase */
@@ -2980,10 +3112,10 @@ body.envelope-active {
 }
 
 .seal-text .seal-connector {
-  font-family: 'Alex Brush', 'Great Vibes', cursive;
-  font-size: 0.95rem;
+  font-family: var(--font-connector) !important;
+  font-size: 1.05rem;
   font-weight: 400;
-  font-style: italic;
+  font-style: normal !important;
   color: #FFF6EB;
 }
 
@@ -3495,8 +3627,9 @@ body.envelope-active {
   }
 
   .hero-names .hero-connector {
-    font-size: 3.1rem;
-    top: 2px;
+    font-size: 3.4rem;
+    top: -2px;
+    margin: 0 6px;
   }
 
   .hero-photo-wrapper {
@@ -3692,7 +3825,8 @@ body.envelope-active {
     width: 100%;
   }
 
-  .header-action-btns {
+  .header-action-btns,
+  .map-action-btns {
     width: 100%;
   }
 
