@@ -1183,19 +1183,20 @@ body.envelope-active {
 
 .hero-names {
   font-family: var(--font-script);
-  font-size: 5rem;
+  font-size: clamp(2.4rem, 6.2vw, 5rem);
   line-height: 1.2;
   margin-bottom: 10px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
+  gap: 10px;
   position: relative;
   /* Color nupcial oro puro y cálido sin recortes ni clipping */
   color: var(--gold-dark);
   text-shadow: 0 3px 14px rgba(143, 107, 62, 0.32), 0 0 1px rgba(212, 175, 55, 0.4);
-  padding: 8px 18px;
+  padding: 6px 10px;
   overflow: visible;
+  max-width: 100%;
   /* Revelado caligráfico de una sola vez que queda estático */
   clip-path: inset(0 0 0 0);
 }
@@ -1232,11 +1233,11 @@ body.envelope-active {
   font-family: var(--font-connector) !important;
   font-style: normal !important;
   font-weight: 400;
-  font-size: 4.6rem;
+  font-size: clamp(2.1rem, 5.5vw, 4.6rem);
   line-height: 1;
   color: var(--gold-dark);
   text-shadow: 0 3px 14px rgba(143, 107, 62, 0.32), 0 0 1px rgba(212, 175, 55, 0.4);
-  margin: 0 12px;
+  margin: 0 8px;
   display: inline-block;
   position: relative;
   top: -3px;
@@ -3621,15 +3622,29 @@ body.envelope-active {
 
 @media (max-width: 768px) {
 
+  .hero-decorative-frame {
+    padding: 36px 16px;
+    border-radius: 28px;
+  }
+
+  .hero-decorative-frame::before {
+    top: 8px;
+    left: 8px;
+    right: 8px;
+    bottom: 8px;
+    border-radius: 22px;
+  }
+
   .hero-names {
-    font-size: 3.6rem;
-    gap: 8px;
+    font-size: clamp(2.1rem, 7vw, 3rem);
+    gap: 6px;
+    padding: 4px 6px;
   }
 
   .hero-names .hero-connector {
-    font-size: 3.4rem;
+    font-size: clamp(1.9rem, 6.2vw, 2.8rem);
     top: -2px;
-    margin: 0 6px;
+    margin: 0 4px;
   }
 
   .hero-photo-wrapper {
@@ -3777,8 +3792,29 @@ body.envelope-active {
     bottom: 4px;
   }
 
+  .hero-decorative-frame {
+    padding: 28px 10px;
+    border-radius: 22px;
+  }
+
+  .hero-decorative-frame::before {
+    top: 6px;
+    left: 6px;
+    right: 6px;
+    bottom: 6px;
+    border-radius: 16px;
+  }
+
   .hero-names {
-    font-size: 3.2rem;
+    font-size: clamp(1.8rem, 6.8vw, 2.5rem);
+    gap: 4px;
+    padding: 2px 4px;
+  }
+
+  .hero-names .hero-connector {
+    font-size: clamp(1.6rem, 5.8vw, 2.3rem);
+    top: -1px;
+    margin: 0 2px;
   }
 
   .hero-photo-wrapper {
