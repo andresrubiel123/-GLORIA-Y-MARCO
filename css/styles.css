@@ -2673,18 +2673,158 @@ body.envelope-active {
   box-shadow: 0 15px 35px rgba(197, 168, 128, 0.25);
 }
 
+/* ==========================================================================
+   ANIMACIONES ATÓMICAS Y DINÁMICAS: ICONOS DE DETALLES & RECOMENDACIONES
+   (Inspirado en Tabla Periódica del Movimiento & Micro-interacciones de Gala)
+   ========================================================================== */
 .detail-icon {
-  width: 54px;
-  height: 54px;
+  width: 56px;
+  height: 56px;
   border-radius: 50%;
-  background: rgba(197, 168, 128, 0.15);
+  background: rgba(197, 168, 128, 0.16);
   color: var(--gold-dark);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.6rem;
+  font-size: 1.65rem;
   margin-bottom: 16px;
-  border: 1px solid var(--gold-light);
+  border: 1.5px solid var(--gold-light);
+  box-shadow: 0 4px 15px rgba(197, 168, 128, 0.20);
+  position: relative;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+              background 0.35s ease,
+              color 0.35s ease,
+              box-shadow 0.4s ease,
+              border-color 0.35s ease;
+  cursor: pointer;
+  will-change: transform;
+}
+
+/* Anillo exterior sutil punteado que gira suavemente */
+.detail-icon::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 1.5px dashed rgba(197, 168, 128, 0.50);
+  animation: periodic-ring-spin 14s linear infinite;
+  pointer-events: none;
+  opacity: 0.75;
+  transition: opacity 0.3s ease, border-color 0.3s ease;
+}
+
+@keyframes periodic-ring-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* 1. Icono Vestimenta: Flotación suave y balanceo estilo tejido nupcial */
+.detail-icon.icon-dress i {
+  display: inline-block;
+  animation: anim-dress-sway 3.8s ease-in-out infinite;
+  transform-origin: top center;
+  will-change: transform;
+}
+
+@keyframes anim-dress-sway {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-3px) rotate(-6deg);
+  }
+  50% {
+    transform: translateY(1px) rotate(0deg);
+  }
+  75% {
+    transform: translateY(-3px) rotate(6deg);
+  }
+}
+
+/* 2. Icono Regalos: Latido y rebote festivo continuo */
+.detail-icon.icon-gift i {
+  display: inline-block;
+  animation: anim-gift-heartbeat 3s ease-in-out infinite;
+  transform-origin: center bottom;
+  will-change: transform;
+}
+
+@keyframes anim-gift-heartbeat {
+  0%, 100% {
+    transform: scale(1) translateY(0);
+  }
+  15% {
+    transform: scale(1.16) translateY(-4px) rotate(-4deg);
+  }
+  30% {
+    transform: scale(0.95) translateY(0) rotate(3deg);
+  }
+  45% {
+    transform: scale(1.09) translateY(-2px) rotate(0deg);
+  }
+  60% {
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* 3. Icono Recomendaciones: Resplandor oscilante y suave tilt dinámico */
+.detail-icon.icon-info i {
+  display: inline-block;
+  animation: anim-info-sparkle 3.4s ease-in-out infinite;
+  will-change: transform;
+}
+
+@keyframes anim-info-sparkle {
+  0%, 100% {
+    transform: scale(1) rotate(0deg);
+  }
+  25% {
+    transform: scale(1.14) rotate(9deg);
+  }
+  50% {
+    transform: scale(1) rotate(0deg);
+  }
+  75% {
+    transform: scale(1.10) rotate(-7deg);
+  }
+}
+
+/* Estados Hover / Touch Interactivos (Aura dorada y reacción física) */
+.detail-glass-card:hover .detail-icon,
+.detail-icon:hover {
+  transform: translateY(-6px) scale(1.12);
+  background: var(--gold-gradient);
+  color: #ffffff;
+  border-color: #ffffff;
+  box-shadow: 0 12px 28px rgba(197, 168, 128, 0.48), 0 0 20px rgba(212, 175, 55, 0.38);
+}
+
+.detail-glass-card:hover .detail-icon::after,
+.detail-icon:hover::after {
+  opacity: 1;
+  border-color: rgba(255, 255, 255, 0.9);
+  animation-duration: 4s;
+}
+
+.detail-glass-card:hover .detail-icon.icon-dress i,
+.detail-icon.icon-dress:hover i {
+  animation: none;
+  transform: scale(1.25) rotate(-12deg);
+  transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.detail-glass-card:hover .detail-icon.icon-gift i,
+.detail-icon.icon-gift:hover i {
+  animation: none;
+  transform: scale(1.28) translateY(-4px) rotate(10deg);
+  transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.detail-glass-card:hover .detail-icon.icon-info i,
+.detail-icon.icon-info:hover i {
+  animation: none;
+  transform: scale(1.25) rotate(360deg);
+  transition: transform 0.65s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .detail-title {
