@@ -33,6 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initRsvpForm();
   initNavigation();
   initVideoSync();
+  initGiftSurpriseAnimation();
 });
 
 window.addEventListener('beforeunload', () => {
@@ -995,3 +996,30 @@ window.toggleVideoFullscreen = function() {
     }
   }
 };
+
+/* ============================================================================
+   12. ANIMACIÓN CAJA DE REGALO CON CONFETI (Bucle Infinito en Scroll)
+   ============================================================================ */
+function initGiftSurpriseAnimation() {
+  const container = document.getElementById('giftSurpriseContainer');
+  if (!container) return;
+
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          container.classList.add('is-active');
+        } else {
+          container.classList.remove('is-active');
+        }
+      });
+    }, {
+      threshold: 0.15
+    });
+
+    observer.observe(container);
+  } else {
+    container.classList.add('is-active');
+  }
+}
+
