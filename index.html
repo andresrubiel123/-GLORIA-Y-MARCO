@@ -156,7 +156,7 @@
         <li><a href="#inicio" class="nav-link active">Inicio</a></li>
         <li><a href="#nuestros-padres" class="nav-link">Nuestros Padres</a></li>
         <li><a href="#nuestra-historia" class="nav-link">Nuestra Historia</a></li>
-        <li><a href="#video-seccion" class="nav-link">Nuestro Video</a></li>
+        <li><a href="#video-seccion" class="nav-link">Save The Date</a></li>
         <li><a href="#cuenta-regresiva" class="nav-link">La Fecha</a></li>
         <li><a href="#itinerario" class="nav-link">Itinerario</a></li>
         <li><a href="#ubicacion" class="nav-link">Ubicación</a></li>
@@ -407,7 +407,7 @@
       </div>
     </section>
 
-    <!-- SECTION: NUESTRO MENSAJE EN VIDEO (Stream Google Drive) -->
+    <!-- SECTION: NUESTRO MENSAJE EN VIDEO (Save The Date - Stream Google Drive & Local) -->
     <section id="video-seccion" class="wedding-card">
       <div class="card-header">
         <div class="card-title-group">
@@ -415,9 +415,9 @@
             <i class="ri-movie-line"></i>
           </div>
           <div>
-            <span class="card-tag">Momentos Inolvidables</span>
-            <h2 class="card-title">Nuestro Video Especial</h2>
-            <p class="card-subtitle">Un vistazo a nuestra historia, los preparativos y el vestido</p>
+            <span class="card-tag">Save The Date</span>
+            <h2 class="card-title">Aparta la Fecha</h2>
+            <p class="card-subtitle">Una sorpresa muy divertida y especial que preparamos para ti</p>
           </div>
         </div>
       </div>
@@ -425,16 +425,22 @@
       <div class="video-container-wedding">
         <div class="video-frame-inner">
           <video id="weddingVideoPlayer" class="wedding-video" controls playsinline preload="metadata">
-            <source src="video/video_novios.mp4" type="video/mp4">
+            <source src="video/salvame_fake.mp4" type="video/mp4">
+            <source src="https://drive.google.com/uc?export=download&id=1ZA0v_cOHa1E_9VIUwSazRTpn0LqylqR6" type="video/mp4">
             Tu navegador no soporta la reproducción directa de este video.
           </video>
         </div>
         <div class="video-caption-bar">
-          <p><i class="ri-sparkling-fill"></i> “Lo quiero y lo tengo... felices de compartir este camino con ustedes”
+          <p><i class="ri-sparkling-fill"></i> “Save The Date: 05 de Diciembre de 2026... ¡No te lo puedes perder!”
           </p>
-          <button class="mini-btn" id="videoFullscreenBtn" onclick="toggleVideoFullscreen()">
-            <i class="ri-fullscreen-line"></i> Pantalla Completa
-          </button>
+          <div class="video-actions-group">
+            <a href="https://drive.google.com/file/d/1ZA0v_cOHa1E_9VIUwSazRTpn0LqylqR6/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="mini-btn" title="Ver en Google Drive">
+              <i class="ri-google-drive-line"></i> Ver en Drive
+            </a>
+            <button class="mini-btn" id="videoFullscreenBtn" onclick="toggleVideoFullscreen()">
+              <i class="ri-fullscreen-line"></i> Pantalla Completa
+            </button>
+          </div>
         </div>
       </div>
     </section>

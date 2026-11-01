@@ -895,7 +895,7 @@ function initVideoSync() {
   const audio = document.getElementById('weddingAudio');
 
   // Si el usuario hace clic en los enlaces de Google Drive para ver el video:
-  const driveVideoBtns = document.querySelectorAll('a[href*="1_a0LYkCTgFFct6fBYbT5ONjBj5j7VjXW"]');
+  const driveVideoBtns = document.querySelectorAll('a[href*="1ZA0v_cOHa1E_9VIUwSazRTpn0LqylqR6"]');
   driveVideoBtns.forEach(btn => {
     btn.addEventListener('click', () => {
       if (isPlayingMusic && audio) {
