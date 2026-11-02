@@ -68,7 +68,7 @@ BODA_GLORIA_Y_MARCO/
    - Cronograma nupcial paso a paso con íconos elegantes (Ceremonia, Cóctel, Banquete, Vals y Fiesta).
 
 7. **Ubicación & Navegación GPS**:
-   - Lugar: **EL BÚHO NUEVE** (Lebrija, Santander, Colombia).
+   - Lugar: **Chocofresitas Lebrija** (Finca La Arboleda, Lebrija, Santander, Colombia).
    - Mapa interactivo de Google Maps embebido con coordenadas exactas.
    - Enlace directo a Google Maps: `https://maps.app.goo.gl/goeLVz2qetJhEaPS7`.
    - Botón directo de navegación GPS en **Waze**.

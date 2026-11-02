@@ -445,7 +445,7 @@ function initCalendarActions() {
 
   const title = encodeURIComponent('Boda de Gloria & Marco 💍');
   const details = encodeURIComponent('¡Nos casamos! Acompáñanos a celebrar nuestra unión sagrada y una noche inolvidable.');
-  const location = encodeURIComponent('EL BÚHO NUEVE, Lebrija, Santander, Colombia');
+  const location = encodeURIComponent('Chocofresitas Lebrija, Finca La Arboleda, Lebrija, Santander, Colombia');
   const dates = '20261205T210000Z/20261206T080000Z'; // UTC
 
   if (googleBtn) {
@@ -464,7 +464,7 @@ function initCalendarActions() {
         'BEGIN:VEVENT',
         'SUMMARY:Boda de Gloria & Marco 💍',
         'DESCRIPTION:¡Nos casamos! Acompáñanos a celebrar nuestra unión sagrada.',
-        'LOCATION:EL BÚHO NUEVE, Lebrija, Santander, Colombia',
+        'LOCATION:Chocofresitas Lebrija, Finca La Arboleda, Lebrija, Santander, Colombia',
         'DTSTART:20261205T160000',
         'DTEND:20261206T030000',
         'STATUS:CONFIRMED',
@@ -686,7 +686,7 @@ window.closePassModal = function() {
 
 window.sharePassWhatsapp = function() {
   const guestName = document.getElementById('passDisplayGuestName')?.textContent || 'Invitado';
-  const text = encodeURIComponent(`Hola Gloria y Marco 💍, aquí tengo listo mi Pase Digital para su boda:\n\n👤 Invitado: ${guestName}\n📅 Fecha: Sábado, 5 de Diciembre de 2026\n📍 Lugar: EL BÚHO NUEVE, Lebrija, Santander, Colombia\n\n¡Ansioso(a) de verlos y celebrar juntos! ❤️`);
+  const text = encodeURIComponent(`Hola Gloria y Marco 💍, aquí tengo listo mi Pase Digital para su boda:\n\n👤 Invitado: ${guestName}\n📅 Fecha: Sábado, 5 de Diciembre de 2026\n📍 Lugar: Chocofresitas Lebrija, Finca La Arboleda, Lebrija, Santander, Colombia\n\n¡Ansioso(a) de verlos y celebrar juntos! ❤️`);
   window.open(`https://api.whatsapp.com/send?text=${text}`, '_blank');
 };
 
