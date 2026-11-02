@@ -4741,76 +4741,44 @@ body.envelope-active {
 }
 
 /* ==========================================================================
-   BADGE FIRMA DE AUTOR: TWENTY TWO
+   CRÉDITOS FOOTER: TWENTY TWO (Texto puro, sutil y delicado)
    ========================================================================== */
-.twenty-two-credit-wrapper {
-  margin: 16px 0 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.twenty-two-badge {
-  display: inline-flex;
-  align-items: center;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 8px;
-  padding: 8px 18px;
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(197, 168, 128, 0.45);
-  border-radius: 50px;
-  color: #4A4543;
+.twenty-two-credit-text {
+  margin-top: 14px;
   font-family: var(--font-sans);
-  font-size: 0.8rem;
-  text-decoration: none;
-  box-shadow: 0 4px 15px rgba(197, 168, 128, 0.15);
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-}
-
-.twenty-two-badge .badge-text {
-  font-weight: 500;
+  font-size: 0.74rem;
+  font-weight: 400;
+  color: var(--text-light, #8A8580);
   letter-spacing: 0.3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  line-height: 1.5;
 }
 
-.twenty-two-badge .badge-text strong {
-  color: var(--gold-dark, #8F6B3E);
-  letter-spacing: 0.5px;
-  font-weight: 700;
-  text-transform: uppercase;
-}
-
-.twenty-two-badge .badge-divider {
-  width: 1px;
-  height: 12px;
-  background: rgba(197, 168, 128, 0.5);
-  margin: 0 2px;
-}
-
-.twenty-two-badge .badge-email {
-  color: #726B66;
-  font-size: 0.78rem;
+.twenty-two-email-link {
+  color: var(--text-light, #8A8580);
+  text-decoration: none;
   display: inline-flex;
   align-items: center;
-  gap: 5px;
+  gap: 4px;
+  font-weight: 400;
   transition: color 0.25s ease;
 }
 
-.twenty-two-badge .badge-email i {
-  color: var(--gold-primary, #C5A880);
-  font-size: 0.88rem;
+.twenty-two-email-link i {
+  font-size: 0.82rem;
+  color: var(--text-light, #8A8580);
+  vertical-align: middle;
 }
 
-.twenty-two-badge:hover {
-  background: rgba(255, 255, 255, 0.96);
-  border-color: var(--gold-primary, #C5A880);
-  box-shadow: 0 6px 22px rgba(197, 168, 128, 0.32);
-  transform: translateY(-2px);
-  color: #1F1B1A;
+.twenty-two-email-link:hover {
+  color: var(--text-dark, #2B2625);
+  text-decoration: underline;
 }
 
-.twenty-two-badge:hover .badge-email {
-  color: var(--gold-dark, #8F6B3E);
+.twenty-two-email-link:hover i {
+  color: var(--text-dark, #2B2625);
 }
