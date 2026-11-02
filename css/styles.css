@@ -2580,6 +2580,20 @@ body.envelope-active {
   text-shadow: 0 1px 4px rgba(197, 168, 128, 0.2);
 }
 
+.itin-heart-fountain {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 16px auto 12px;
+  width: 60px;
+  height: 46px;
+}
+
+.itin-heart-fountain .main-golden-heart {
+  font-size: 1.9rem;
+}
+
 .itin-time {
   font-family: var(--font-body);
   font-weight: 700;
