@@ -4739,3 +4739,93 @@ body.envelope-active {
   border-color: var(--gold-primary);
   transform: translateY(-2px);
 }
+
+/* ==========================================================================
+   BADGE FIRMA DE AUTOR: TWENTY TWO
+   ========================================================================== */
+.twenty-two-credit-wrapper {
+  margin: 16px 0 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.twenty-two-badge {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 18px;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(197, 168, 128, 0.45);
+  border-radius: 50px;
+  color: #4A4543;
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  text-decoration: none;
+  box-shadow: 0 4px 15px rgba(197, 168, 128, 0.15);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.twenty-two-badge .badge-icon {
+  color: var(--gold-primary, #C5A880);
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  animation: pulseSparkle 2.5s infinite ease-in-out;
+}
+
+.twenty-two-badge .badge-text {
+  font-weight: 500;
+  letter-spacing: 0.3px;
+}
+
+.twenty-two-badge .badge-text strong {
+  color: var(--gold-dark, #8F6B3E);
+  letter-spacing: 1px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.twenty-two-badge .badge-divider {
+  width: 1px;
+  height: 12px;
+  background: rgba(197, 168, 128, 0.5);
+  margin: 0 2px;
+}
+
+.twenty-two-badge .badge-email {
+  color: #726B66;
+  font-size: 0.78rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  transition: color 0.25s ease;
+}
+
+.twenty-two-badge:hover {
+  background: rgba(255, 255, 255, 0.96);
+  border-color: var(--gold-primary, #C5A880);
+  box-shadow: 0 6px 22px rgba(197, 168, 128, 0.32);
+  transform: translateY(-2px);
+  color: #1F1B1A;
+}
+
+.twenty-two-badge:hover .badge-email {
+  color: var(--gold-dark, #8F6B3E);
+}
+
+@keyframes pulseSparkle {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.85;
+  }
+  50% {
+    transform: scale(1.22);
+    opacity: 1;
+    filter: drop-shadow(0 0 5px rgba(212, 175, 55, 0.65));
+  }
+}
