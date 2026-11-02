@@ -4770,14 +4770,6 @@ body.envelope-active {
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
-.twenty-two-badge .badge-icon {
-  color: var(--gold-primary, #C5A880);
-  font-size: 0.95rem;
-  display: flex;
-  align-items: center;
-  animation: pulseSparkle 2.5s infinite ease-in-out;
-}
-
 .twenty-two-badge .badge-text {
   font-weight: 500;
   letter-spacing: 0.3px;
@@ -4785,7 +4777,7 @@ body.envelope-active {
 
 .twenty-two-badge .badge-text strong {
   color: var(--gold-dark, #8F6B3E);
-  letter-spacing: 1px;
+  letter-spacing: 0.5px;
   font-weight: 700;
   text-transform: uppercase;
 }
@@ -4806,6 +4798,11 @@ body.envelope-active {
   transition: color 0.25s ease;
 }
 
+.twenty-two-badge .badge-email i {
+  color: var(--gold-primary, #C5A880);
+  font-size: 0.88rem;
+}
+
 .twenty-two-badge:hover {
   background: rgba(255, 255, 255, 0.96);
   border-color: var(--gold-primary, #C5A880);
@@ -4816,16 +4813,4 @@ body.envelope-active {
 
 .twenty-two-badge:hover .badge-email {
   color: var(--gold-dark, #8F6B3E);
-}
-
-@keyframes pulseSparkle {
-  0%, 100% {
-    transform: scale(1);
-    opacity: 0.85;
-  }
-  50% {
-    transform: scale(1.22);
-    opacity: 1;
-    filter: drop-shadow(0 0 5px rgba(212, 175, 55, 0.65));
-  }
 }
