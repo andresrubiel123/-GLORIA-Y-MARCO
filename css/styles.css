@@ -3053,10 +3053,12 @@ body.envelope-active {
   color: var(--text-muted);
   line-height: 1.6;
   margin-bottom: 16px;
+  text-align: center;
 }
 
 .color-palette-guide {
   margin: 12px 0 16px;
+  text-align: center;
 }
 
 .palette-title {
@@ -3065,11 +3067,14 @@ body.envelope-active {
   font-weight: 600;
   color: var(--text-muted);
   margin-bottom: 8px;
+  text-align: center;
 }
 
 .palette-swatches {
   display: flex;
   gap: 10px;
+  justify-content: center;
+  align-items: center;
 }
 
 .swatch {
@@ -3785,8 +3790,8 @@ body.envelope-active {
 
 .pass-info-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
   margin-bottom: 18px;
   text-align: center;
 }
@@ -4502,8 +4507,8 @@ body.envelope-active {
   }
 
   .pass-info-grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 6px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
   }
 
   .pass-info-col {
